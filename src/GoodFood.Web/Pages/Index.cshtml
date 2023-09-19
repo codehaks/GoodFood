@@ -1,0 +1,988 @@
+﻿@page
+@model GoodFood.Web.Pages.IndexModel
+@{
+    Layout = "";
+}
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="HTML5,CSS3,HTML,Template,multi-page,Caban - Restaurant & Cafe HTML Template">
+    <meta name="description" content="Caban - Restaurant & Cafe HTML Template">
+    <meta name="author" content="Barat Hadian">
+
+    <link rel="stylesheet" href="assets/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="assets/css/line-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/flaticon.css">
+    <link rel="stylesheet" href="assets/css/swiper-min.css">
+    <link rel="stylesheet" href="assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="assets/css/fancybox.css">
+    <link rel="stylesheet" href="assets/css/aos.css">
+    <link rel="stylesheet" href="assets/css/odometre.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="assets/css/dark-theme.css">
+    <link rel="stylesheet" href="assets/css/rtl.css">
+    <title>Caban - قالب HTML کابان ، پوسته سایت رستوران و کافه</title>
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
+</head>
+<body>
+
+    <div class="preloader js-preloader">
+        <img src="assets/img/preloader.gif" alt="Image">
+    </div>
+
+
+    <div class="switch-theme-mode">
+        <label id="switch" class="switch">
+            <input type="checkbox" onchange="toggleTheme()" id="slider">
+            <span class="slider round"></span>
+        </label>
+    </div>
+
+
+    <div class="page-wrapper ">
+
+        <header class="header-wrap style1">
+            <div class="header-top">
+                <div class="container">
+                    <div class="close-header-top xl-none">
+                        <button type="button"><i class="las la-times"></i></button>
+                    </div>
+                    <div class="row align-items-center">
+                        <div class="col-xl-10 col-lg-12">
+                            <div class="header-top-left">
+                                <div class="contact-item">
+                                    <i class="flaticon-wall-clock"></i>
+                                    <p>دوشنبه - یکشنبه[8:00عصر - 10:00صبح]</p>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="flaticon-phone-call"></i>
+                                    <a href="tel:13454567877">800-323-4567</a>
+                                </div>
+                                <div class="contact-item">
+                                    <i class="flaticon-voucher"></i>
+                                    <p>
+                                        تخفیف <strong>25%</strong>تنها برای <span>همبرگر</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-12">
+                            <div class="header-top-right">
+                                <div class="select-lang">
+                                    <div class="navbar-option-item navbar-language dropdown language-option">
+                                        <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <span class="lang-name"></span>
+                                        </button>
+                                        <div class="dropdown-menu language-dropdown-menu">
+                                            <a class="dropdown-item" href="#">
+                                                <img src="assets/img/uk.png" alt="flag">
+                                                انگلیسی
+                                            </a>
+                                            <a class="dropdown-item" href="#">
+                                                <img src="assets/img/china.png" alt="flag">
+                                                简体中文
+                                            </a>
+                                            <a class="dropdown-item" href="#">
+                                                <img src="assets/img/uae.png" alt="flag">
+                                                العربيّة
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="select-currency">
+                                    <select>
+                                        <option value="1">دلار</option>
+                                        <option value="2">پوند</option>
+                                        <option value="3">ین</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <a href="reservation.html" class="btn style1 xl-none">رزرو کردن <i class="flaticon-right-arrow-2"></i> </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container ">
+                <div class="header-bottom">
+                    <div class="row align-items-center">
+                        <div class="col-xl-3 col-lg-6 col-md-6 col-5">
+                            <a href="index.html" class="logo"><img src="assets/img/logo-white.png" alt="Image"></a>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-7">
+                            <div class="main-menu-wrap">
+                                <div class="menu-close xl-none">
+                                    <a href="javascript:void(0)"><i class="las la-times"></i></a>
+                                </div>
+                                <div id="menu">
+                                    <ul class="main-menu list-style">
+                                        <li class="has-children">
+                                            <a class="active" href="#">خانه</a>
+                                            <ul class="sub-menu list-style">
+                                                <li>
+                                                    <a class="active" href="index.html">صفحه اصلی 1</a>
+                                                </li>
+                                                <li><a href="index-2.html">صفحه اصلی 2</a></li>
+                                                <li><a href="index-3.html">صفحه اصلی 3</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="has-children">
+                                            <a href="#">خدمات</a>
+                                            <ul class="sub-menu list-style">
+                                                <li><a href="services.html">خدمات ما</a></li>
+                                                <li>
+                                                    <a href="service-details.html">جزئیات خدمات</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="has-children">
+                                            <a href="#">صفحات</a>
+                                            <ul class="sub-menu list-style">
+                                                <li><a href="about.html">درباره ما</a></li>
+                                                <li><a href="feature.html">ویژگی ها</a></li>
+                                                <li><a href="gallery.html">گالری</a></li>
+                                                <li><a href="search-location.html">جستجوی موقعیت</a></li>
+                                                <li><a href="reservation.html">رزرواسیون</a></li>
+                                                <li><a href="app.html">برنامه ما</a></li>
+                                                <li><a href="testimonials.html">بازخوردها</a></li>
+                                                <li><a href="faq.html">سوالات متداول</a></li>
+                                                <li class="has-children">
+                                                    <a href="#">کاربران</a>
+                                                    <ul class="sub-menu list-style">
+                                                        <li>
+                                                            <a href="login.html">ورود</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="register.html">ثبت نام</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="forgot-pwd.html">فراموشی رمز</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li><a href="privacy-policy.html">حریم خصوصی</a></li>
+                                                <li><a href="terms-conditions.html">قوانین و ضوابط</a></li>
+                                                <li><a href="404.html">خطای 404</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="has-children">
+                                            <a href="#">فروشگاه</a>
+                                            <ul class="sub-menu list-style">
+                                                <li class="has-children">
+                                                    <a href="#">چیدمان فروشگاه</a>
+                                                    <ul class="sub-menu list-style">
+                                                        <li>
+                                                            <a href="shop-left-sidebar.html">فروشگاه سایدبار 1</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="shop-right-sidebar.html">فروشگاه سایدبار 2</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="shop-no-sidebar.html">فروشگاه شبکه ای</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <a href="shop-details.html">جزئیات فروشگاه</a>
+                                                </li>
+                                                <li>
+                                                    <a href="cart.html">سبد خرید</a>
+                                                </li>
+                                                <li>
+                                                    <a href="wishlist.html">لیست علاقه مندیها</a>
+                                                </li>
+                                                <li>
+                                                    <a href="checkout.html">بررسی پرداخت</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="has-children">
+                                            <a href="#">وبلاگ</a>
+                                            <ul class="sub-menu list-style">
+                                                <li class="has-children">
+                                                    <a href="#">چیدمان وبلاگ</a>
+                                                    <ul class="sub-menu list-style">
+                                                        <li><a href="blog-no-sidebar.html">وبلاگ شبکه ای </a></li>
+                                                        <li><a href="blog-left-sidebar.html">وبلاگ سایدبار 1</a></li>
+                                                        <li>
+                                                            <a href="blog-right-sidebar.html">وبلاگ سایدبار 2</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li class="has-children">
+                                                    <a href="#">جزئیات وبلاگ</a>
+                                                    <ul class="sub-menu list-style">
+                                                        <li><a href="blog-details-no-sidebar.html">وبلاگ بدون سایدبار</a></li>
+                                                        <li><a href="blog-details-left-sidebar.html">وبلاگ سایدبار 1</a></li>
+                                                        <li><a href="blog-details-right-sidebar.html">وبلاگ سایدبار 2</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="contact.html">تماس با ما</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="mobile-bar-wrap">
+                                <a href="cart.html" class="shopcart  xl-none">
+                                    <i class="las la-shopping-cart"></i>
+                                    <span>1</span>
+                                </a>
+                                <div class="mobile-top-bar xl-none">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
+                                <div class="mobile-menu xl-none">
+                                    <a href="javascript:void(0)"><i class="las la-bars"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 lg-none">
+                            <div class="header-bottom-right">
+                                <a href="cart.html" class="shopcart">
+                                    <i class="las la-shopping-cart"></i>
+                                    <span>1</span>
+                                </a>
+                                <a href="reservation.html" class="btn style1">رزرو کنید <i class="flaticon-right-arrow-2"></i> </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+
+        <section class="hero-wrap style1 bg-cod-grey">
+            <img src="assets/img/hero/hero-shape-1.png" alt="Image" class="hero-shape-1">
+            <img src="assets/img/hero/hero-shape-2.png" alt="Image" class="hero-shape-2">
+            <img src="assets/img/hero/hero-shape-31.png" alt="Image" class="hero-shape-3 md-none">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <div class="hero-content">
+                            <h1>ما تحویل سریع خانه را ارائه می دهیم</h1>
+                            <p>در شیکس 1401، ما 20٪ تخفیف ثابت ارائه می دهیم. از دست ندهید!!</p>
+                            <div class="hero-btn">
+                                <a href="shop-left-sidebar.html" class="btn style1"><i class="las la-shopping-bag"></i>سفارش بده</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="hero-img-wrap">
+                            <img src="assets/img/hero/hero-img-1.png" alt="Image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="about-wrap style1 ptb-100">
+            <div class="container">
+                <div class="row gx-5 align-items-center">
+                    <div class="col-lg-6">
+                        <div class="about-img-wrap">
+                            <img src="assets/img/about/about-shape-1.png" alt="Image" class="abouut-shape-1 md-none">
+                            <img src="assets/img/about/about-shape-2.png" alt="Image" class="abouut-shape-2 md-none">
+                            <img src="assets/img/about/about-shape-3.png" alt="Image" class="abouut-shape-3 md-none">
+                            <div class="about-bg-1 bg-f"></div>
+                            <div class="about-bg-2 bg-f"></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="about-content">
+                            <div class="content-title style2 mb-15">
+                                <span>
+                                    <img src="assets/img/secion-shape-1.png" alt="Image">
+                                    داستان ما
+                                    <img src="assets/img/secion-shape-2.png" alt="Image">
+                                </span>
+                                <h2>ما خدمات غذای ساخته شده محلی را ارائه می دهیم </h2>
+                            </div>
+                            <p>
+                                در رستوران ما با افرادی که برای شما مهم هستند، گفتگوهایی که شما را به یکدیگر نزدیکتر می کند و کسانی که از غذاهای ما لذت می برند.
+                                غذاهای سنتی با محصولات محلی با بالاترین کیفیت. از جمله گوشت گوساله
+                                مرغ سخاری، کباب ترکی، فیله گوشت.
+                            </p>
+                            <img src="assets/img/about/author-sign.png" alt="Image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="service-wrap bg-f service-bg-1 pt-100 pb-75">
+            <div class="overlay op-7 bg-white"></div>
+            <div class="container">
+                <div class="section-title style1 text-center mb-110">
+                    <span>
+                        <img src="assets/img/secion-shape-1.png" alt="Image">
+                        خدمات ما
+                        <img src="assets/img/secion-shape-2.png" alt="Image">
+                    </span>
+                    <h2>آنچه ما ارائه می دهیم</h2>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="service-card-wrap">
+                            <div class="service-card style1">
+                                <div class="service-img">
+                                    <img src="assets/img/service/breakfast.png" alt="Image">
+                                </div>
+                                <div class="service-info">
+                                    <h3 class="service-title"><a href="service-details.html">صبحانه</a></h3>
+                                    <p>لورم ایپسوم به سادگی ساختار چاپ و متن را در بر می گیرد. لورم ایپسوم به مدت 40 سال استاندارد صنعت بوده است.</p>
+                                </div>
+                            </div>
+                            <div class="service-card style1">
+                                <div class="service-img">
+                                    <img src="assets/img/service/lunch.png" alt="Image">
+                                </div>
+                                <div class="service-info">
+                                    <h3 class="service-title"><a href="service-details.html">ناهار</a></h3>
+                                    <p>لورم ایپسوم به سادگی ساختار چاپ و متن را در بر می گیرد. لورم ایپسوم به مدت 40 سال استاندارد صنعت بوده است.</p>
+                                </div>
+                            </div>
+                            <div class="service-card style1">
+                                <div class="service-img">
+                                    <img src="assets/img/service/dinner.png" alt="Image">
+                                </div>
+                                <div class="service-info">
+                                    <h3 class="service-title"><a href="service-details.html">شام</a></h3>
+                                    <p>لورم ایپسوم به سادگی ساختار چاپ و متن را در بر می گیرد. لورم ایپسوم به مدت 40 سال استاندارد صنعت بوده است.</p>
+                                </div>
+                            </div>
+                            <div class="service-card style1">
+                                <div class="service-img">
+                                    <img src="assets/img/service/custom.png" alt="Image">
+                                </div>
+                                <div class="service-info">
+                                    <h3 class="service-title"><a href="service-details.html">سفارشی</a></h3>
+                                    <p>لورم ایپسوم به سادگی ساختار چاپ و متن را در بر می گیرد. لورم ایپسوم به مدت 40 سال استاندارد صنعت بوده است.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="feature-wrap style1 pt-100 pb-70 bg-1 pos-rel">
+            <div class="feature-top-shape bg-f">
+                <img src="assets/img/shape-1.png" alt="Image" class="feature-top-shape-1 md-none">
+                <img src="assets/img/shape-2.png" alt="Image" class="feature-top-shape-2 md-none">
+                <div class="overlay op-9 bg-black"></div>
+            </div>
+            <div class="overlay op-6 bg-white"></div>
+            <div class="section-title style6 text-center mb-40">
+                <span>
+                    <img src="assets/img/secion-shape-1.png" alt="Image">
+                    آیتم های ویژگی ما
+                    <img src="assets/img/secion-shape-2.png" alt="Image">
+                </span>
+                <h2 class="text-white">اقلام محبوب رستوران ما</h2>
+            </div>
+            <div class="container pos-rel">
+                <div class="row justify-content-center">
+                    <div class="col-xl-4 col-lg-6 col-md-6">
+                        <div class="feature-card style1">
+                            <div class="feature-img">
+                                <img src="assets/img/feature/feature-item-1.jpg" alt="Image">
+                            </div>
+                            <div class="feature-info">
+                                <h3 class="feature-title"><a href="shop-details.html">مرغ سخاری</a></h3>
+                                <div class="feature-meta">
+                                    <p class="feature-price">22000 تومان <span>30000 تومان</span></p>
+                                    <div class="ratings">
+                                        <span>4.9</span><i class="flaticon-star-1"></i>
+                                    </div>
+                                </div>
+                                <a class="btn style2" href="cart.html"><i class="flaticon-shopping-bag-1"></i>افزودن خرید</a>
+                                <div class="discount-tag">
+                                    <img src="assets/img/feature/circle-1.png" alt="Image">
+                                    <p>
+                                        <span>تخفیف</span>
+                                        30%
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-6 col-md-6">
+                        <div class="feature-card style1">
+                            <div class="feature-img">
+                                <img src="assets/img/feature/feature-item-2.jpg" alt="Image">
+                            </div>
+                            <div class="feature-info">
+                                <h3 class="feature-title"><a href="shop-details.html">مرغ سخاری</a></h3>
+                                <div class="feature-meta">
+                                    <p class="feature-price">22000 تومان <span>30000 تومان</span></p>
+                                    <div class="ratings">
+                                        <span>4.9</span><i class="flaticon-star-1"></i>
+                                    </div>
+                                </div>
+                                <a class="btn style2" href="cart.html"><i class="flaticon-shopping-bag-1"></i>افزودن خرید</a>
+                                <div class="discount-tag">
+                                    <img src="assets/img/feature/circle-1.png" alt="Image">
+                                    <p>
+                                        <span>تخفیف</span>
+                                        20%
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-6 col-md-6">
+                        <div class="feature-card style1">
+                            <div class="feature-img">
+                                <img src="assets/img/feature/feature-item-3.jpg" alt="Image">
+                            </div>
+                            <div class="feature-info">
+                                <h3 class="feature-title"><a href="shop-details.html">مرغ سخاری</a></h3>
+                                <div class="feature-meta">
+                                    <p class="feature-price">22000 تومان <span>30000 تومان</span></p>
+                                    <div class="ratings">
+                                        <span>4.9</span><i class="flaticon-star-1"></i>
+                                    </div>
+                                </div>
+                                <a class="btn style2" href="cart.html"><i class="flaticon-shopping-bag-1"></i>افزودن خرید</a>
+                                <div class="discount-tag">
+                                    <img src="assets/img/feature/circle-1.png" alt="Image">
+                                    <p>
+                                        <span>تخفیف</span>
+                                        25%
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-6 col-md-6">
+                        <div class="feature-card style1">
+                            <div class="feature-img">
+                                <img src="assets/img/feature/feature-item-4.jpg" alt="Image">
+                            </div>
+                            <div class="feature-info">
+                                <h3 class="feature-title"><a href="shop-details.html">مرغ سخاری</a></h3>
+                                <div class="feature-meta">
+                                    <p class="feature-price">22000 تومان <span>30000 تومان</span></p>
+                                    <div class="ratings">
+                                        <span>4.9</span><i class="flaticon-star-1"></i>
+                                    </div>
+                                </div>
+                                <a class="btn style2" href="cart.html"><i class="flaticon-shopping-bag-1"></i>افزودن خرید</a>
+                                <div class="discount-tag">
+                                    <img src="assets/img/feature/circle-1.png" alt="Image">
+                                    <p>
+                                        <span>تخفیف</span>
+                                        30%
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-6 col-md-6">
+                        <div class="feature-card style1">
+                            <div class="feature-img">
+                                <img src="assets/img/feature/feature-item-5.jpg" alt="Image">
+                            </div>
+                            <div class="feature-info">
+                                <h3 class="feature-title"><a href="shop-details.html">مرغ سخاری</a></h3>
+                                <div class="feature-meta">
+                                    <p class="feature-price">22000 تومان <span>30000 تومان</span></p>
+                                    <div class="ratings">
+                                        <span>4.9</span><i class="flaticon-star-1"></i>
+                                    </div>
+                                </div>
+                                <a class="btn style2" href="cart.html"><i class="flaticon-shopping-bag-1"></i>افزودن خرید</a>
+                                <div class="discount-tag">
+                                    <img src="assets/img/feature/circle-1.png" alt="Image">
+                                    <p>
+                                        <span>تخفیف</span>
+                                        40%
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-6 col-md-6">
+                        <div class="feature-card style1">
+                            <div class="feature-img">
+                                <img src="assets/img/feature/feature-item-6.jpg" alt="Image">
+                            </div>
+                            <div class="feature-info">
+                                <h3 class="feature-title"><a href="shop-details.html">مرغ سخاری</a></h3>
+                                <div class="feature-meta">
+                                    <p class="feature-price">22000 تومان <span>30000 تومان</span></p>
+                                    <div class="ratings">
+                                        <span>4.9</span><i class="flaticon-star-1"></i>
+                                    </div>
+                                </div>
+                                <a class="btn style2" href="cart.html"><i class="flaticon-shopping-bag-1"></i>افزودن خرید</a>
+                                <div class="discount-tag">
+                                    <img src="assets/img/feature/circle-1.png" alt="Image">
+                                    <p>
+                                        <span>تخفیف</span>
+                                        15%
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="delivery-wrap ptb-100">
+            <div class="container">
+                <div class="row gx-5 align-items-center">
+                    <div class="col-lg-6">
+                        <div class="delivery-content">
+                            <div class="content-title style2 text-left mb-20">
+                                <span class="">
+                                    <img src="assets/img/secion-shape-1.png" alt="Image">
+                                    تحویل سریع
+                                    <img src="assets/img/secion-shape-2.png" alt="Image">
+                                </span>
+                                <h2>تحویل رایگان غذا هر روز به راحتی شما</h2>
+                            </div>
+                            <p>در رستوران ما با افرادی که برای شما مهم هستند، گفتگوهایی که شما را به یکدیگر نزدیکتر می کند و کسانی که از غذاهای ما لذت می برند. لورم ایپسوم به سادگی ساختار چاپ و متن را در بر می گیرد. لورم ایپسوم به مدت 40 سال استاندارد صنعت بوده است.</p>
+                            <div class="row align-items-end gx-5">
+                                <div class="col-md-8">
+                                    <div class="contact-item-wrap">
+                                        <div class="contact-item">
+                                            <span><i class="flaticon-phone-call"></i></span>
+                                            <a href="tel:49260573180">+49260-5731-80</a>
+                                        </div>
+                                        <div class="contact-item">
+                                            <div class="contact-item">
+                                                <span> <i class="lar la-clock"></i></span>
+                                                <p>همه روزه از ساعت 8:00 الی 12:00</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <form class="deilvery-address" action="#">
+                                        <input type="text" placeholder="کد پستی منطقه خود را وارد کنید">
+                                        <button type="submit"><i class="flaticon-right-arrow-2"></i></button>
+                                    </form>
+                                </div>
+                                <div class="col-md-4 sm-none">
+                                    <div class="del-img">
+                                        <img src="assets/img/fruit-1.png" alt="Image">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="delivery-van-img">
+                            <img src="assets/img/delivery/car.png" alt="Image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="contact-wrap style1 bg-f contact-bg-1 pt-100 pb-70 pos-rel">
+            <div class="overlay bg-black op-85"></div>
+            <img src="assets/img/shape-1.png" alt="Iamge" class="contact-shape-1 lg-none">
+            <img src="assets/img/shape-2.png" alt="Iamge" class="contact-shape-2 lg-none">
+            <div class="section-title style6 text-center mb-40">
+                <span class="text-sunshade">
+                    <img src="assets/img/secion-shape-1.png" alt="Image">
+                    تماس با ما
+                    <img src="assets/img/secion-shape-2.png" alt="Image">
+                </span>
+                <h2 class="text-white">مطمئن نیستید چه چیزی را سفارش دهید؟ <br> تماس بگیرید</h2>
+            </div>
+            <div class="container pos-rel">
+                <div class="row">
+                    <div class="col-xl-10 offset-xl-1">
+                        <div class="contact-box-wrap">
+                            <div class="contact-box-icon">
+                                <i class="flaticon-phone-call"></i>
+                            </div>
+                            <div class="contact-box">
+                                <h5>تماس بگیر</h5>
+                                <a href="tel:880123654223">880-123-654</a>
+                            </div>
+                            <div class="contact-box">
+                                <h5>ایمیل بده</h5>
+                                <a href="mainto:hello@caban.com">hello@caban.com</a>
+                                <img src="assets/img/contact/contact-img-1.png" alt="Image">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="testimonial-wrap bg-f testimonial-bg-1 pt-100 pb-100 pos-rel">
+            <div class="overlay bg-white op-7"></div>
+            <div class="section-title style1 text-center mb-40">
+                <span>
+                    <img src="assets/img/secion-shape-1.png" alt="Image">
+                    بازخوردها
+                    <img src="assets/img/secion-shape-2.png" alt="Image">
+                </span>
+                <h2>مشتریان خوشحال ما</h2>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div dir="rtl" class="testimonial-slider-one swiper-container">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <div class="testimonial-item style1">
+                                        <div class="client-img">
+                                            <img src="assets/img/testimonial/client-1.jpg" alt="Image">
+                                        </div>
+                                        <div class="client-info">
+                                            <h4>لیزا الیسا</h4>
+                                            <span>مدیر عامل</span>
+                                        </div>
+                                        <div class="client-quote">
+                                            <p>
+                                                غذا واقعاً بسیار خوشمزه است - سوشی واگیو در منوی شام است
+                                                به خصوص خوشمزه است و برای مدت طولانی نباید از دست داد!
+                                            </p>
+                                        </div>
+                                        <div class="client-rating-wrap">
+                                            <ul class="ratings list-style">
+                                                <li><i class="flaticon-star-1"></i></li>
+                                                <li><i class="flaticon-star-1"></i></li>
+                                                <li><i class="flaticon-star-1"></i></li>
+                                                <li><i class="flaticon-star-1"></i></li>
+                                                <li><i class="flaticon-star-1"></i></li>
+                                            </ul>
+                                            <div class="quote-icon">
+                                                <i class="flaticon-right-quote-sign"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="testimonial-item style1">
+                                        <div class="client-img">
+                                            <img src="assets/img/testimonial/client-2.jpg" alt="Image">
+                                        </div>
+                                        <div class="client-info">
+                                            <h4>لیزا الیسا</h4>
+                                            <span>مدیر عامل</span>
+                                        </div>
+                                        <div class="client-quote">
+                                            <p>
+                                                غذا واقعاً بسیار خوشمزه است - سوشی واگیو در منوی شام است
+                                                به خصوص خوشمزه است و برای مدت طولانی نباید از دست داد!
+                                            </p>
+                                        </div>
+                                        <div class="client-rating-wrap">
+                                            <ul class="ratings list-style">
+                                                <li><i class="flaticon-star-1"></i></li>
+                                                <li><i class="flaticon-star-1"></i></li>
+                                                <li><i class="flaticon-star-1"></i></li>
+                                                <li><i class="flaticon-star-1"></i></li>
+                                                <li><i class="flaticon-star-1"></i></li>
+                                            </ul>
+                                            <div class="quote-icon">
+                                                <i class="flaticon-right-quote-sign"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="testimonial-item style1">
+                                        <div class="client-img">
+                                            <img src="assets/img/testimonial/client-3.jpg" alt="Image">
+                                        </div>
+                                        <div class="client-info">
+                                            <h4>لیزا الیسا</h4>
+                                            <span>مدیر عامل</span>
+                                        </div>
+                                        <div class="client-quote">
+                                            <p>
+                                                غذا واقعاً بسیار خوشمزه است - سوشی واگیو در منوی شام است
+                                                به خصوص خوشمزه است و برای مدت طولانی نباید از دست داد!
+                                            </p>
+                                        </div>
+                                        <div class="client-rating-wrap">
+                                            <ul class="ratings list-style">
+                                                <li><i class="flaticon-star-1"></i></li>
+                                                <li><i class="flaticon-star-1"></i></li>
+                                                <li><i class="flaticon-star-1"></i></li>
+                                                <li><i class="flaticon-star-1"></i></li>
+                                                <li><i class="flaticon-star-1"></i></li>
+                                            </ul>
+                                            <div class="quote-icon">
+                                                <i class="flaticon-right-quote-sign"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="swiper-slide">
+                                    <div class="testimonial-item style1">
+                                        <div class="client-img">
+                                            <img src="assets/img/testimonial/client-4.jpg" alt="Image">
+                                        </div>
+                                        <div class="client-info">
+                                            <h4>لیزا الیسا</h4>
+                                            <span>مدیر عامل</span>
+                                        </div>
+                                        <div class="client-quote">
+                                            <p>
+                                                غذا واقعاً بسیار خوشمزه است - سوشی واگیو در منوی شام است
+                                                به خصوص خوشمزه است و برای مدت طولانی نباید از دست داد!
+                                            </p>
+                                        </div>
+                                        <div class="client-rating-wrap">
+                                            <ul class="ratings list-style">
+                                                <li><i class="flaticon-star-1"></i></li>
+                                                <li><i class="flaticon-star-1"></i></li>
+                                                <li><i class="flaticon-star-1"></i></li>
+                                                <li><i class="flaticon-star-1"></i></li>
+                                                <li><i class="flaticon-star-1"></i></li>
+                                            </ul>
+                                            <div class="quote-icon">
+                                                <i class="flaticon-right-quote-sign"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="testimonial-one-pagination"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="app-wrap style1 ptb-100 bg-f app-bg-1">
+            <div class="overlay op-95 bg-black"></div>
+            <img src="assets/img/shape-1.png" alt="Image" class="app-shape-1 lg-none">
+            <img src="assets/img/shape-2.png" alt="Image" class="app-shape-2 lg-none">
+            <div class="container">
+                <div class="row gx-5 align-items-center">
+                    <div class="col-lg-6">
+                        <div class="app-content">
+                            <div class="content-title style3 text-left mb-30">
+                                <span>
+                                    <img src="assets/img/secion-shape-1.png" alt="Image">
+                                    برنامه ما
+                                    <img src="assets/img/secion-shape-2.png" alt="Image">
+                                </span>
+                                <h2 class="text-white">با برنامه ما سفارش دهید</h2>
+                            </div>
+                            <div class="pr-wrap style1">
+                                <div class="pr-item">
+                                    <h4><i class="flaticon-check-box-with-check-sign"></i>سفارش دهید و در چند دقیقه پرداخت کنید</h4>
+                                    <p>
+                                        غذا را انتخاب کنید و هزینه سفارش را با چند کلیک آنلاین نیز پرداخت کنید
+                                        مکان فعلی خود را با استفاده از GPS انتخاب کنید
+                                    </p>
+                                </div>
+                                <div class="pr-item">
+                                    <h4><i class="flaticon-check-box-with-check-sign"></i>وضعیت تحویل را بررسی کنید</h4>
+                                    <p>وضعیت سفارش خود را به صورت لحظه ای دنبال کنید و همچنین مسیر تحویل را تا زمان دریافت آن پیگیری کنید.</p>
+                                </div>
+                            </div>
+                            <div class="download-app-btn">
+                                <a href="app.html"><img src="assets/img/app/google-playstore.png" alt="Image"></a>
+                                <a href="app.html"><img src="assets/img/app/apple-playstore.png" alt="Image"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="app-img">
+                            <img src="assets/img/app/app-img-1.png" alt="Image" class="app-top-img md-none">
+                            <img src="assets/img/app/app-showcase.png" alt="Image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="newsletter-wrap bg-f newsletter-bg-1 ptb-100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 offset-lg-2 col-md-10 offset-md-1">
+                        <div class="section-title style1 text-center mb-40">
+                            <h2>عضویت در خبرنامه</h2>
+                            <p>آدرس ایمیل خود را به ما بسپارید ما دوست داریم از شما بشنویم و خوشحالیم که بلافاصله به هر سوالی پاسخ می دهیم.</p>
+                        </div>
+                        <form action="#" class="newsletter-form">
+                            <div class="form-group">
+                                <input type="email" placeholder="آدرس ایمیل خود را وارد کنید">
+                                <button type="submit"><i class="flaticon-direct"></i></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <footer class="footer-wrap">
+            <div class="footer-top bg-f footer-bg-1 pt-100 pb-70">
+                <div class="overlay op-9 bg-black"></div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="footer-widget-wrap">
+                                <div class="footer-widget">
+                                    <a href="index.html" class="footer-logo">
+                                        <img src="assets/img/logo-white.png" alt="Image">
+                                    </a>
+                                    <p class="comp-desc">
+                                        پاهای ما روی زمین است، اما آرزوی ما این است
+                                        بر فراز ابرها در اینجا نحوه حرکت ما برای جلب رضایت مشتریان است
+                                    </p>
+                                    <div class="contact-item-wrap">
+                                        <div class="contact-item">
+                                            <i class="flaticon-mail-1"></i>
+                                            <a href="mailto:hello@caban.com">hello@caban.com</a>
+                                        </div>
+                                        <div class="contact-item">
+                                            <i class="flaticon-phone-call"></i>
+                                            <a href="tel:44345467890">+44-3454-678-90</a>
+                                        </div>
+                                    </div>
+                                    <ul class="social-profile style1 list-style">
+                                        <li><a target="_blank" href="https://facebook.com"><i class="flaticon-facebook"></i> </a></li>
+                                        <li><a target="_blank" href="https://twitter.com"> <i class="flaticon-twitter-1"></i> </a></li>
+                                        <li><a target="_blank" href="https://instagram.com"> <i class="flaticon-instagram"></i> </a></li>
+                                        <li><a target="_blank" href="https://youtube.com"> <i class="flaticon-youtube"></i> </a></li>
+                                    </ul>
+                                </div>
+                                <div class="footer-widget">
+                                    <h4 class="footer-widget-title">
+                                        لینکهای سریع
+                                    </h4>
+                                    <ul class="footer-menu list-style">
+                                        <li><a href="about.html">درباره ما</a></li>
+                                        <li><a href="menus.html">منوها</a></li>
+                                        <li><a href="shop-left-sidebar.html">فروشگاه</a></li>
+                                        <li><a href="wishlist.html">فهرست</a></li>
+                                        <li><a href="contact.html">تماس با ما</a></li>
+                                        <li><a href="contact.html">شغل</a></li>
+                                    </ul>
+                                </div>
+                                <div class="footer-widget">
+                                    <h4 class="footer-widget-title">
+                                        ساعت های کاری
+                                    </h4>
+                                    <ul class="office-schedule  list-style">
+                                        <li>
+                                            <p>دوشنبه</p>
+                                            <p>09:00 - 18:00</p>
+                                        </li>
+                                        <li>
+                                            <p>سه شنبه</p>
+                                            <p>10:00 - 18:00</p>
+                                        </li>
+                                        <li>
+                                            <p>چهارشنبه</p>
+                                            <p>11:00 - 18:00</p>
+                                        </li>
+                                        <li>
+                                            <p>پنج شنبه</p>
+                                            <p>12:00 - 18:00</p>
+                                        </li>
+                                        <li>
+                                            <p>جمعه</p>
+                                            <p>14:00 - 18:00</p>
+                                        </li>
+                                        <li>
+                                            <p>شنبه، یکشنبه</p>
+                                            <p>بسته شده</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="footer-widget">
+                                    <h4 class="footer-widget-title">
+                                        اینستاگرام
+                                    </h4>
+                                    <div class="instagram-img-wrap">
+                                        <a href="https://instagram.com" target="_blank" class="insta-box">
+                                            <img src="assets/img/instagram/instagram-1.jpg" alt="Image">
+                                        </a>
+                                        <a href="https://instagram.com" target="_blank" class="insta-box">
+                                            <img src="assets/img/instagram/instagram-2.jpg" alt="Image">
+                                        </a>
+                                        <a href="https://instagram.com" target="_blank" class="insta-box">
+                                            <img src="assets/img/instagram/instagram-3.jpg" alt="Image">
+                                        </a>
+                                        <a href="https://instagram.com" target="_blank" class="insta-box">
+                                            <img src="assets/img/instagram/instagram-4.jpg" alt="Image">
+                                        </a>
+                                        <a href="https://instagram.com" target="_blank" class="insta-box">
+                                            <img src="assets/img/instagram/instagram-5.jpg" alt="Image">
+                                        </a>
+                                        <a href="https://instagram.com" target="_blank" class="insta-box">
+                                            <img src="assets/img/instagram/instagram-6.jpg" alt="Image">
+                                        </a>
+                                        <a href="https://instagram.com" target="_blank" class="insta-box">
+                                            <img src="assets/img/instagram/instagram-7.jpg" alt="Image">
+                                        </a>
+                                        <a href="https://instagram.com" target="_blank" class="insta-box">
+                                            <img src="assets/img/instagram/instagram-8.jpg" alt="Image">
+                                        </a>
+                                        <a href="https://instagram.com" target="_blank" class="insta-box">
+                                            <img src="assets/img/instagram/instagram-9.jpg" alt="Image">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom bg-black">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6 col-md-12 col-12 order-lg-1 order-md-2 order-2">
+                            <p class="copyright"><span class="las la-copyright"></span><script>document.write(new Date().getFullYear())</script> تمام حقوق قالب محفوظ است . طراحی و توسعه <a href="https://www.rtl-theme.com/author/barat" target="_blank">Barat Hadian</a></p>
+                        </div>
+                        <div class="col-lg-6 col-md-12 col-12 order-lg-2 order-md-1 order-1">
+                            <ul class="footer-bottom-menu list-style">
+                                <li><a href="privacy-policy.html">حریم خصوصی</a></li>
+                                <li><a href="terms-conditions.html">قوانین و ضوابط</a></li>
+                                <li><a href="contact.html">مرکز کمک</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+
+    <a href="javascript:void(0)" class="back-to-top"><i class="las la-arrow-up"></i></a>
+
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/form-validator.min.js"></script>
+    <script src="assets/js/contact-form-script.js"></script>
+    <script src="assets/js/aos.js"></script>
+    <script src="assets/js/swiper-min.js"></script>
+    <script src="assets/js/jquery-magnific-popup.js"></script>
+    <script src="assets/js/fancybox.js"></script>
+    <script src="assets/js/jquery.appear.js"></script>
+    <script src="assets/js/odometre.min.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,454 @@
+/*-------------------------------
+    Dark Theme  CSS
+-------------------------------*/
+.switch-theme-mode {
+  position: fixed;
+  top: 200px;
+  right: 20px;
+  z-index: 999999;
+}
+
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 40px;
+  width: 40px;
+  left: 0px;
+  bottom: 4px;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  -webkit-box-shadow: 0 0px 15px #2020203d;
+          box-shadow: 0 0px 15px #2020203d;
+  background: white url("https://i.ibb.co/7JfqXxB/night.png");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+input:checked + .slider {
+  background-color: #000;
+}
+
+input:focus + .slider {
+  -webkit-box-shadow: 0 0 1px #000;
+          box-shadow: 0 0 1px #000;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(24px);
+  transform: translateX(24px);
+  background: white url("https://i.ibb.co/FxzBYR9/sunny.png");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/*---------------------------------
+    Color CSS For Elements 
+-----------------------------------*/
+.theme-light .logo .logo-dark {
+  display: none !important;
+}
+
+.theme-light .logo .logo-light {
+  display: block !important;
+}
+
+.theme-dark .dpt-100 {
+  padding-top: 100px;
+}
+
+.theme-dark .logo .logo-light {
+  display: none !important;
+}
+
+.theme-dark .logo .logo-dark {
+  display: block !important;
+}
+
+.theme-dark .td-cod,
+.theme-dark .footer-wrap .overlay.bg-black {
+  background-color: #0A0A0A;
+}
+
+.theme-dark body,
+.theme-dark .bg-white,
+.theme-dark .service-card {
+  background-color: #000 !important;
+}
+
+.theme-dark .footer-wrap .footer-bottom {
+  border-color: transparent;
+}
+
+.theme-dark .td-aztech,
+.theme-dark .header-wrap.style2 .header-bottom,
+.theme-dark .header-wrap.style3 .header-bottom,
+.theme-dark .header-wrap.sticky.style2,
+.theme-dark .header-wrap.sticky.style3,
+.theme-dark .contact-box-wrap .contact-box,
+.theme-dark .testimonial-item.style1,
+.theme-dark .feature-card .feature-info,
+.theme-dark .blog-card .blog-info,
+.theme-dark .contact-card,
+.theme-dark .reservation-wrap .reservation-box-wrap .reservation-form,
+.theme-dark .offer-wrap::before,
+.theme-dark .wp-block-quote,
+.theme-dark .post-author,
+.theme-dark .post-author::before,
+.theme-dark .breadcrumb-wrap .bg-black,
+.theme-dark .filter-item-num select,
+.theme-dark .filter-item-cat select,
+.theme-dark .wishlist-table table thead tr th,
+.theme-dark .wishlist-table table tbody tr:nth-child(2n),
+.theme-dark .accordion-item .accordion-header .accordion-button,
+.theme-dark .login-form,
+.theme-dark .service-quote {
+  background-color: #0E1C1F;
+}
+
+.theme-dark .service-card.style2 .service-img .service-card-shape-1 {
+  -webkit-filter: brightness(0) invert(0.25);
+          filter: brightness(0) invert(0.25);
+}
+
+.theme-dark h1,
+.theme-dark h2,
+.theme-dark h3,
+.theme-dark h4,
+.theme-dark h5,
+.theme-dark h6,
+.theme-dark h3 a,
+.theme-dark .section-title h2,
+.theme-dark .section-title h2,
+.theme-dark .header-wrap.style2 .header-top .header-top-left .contact-item p,
+.theme-dark .header-wrap.style2 .header-top .header-top-left .contact-item a,
+.theme-dark .header-wrap.style2 .main-menu-wrap #menu > ul > li > a,
+.theme-dark .header-wrap.style3 .main-menu-wrap #menu > ul > li > a,
+.theme-dark .select-lang .navbar-language .dropdown-toggle,
+.theme-dark .shopcart i,
+.theme-dark .main-menu-wrap #menu ul li.has-children .sub-menu li a,
+.theme-dark .feature-card .feature-info .feature-meta .feature-price,
+.theme-dark .delivery-wrap .contact-item-wrap .contact-item p,
+.theme-dark .delivery-wrap .contact-item-wrap .contact-item a,
+.theme-dark .promo-wrap .promo-list li,
+.theme-dark .reservation-wrap .reservation-box-wrap .reservation-form form .form-group label,
+.theme-dark .contact-form .form-group label,
+.theme-dark .sidebar .sidebar-widget h4,
+.theme-dark .pp-post-item .pp-post-info h6 a,
+.theme-dark .post-metainfo li a,
+.theme-dark .post-tag span,
+.theme-dark .post-share span,
+.theme-dark .new-product-item .new-product-info h6 a,
+.theme-dark .wishlist-table table thead tr th,
+.theme-dark .wishlist-table table tbody tr td .wh_item .wh-item-info a,
+.theme-dark .subtotal-item-right span,
+.theme-dark .total-wrap span,
+.theme-dark .accordion-item .accordion-header .accordion-button,
+.theme-dark .accordion-item .accordion-header .accordion-button span i.minus,
+.theme-dark .accordion-item .accordion-header .accordion-button span i.plus,
+.theme-dark .login-form .login-body .form-group label,
+.theme-dark .login-form .login-header h2,
+.theme-dark .login-form .login-body .form_group label,
+.theme-dark .error-content span {
+  color: #fff;
+}
+
+.theme-dark p,
+.theme-dark .blog-card .blog-info .blog-metainfo .blog-date,
+.theme-dark .blog-card .blog-info .blog-metainfo .blog-author,
+.theme-dark .contact-card .contact-info p,
+.theme-dark .contact-card .contact-info a,
+.theme-dark .pr-wrap.style2 p,
+.theme-dark .checkbox.style2 label,
+.theme-dark .find-location,
+.theme-dark .category-box ul li a,
+.theme-dark .pp-post-item .pp-post-info span,
+.theme-dark .tag-list ul li a,
+.theme-dark .page-navigation .btn,
+.theme-dark .page-navigation .page-nav li a,
+.theme-dark .content-feature-list li,
+.theme-dark .post-tag li a,
+.theme-dark .post-navigation .next-post,
+.theme-dark .post-navigation .prev-post,
+.theme-dark .reply-btn,
+.theme-dark #cmt-form .checkbox label,
+.theme-dark .filter-item-num select,
+.theme-dark .filter-item-cat select,
+.theme-dark .comment-item .comment-author-wrap .comment-author-name .comment-date,
+.theme-dark .product-more-option-item a,
+.theme-dark .product-tablist .nav-item .nav-link,
+.theme-dark .select-method [type="radio"]:checked + label,
+.theme-dark .select-method [type="radio"]:not(:checked) + label {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.theme-dark .category-box ul li a:hover,
+.theme-dark .pp-post-item .pp-post-info h6 a:hover,
+.theme-dark .pp-post-item .pp-post-info h6 a:hover i,
+.theme-dark h3 a:hover,
+.theme-dark .post-tag li a:hover,
+.theme-dark .link,
+.theme-dark .link:hover,
+.theme-dark .post-navigation .next-post:hover,
+.theme-dark .post-navigation .next-post:hover,
+.theme-dark .post-navigation .prev-post:hover i,
+.theme-dark .post-navigation .prev-post:hover i {
+  color: #FFA323;
+}
+
+.theme-dark .food-tablist .nav-item .nav-link {
+  background-color: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff !important;
+}
+
+.theme-dark .food-tablist .nav-item .nav-link i {
+  color: #fff !important;
+}
+
+.theme-dark .food-tablist .nav-item .nav-link.active {
+  background-color: #F41F31 !important;
+  color: #fff !important;
+  border-color: transparent;
+}
+
+.theme-dark article,
+.theme-dark .main-menu-wrap #menu ul li.has-children .sub-menu li a,
+.theme-dark .testimonial-item.style1 .client-img img,
+.theme-dark .delivery-wrap .contact-item-wrap .contact-item span,
+.theme-dark .contact-card .contact-icon,
+.theme-dark .sidebar .sidebar-widget,
+.theme-dark .sidebar .sidebar-widget h4,
+.theme-dark .tag-list ul li a,
+.theme-dark .page-navigation .btn,
+.theme-dark .page-navigation .page-nav li a,
+.theme-dark .comment-box-wrap,
+.theme-dark .comment-item,
+.theme-dark .reply-btn,
+.theme-dark #cmt-form,
+.theme-dark .filter-item-num select,
+.theme-dark .filter-item-cat select,
+.theme-dark .product-tablist .nav-item .nav-link,
+.theme-dark .product-tab-content,
+.theme-dark .bill-details {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.theme-dark .header-wrap.style2 .header-top .header-top-right .select-lang .navbar-language .dropdown-toggle::before {
+  border-top-color: #fff;
+}
+
+.theme-dark .header-wrap.style2 .header-top .header-top-right .select-currency select {
+  color: #fff;
+  background-image: linear-gradient(45deg, transparent 50%, #fff 60%), linear-gradient(135deg, #fff 40%, transparent 50%) !important;
+}
+
+.theme-dark .header-wrap.style2 .header-top .header-top-right .select-lang::after {
+  border-color: #fff;
+}
+
+.theme-dark .hero-wrap.style2 .food-tabcontent form input,
+.theme-dark .contact-form .form-group input,
+.theme-dark .contact-form .form-group textarea,
+.theme-dark .reservation-wrap .reservation-box-wrap .reservation-form form .form-group input,
+.theme-dark .search-box .form-group input,
+.theme-dark .comment-form .form-group input,
+.theme-dark .comment-form .form-group textarea,
+.theme-dark .product-quantity.style2 .qtySelector input,
+.theme-dark .product-quantity.style2 .qtySelector span.decreaseQty,
+.theme-dark .product-quantity.style2 .qtySelector span.increaseQty,
+.theme-dark .checkout-form,
+.theme-dark .checkout-form .billing-details .form-group input,
+.theme-dark .checkout-form .billing-details .form-group textarea,
+.theme-dark .sl-wrap .food-tabcontent input,
+.theme-dark .login-form .login-body .form-group input,
+.theme-dark .contact-widget .contact-widget-form .form-group input,
+.theme-dark .contact-widget .contact-widget-form .form-group textarea {
+  background-color: transparent !important;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.theme-dark .reservation-wrap .reservation-box-wrap .reservation-form form .form-group select {
+  background-color: #0E1C1F !important;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.theme-dark .about-wrap.style1 .about-content img {
+  -webkit-filter: brightness(0) invert(1);
+          filter: brightness(0) invert(1);
+}
+
+.theme-dark .about-wrap.style1 .about-img-wrap .abouut-shape-1,
+.theme-dark .about-wrap.style1 .about-img-wrap .abouut-shape-2,
+.theme-dark .about-wrap.style1 .about-img-wrap .abouut-shape-3,
+.theme-dark .app-wrap.style2 .app-img .app-img-shape-1,
+.theme-dark .app-wrap.style2 .app-img .app-img-shape-2,
+.theme-dark .about-wrap.style2 .about-img-wrap .abouut-shape-1,
+.theme-dark .about-wrap.style2 .about-img-wrap .abouut-shape-2,
+.theme-dark .video-bg-1 .offser-shape-3 {
+  -webkit-filter: brightness(0) invert(0.3);
+          filter: brightness(0) invert(0.3);
+}
+
+.theme-dark .hero-wrap.style2,
+.theme-dark .testimonial-wrap.bg-f,
+.theme-dark .service-wrap.bg-f,
+.theme-dark .feature-wrap.style1,
+.theme-dark .app-wrap.style2.bg-f,
+.theme-dark .offer-wrap,
+.theme-dark .service-wrap.bg-wild-sand {
+  background-blend-mode: difference;
+}
+
+.theme-dark .app-wrap.style2 .overlay,
+.theme-dark .testimonial-wrap.bg-f .overlay.bg-white,
+.theme-dark .service-wrap .overlay.bg-white,
+.theme-dark .feature-wrap.style1 .overlay.bg-white {
+  background-color: #222 !important;
+}
+
+.theme-dark .service-card.style1 .service-img {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.theme-dark .service-card.style1:hover .service-img {
+  background-color: #fff;
+}
+
+.theme-dark .newsletter-wrap.bg-f {
+  position: relative;
+  z-index: 1;
+}
+
+.theme-dark .newsletter-wrap.bg-f:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-color: rgba(14, 28, 31, 0.87);
+  z-index: -1;
+}
+
+.theme-dark .contact-wrap .map-bg:before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "";
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: -1;
+}
+
+.theme-dark .single-product-option .btn.style2 {
+  background-color: #FFA323;
+}
+
+.theme-dark .or-text p {
+  background-color: transparent;
+  border-radius: 0;
+}
+
+@media only screen and (max-width: 767px) {
+  .theme-dark .dpt-100 {
+    padding-top: 70px;
+  }
+}
+
+@media only screen and (max-width: 768px) and (max-width: 992px) {
+  .theme-dark .dpt-100 {
+    padding-top: 70px;
+  }
+}
+
+@media only screen and (max-width: 1199px) {
+  .theme-dark .header-wrap .header-top {
+    background-color: #000;
+  }
+  .theme-dark .main-menu-wrap {
+    background-color: #0E1C1F;
+  }
+  .theme-dark .mobile-top-bar span {
+    background-color: #fff;
+  }
+  .theme-dark .main-menu > li.has-children.menu-open > span.menu-expand i,
+  .theme-dark .main-menu li > span.menu-expand i,
+  .theme-dark .main-menu li a,
+  .theme-dark .menu-close i,
+  .theme-dark .header-wrap.style1 .header-top .header-top-left .contact-item p,
+  .theme-dark .header-wrap.style1 .header-top .header-top-left .contact-item a,
+  .theme-dark .header-wrap.style1 .header-top .header-top-right .select-lang .navbar-language .dropdown-toggle,
+  .theme-dark .header-wrap.style2 .header-top .header-top-right .select-lang .navbar-language .dropdown-toggle,
+  .theme-dark .header-wrap.style3 .header-top .header-top-right .select-lang .navbar-language .dropdown-toggle,
+  .theme-dark .header-wrap.style1 .header-top .header-top-right .select-currency select,
+  .theme-dark .header-wrap.style2 .header-top .header-top-right .select-currency select,
+  .theme-dark .header-wrap.style3 .header-top .header-top-right .select-currency select,
+  .theme-dark .close-header-top button i {
+    color: #fff !important;
+  }
+  .theme-dark .main-menu li a:hover {
+    color: #FFA323;
+  }
+  .theme-dark .header-wrap .select-currency select {
+    background-image: linear-gradient(45deg, transparent 50%, #fff 60%), linear-gradient(135deg, #fff 40%, transparent 50%) !important;
+  }
+  .theme-dark .main-menu li a.active,
+  .theme-dark .main-menu li a {
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+  .theme-dark .header-wrap .select-lang .navbar-language .dropdown-toggle::before {
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 4px solid #fff;
+  }
+  .theme-dark .header-wrap .header-top .header-top-right .select-lang::after {
+    border-color: rgba(255, 255, 255, 0.72);
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .theme-dark .main-menu-wrap #menu ul li.has-children .sub-menu {
+    background-color: #0E1C1F;
+  }
+}
+/*# sourceMappingURL=dark-theme.css.map */

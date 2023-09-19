@@ -1,0 +1,37 @@
+﻿@page
+@model GoodFood.Web.Areas.Admin.Pages.Foods.IndexModel
+@{
+}
+<div class="row">
+    <div class="col-md-6 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title">غذاها</h6>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>نام</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.FoodList)
+                            {
+                                <tr>
+                                    <th>@item.Id</th>
+                                    <td>@item.Name</td>
+
+                                </tr>
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

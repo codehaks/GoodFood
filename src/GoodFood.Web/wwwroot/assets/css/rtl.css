@@ -1,0 +1,961 @@
+/*---------------------------------
+          Mixins & Animation CSS
+-----------------------------------*/
+/*-------------------------------------
+  General CSS for RTL Version
+-----------------------------------*/
+input,
+select {
+  text-align: right;
+}
+
+select {
+  background-position: 8% 50%;
+}
+
+
+
+[type="email"], [type="number"], [type="tel"], [type="url"] {
+  direction: rtl;
+}
+.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6, span, p, li, a {
+letter-spacing: 0px !important;
+font-family: "Vazirmatn RD FD", sans-serif;
+}
+.odometer.odometer-auto-theme,.odometer.odometer-theme-default{direction: ltr;font-family: "Vazirmatn RD FD", sans-serif;}
+.coming-soon-area .coming-soon .list ul {
+  direction: ltr;
+}
+button, input, optgroup, select, textarea {
+font-family: "Vazirmatn RD FD", sans-serif;
+}
+
+.select-currency select {
+  background-position: calc(100% - 35px) 11px, calc(100% - 27px) 11px, 100% 0;
+}
+
+.main-menu-wrap #menu > ul > li.has-children > .sub-menu > .has-children > a::after {
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+.header-wrap.style1 .btn i {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+.deilvery-address button {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+.feature-card.style1 .feature-info .feature-meta .ratings i {
+  margin-left: 6px;
+}
+
+
+
+.link i {
+  margin-left: 0;
+  margin-right: 5px;
+}
+
+.btn i {
+  margin: 0 7px 0 0px;
+  top: 1px;
+}
+
+.btn.style1 i {
+
+}
+
+.btn.style3 i {
+  margin: 0 6px 0 7px;
+  top: -1px;
+}
+
+.link {
+  position: relative;
+}
+
+.link i {
+  top: 2px;
+  left: -20px;
+  right: auto;
+}
+
+.link.style1::after {
+  left: auto;
+  right: 0;
+  width: calc(100% + 23px);
+}
+
+.link.style2 i {
+  left: -18px;
+  right: auto;
+}
+
+.checkbox label {
+  padding-left: 0;
+  padding-right: 25px;
+}
+
+.checkbox label::before {
+  right: 0;
+  left: auto;
+  top: 7px;
+}
+
+.checkbox.style2 input:checked + label::after {
+  top: 8px;
+}
+
+.checkbox.style2 input:checked + label::after {
+
+}
+
+.checkbox input:checked + label::after {
+  left: auto;
+  right: 9px;
+}
+
+.form_group input {
+  left: auto;
+  right: 0;
+}
+
+.form_group label {
+  padding-left: 0;
+  padding-right: 28px;
+}
+
+.social-profile li:last-child,
+.social-profile.style2 li:last-child {
+
+}
+
+.social-profile li:first-child {
+
+}
+
+.back-to-top {
+  right: auto;
+  left: 20px;
+}
+
+.sidebar .sidebar-widget h4::after {
+  left: auto;
+  right: 0;
+}
+
+.select-method input {
+  display: none;
+}
+
+.select-method [type="radio"]:checked + label::before,
+.select-method [type="radio"]:not(:checked) + label::before {
+  left: auto;
+  right: 0;
+}
+
+.select-method [type="radio"]:checked + label,
+.select-method [type="radio"]:not(:checked) + label {
+  padding-left: 0;
+  padding-right: 25px;
+}
+
+.select-method [type="radio"]:checked + label::after,
+.select-method [type="radio"]:not(:checked) + label::after {
+  left: auto;
+  right: 3px;
+}
+
+.section-title.style1 span:after,
+.content-title.style1 span:after {
+
+}
+
+.section-title.style2 span:after,
+.content-title.style2 span:after {
+
+}
+
+.section-title.style3 span:after,
+.content-title.style3 span:after {
+
+}
+
+.section-title span img:first-child,
+.content-title span img:first-child {
+
+}
+
+.section-title span img:last-child,
+.content-title span img:last-child {
+
+}
+
+.switch-theme-mode {
+  right: auto;
+  left: 20px;
+}
+
+.buy-now-btn {
+  right: auto;
+  left: 20px;
+}
+
+/*------------------------
+        Header CSS
+-------------------------*/
+.header-wrap.style1 .btn {
+
+}
+
+.header-wrap.style1 .main-menu-wrap #menu > ul > li.has-children > a::before {
+  right: -12px;
+  left: auto !important;
+}
+
+.header-wrap .searchbtn {
+  margin-right: 0;
+  margin-left: 10px;
+}
+
+.header-wrap .select-lang {
+  margin-left: 0;
+}
+
+.header-wrap .select-lang .navbar-language .dropdown-toggle::before {
+  right: auto;
+  left: 0;
+}
+
+.header-wrap .header-top .header-top-left .contact-item i {
+  margin-right: 0;
+  margin-left: 8px;
+}
+
+.header-wrap .header-top .header-top-left .contact-item {
+  margin-left: 20px;
+  margin-left: 20px;
+  padding-right: 0 !important;
+  padding-left: 0;
+}
+
+.select-currency select {
+
+}
+
+.select-lang::after {
+  right: auto;
+  left: 0;
+}
+
+.header-wrap .select-lang {
+  margin-left: 5px;
+  margin-right: 0;
+  padding-left: 10px;
+  padding-right: 0;
+}
+
+.main-menu-wrap #menu > ul > li.has-children > a::before {
+  left: 0px;
+}
+
+.main-menu-wrap #menu ul li.has-children .sub-menu {
+  left: 0;
+  right: -6px;
+}
+
+.main-menu-wrap #menu ul > .has-children > .sub-menu > .has-children > .sub-menu {
+  left: auto;
+  right: -100%;
+}
+
+.main-menu-wrap #menu > ul > li.has-children > .sub-menu > .has-children > a::after {
+  right: auto;
+  left: 15px;
+}
+
+.main-menu-wrap #menu > ul > li.has-children > .sub-menu > .has-children > a::after {
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+
+.main-menu-wrap #menu ul li.has-children .sub-menu li {
+  text-align: right;
+}
+
+.header-bottom-right select {
+  padding: 0 7px 0 15px;
+}
+
+.header-bottom-right .lang_selctor select {
+  background-position: calc(100% - 76px) 11px, calc(100% - 68px) 11px, 100% 0;
+}
+
+.header-bottom-right .lang_selctor i {
+  left: auto;
+  right: 8px;
+}
+
+.header-wrap .search-area .form-group button {
+  right: auto;
+  left: 15px;
+}
+
+.header-wrap .header-top .header-top-left .contact-item {
+  margin-left: 20px;
+  margin-right: 0;
+  padding-left: 0;
+  padding-right: 22px;
+}
+
+.contact-item i {
+  left: auto;
+  right: 0;
+}
+
+.navbar-language .dropdown-toggle {
+  padding-right: 0;
+  padding-left: 25px;
+}
+
+.navbar-language .dropdown-toggle::before {
+  right: auto;
+  left: 0;
+}
+
+.navbar-language .dropdown-toggle i {
+  margin-right: 0;
+  margin-left: 4px;
+  position: relative;
+  top: 1px;
+}
+
+.navbar-language .dropdown-menu.show {
+  inset: 0px auto auto auto !important;
+}
+
+.breadcrumb-wrap .breadcrumb-title .breadcrumb-menu li a::after {
+  right: auto;
+  left: -29px;
+}
+
+.breadcrumb-wrap .breadcrumb-title .breadcrumb-menu li:first-child {
+  margin-left: 20px;
+}
+
+.breadcrumb-wrap .breadcrumb-title .breadcrumb-menu li:last-child {
+  margin-right: 20px;
+  margin-left: 0;
+}
+
+.breadcrumb-wrap .breadcrumb-title .breadcrumb-menu li a::after {
+  content: "\f10e";
+}
+
+/*-------------------------------------
+     Hero CSS
+-----------------------------------*/
+.hero-wrap.style2 .hero-img-wrap .hero-top-img {
+  padding-left: 0;
+  padding-right: 60px;
+}
+
+.hero-wrap.style2 .hero-img-wrap .hero-top-img .hero-top-img-1 {
+  right: auto;
+  left: 0;
+}
+
+.hero-wrap.style2 .hero-img-wrap .hero-badge {
+  top: 39%;
+}
+
+.food-tabcontent form input {
+  padding: 10px 15px 10px 78px;
+}
+
+.hero-wrap.style3 .food-tablist .nav-item .nav-link {
+  margin-right: 0;
+  margin-left: 15px;
+}
+
+.food-tablist .nav-item:nth-child(1) .nav-link {
+  margin-right: 0;
+  margin-left: 5px;
+}
+
+.food-tablist .nav-item .nav-link i {
+  margin-right: 0;
+  margin-left: 8px;
+}
+
+.food-tabcontent form button {
+  right: auto;
+  left: 4px;
+}
+
+.find-location {
+  position: relative;
+  padding-right: 22px;
+}
+
+.find-location i {
+  position: absolute;
+  top: 2px;
+  right: 0;
+  margin-right: 0;
+}
+
+/*-------------------------------------
+     About &  Why Choose us CSS
+-----------------------------------*/
+.about-wrap.style1 .about-img-wrap .about-bg-2 {
+  right: auto;
+  left: 0;
+}
+
+.about-wrap.style1 .about-img-wrap .abouut-shape-1 {
+  left: auto;
+  right: 50%;
+}
+
+.about-wrap.style1 .about-img-wrap .abouut-shape-2 {
+  left: auto;
+  right: -120px;
+}
+
+.about-wrap.style1 .about-img-wrap .abouut-shape-3 {
+  left: auto;
+  right: 50%;
+}
+
+.about-wrap.style2 .about-img-wrap .about-bg-4 {
+  border-right: 15px solid #fff;
+  border-left: none;
+}
+
+.about-wrap.style2 .about-img-wrap .about-bg-6 {
+  right: auto;
+  left: -100px;
+}
+
+.about-wrap.style2 .about-img-wrap .abouut-shape-1 {
+  right: auto;
+  left: -85px;
+}
+
+.about-wrap.style2 .about-img-wrap .abouut-shape-2 {
+  left: auto;
+  right: -120px;
+}
+
+.pr-wrap .pr-item h4 {
+  padding-left: 0;
+  padding-right: 30px;
+}
+
+.pr-wrap .pr-item h4 i {
+  left: auto;
+  right: 0;
+}
+
+.download-app-btn a:first-child {
+  margin-right: 0;
+  margin-left: 15px;
+}
+
+.delivery-wrap .contact-item-wrap .contact-item span {
+  left: auto;
+  right: 0;
+}
+
+.delivery-wrap .contact-item-wrap .contact-item p,
+.delivery-wrap .contact-item-wrap .contact-item a {
+  padding-left: 0;
+  padding-right: 45px;
+}
+
+.delivery-wrap .deilvery-address input {
+  padding: 10px 15px 10px 70px;
+}
+
+.delivery-wrap .deilvery-address button {
+
+}
+
+/*-------------------------------------
+      Feature CSS
+-----------------------------------*/
+.feature-card.style1 .feature-info .discount-tag {
+  right: auto;
+  left: -35px;
+}
+
+.btn.style2 i {
+  margin-right: 0;
+  margin-left: 8px;
+}
+
+.service-overview-wrap .service-overview-item i {
+  left: auto;
+  right: 0;
+}
+
+.service-overview-wrap .service-overview-item {
+  padding-right: 38px;
+  padding-left: 10px;
+}
+
+.service-quote > p {
+  padding-left: 0;
+  padding-right: 40px;
+}
+
+.service-quote i {
+  left: auto;
+  right: 25px;
+}
+
+/*-------------------------------------
+       Testimonials, Team, FAQ CSS
+-----------------------------------*/
+.testimonial-slider-thumbs,
+.testimonial-slider-two {
+  overflow: hidden;
+}
+
+.accordion-item .accordion-header .accordion-button span {
+  right: auto;
+  left: 26px;
+}
+
+.accordion-item .accordion-header .accordion-button {
+  padding: 15px 20px 15px 48px;
+}
+
+.wh-item-wrap .wh-item .wh-text {
+  margin-left: 0;
+  margin-right: 20px;
+}
+
+.link i {
+  top: -3px;
+  left: -20px;
+  right: auto;
+  -webkit-transform: rotate(-180deg);
+          transform: rotate(-180deg);
+}
+
+/*-------------------------------------
+       Project CSS
+-----------------------------------*/
+.post-navigation .prev-post {
+  text-align: right;
+}
+
+.post-navigation .next-post {
+  text-align: left;
+}
+
+/*-------------------------------------
+    Service, Event,project & course CSS
+-----------------------------------*/
+.post-navigation .prev-post i {
+  margin-right: 0;
+  margin-left: 5px;
+}
+
+.post-navigation .next-post i {
+  margin-left: 0;
+  margin-right: 5px;
+}
+
+.post-comment-wrap .comment-item .comment-author_text {
+
+}
+
+.comment-author_info .course-rating {
+  margin-left: 0;
+  margin-right: 15px;
+  top: -1px;
+}
+
+.contact-widget {
+  text-align: right;
+}
+
+.contact-widget .contact-info span.contact-icon {
+  left: auto;
+  right: 0;
+}
+
+.contact-widget .contact-info {
+  padding-left: 0;
+  padding-right: 55px;
+}
+
+.circle.style2 {
+  right: auto;
+}
+
+/*-------------------------------------
+       Blog CSS
+-----------------------------------*/
+.blog-card.style1 .blog-img img {
+  -webkit-transform: translate3d(40px, 0, 0);
+  transform: translate3d(40px, 0, 0);
+}
+
+.blog-card.style1 .social-profile li:last-child,
+.blog-card.style1 .social-profile.style2 li:last-child {
+
+}
+
+.blog-card.style1 .blog-info .blog-metainfo .blog-date i,
+.blog-card.style1 .blog-info .blog-metainfo .blog-author i {
+
+}
+
+.blog-card.style1 .blog-info .blog-metainfo .blog-date,
+.blog-card.style1 .blog-info .blog-metainfo .blog-author {
+
+}
+
+.blog-metainfo li {
+  margin-right: 0;
+  margin-left: 10px;
+}
+
+.blog-metainfo li a i {
+  margin-right: 0;
+  margin-left: 7px;
+}
+
+.blog-metainfo li::after {
+  right: auto;
+  left: -9px;
+}
+
+.blog-metainfo li:last-child {
+  padding-right: 20px;
+}
+
+.blog-metainfo li:first-child {
+  padding-right: 0;
+}
+
+.post-metainfo li a {
+  padding-left: 0;
+  padding-right: 20px;
+}
+
+.post-metainfo li a i {
+  left: auto;
+  right: 0;
+}
+
+.post-metainfo li:first-child {
+  padding-left: 10px;
+  padding-right: 0;
+}
+
+.post-metainfo li::after {
+  right: auto;
+  left: -3px;
+}
+
+.post-metainfo li:last-child {
+  padding-right: 10px;
+  padding-left: 0;
+}
+
+.post-navigation .prev-post {
+  padding-left: 0;
+  padding-right: 24px;
+}
+
+.post-navigation .next-post {
+  padding-right: 0;
+  padding-left: 24px;
+}
+
+.post-navigation .prev-post i {
+  left: auto;
+  right: 0;
+}
+
+.post-navigation .next-post i {
+  right: auto;
+  left: 0;
+}
+
+.search-box .form-group button {
+  right: auto;
+  left: 0;
+  border-radius: 5px 0px 0px 5px;
+}
+
+.search-box .form-group input {
+  padding: 10px 20px 10px 60px;
+}
+
+.category-box ul li a {
+  padding: 0 18px 0 10px;
+}
+
+.category-box ul li a i {
+  right: 0;
+  left: auto;
+  top: 3px;
+}
+
+.pp-post-item .pp-post-info {
+
+}
+
+.pp-post-item .pp-post-info span {
+
+}
+
+.pp-post-item .pp-post-info span i {
+
+}
+
+.author-info-wrap .author-info {
+  margin-left: 0;
+  margin-right: 20px;
+}
+
+.author-info-wrap .author-info .post-metainfo li {
+  border-left: 1px solid #ddd;
+  border-right: none;
+}
+
+.author-info-wrap .author-info .post-metainfo li a {
+  padding-left: 0;
+  padding-right: 25px;
+}
+
+.author-info-wrap .author-info .post-metainfo li:first-child {
+  padding-left: 10px;
+  padding-right: 0;
+}
+
+.author-info-wrap .author-info .post-metainfo li:last-child {
+  padding-right: 10px;
+}
+
+.content-feature-list li {
+  padding-right: 28px;
+  padding-left: 0;
+}
+
+.content-feature-list li i {
+  left: auto;
+  right: 0;
+}
+
+.author-info-wrap .author-info .post-metainfo li a i {
+  left: 9px;
+}
+
+.post-tag span,
+.post-share span {
+  margin-right: 0;
+  margin-left: 10px;
+}
+
+.post-author .post-author-info {
+  margin-left: 0;
+  margin-right: 20px;
+}
+
+.comment-item .comment-author-wrap {
+
+}
+
+.comment-item .comment-author-wrap .comment-author-name .comment-date {
+
+}
+
+.comment-item .comment-author-wrap .comment-author-name .comment-date {
+
+}
+
+.comment-item .comment-author-wrap .comment-author-name .comment-date i {
+
+}
+
+.contact-wrap .contact-btn .btn:first-child {
+  margin-right: 0;
+  margin-left: 10px;
+}
+
+.btn.style3 i {
+  margin: 0 8px 0 0;
+  top: 4px;
+}
+
+.reservation-wrap .reservation-box-wrap .reservation-form form .form-group select {
+  background-position: 5% 50%;
+}
+
+.counter-card h2 i {
+  margin-right: 0;
+  margin-left: 10px;
+}
+
+.odometer::after {
+  right: auto;
+  left: -32px;
+}
+
+.promo-wrap .promo-list li {
+  padding-left: 0;
+  padding-right: 48px;
+}
+
+.promo-wrap .promo-list li span {
+  left: auto;
+  right: 0;
+}
+
+/*-------------------------------------
+      Shop CSS
+--------------------------------------*/
+.single-product-details .single-product-title .product-ratings .ratings {
+  margin-right: 0;
+  margin-left: 5px;
+}
+
+.single-product-details .single-product-title .product-ratings {
+  margin: 22px 0 10px;
+}
+
+.product-quantity.style1 .qtySelector input {
+  left: -48px;
+}
+
+.single-product-option .btn:nth-child(1) {
+  margin-right: 0;
+  margin-left: 15px;
+}
+
+.single-product-option .btn i {
+  margin-left: 8px;
+  margin-right: 0px;
+}
+
+.product-tablist .nav-item {
+
+}
+
+.product-more-option-item h6 {
+  margin: 0 0 0 12px;
+}
+
+.checkout-details .form-group button {
+  right: auto;
+  left: 0;
+  border-radius: 5px 0 0 5px;
+}
+
+.wishlist-table table thead tr th:first-child {
+  text-align: right;
+}
+
+.wishlist-table table tbody tr td .wh_item .wh-item-info {
+  text-align: right;
+  margin-left: 0;
+  margin-right: 20px;
+}
+
+.select-method div {
+  margin-right: 0;
+  margin-left: 20px;
+}
+
+.checkout-form .total-amt {
+  margin-right: 0;
+  margin-left: 10px;
+}
+
+.new-product-item .new-product-info {
+  margin-left: 0;
+  margin-right: 15px;
+}
+
+.filter-item-num select,
+.filter-item-cat select {
+  background-position: 5% 50%;
+}
+
+/*-------------------------------------
+       Footer & Newsletter CSS
+--------------------------------------*/
+.newsletter-wrap .newsletter-form .form-group input {
+
+}
+
+.newsletter-wrap .newsletter-form .form-group button {
+
+  border-radius: 5px 0 0 5px;
+}
+
+.footer-wrap .footer-top .footer-menu li::before {
+
+}
+
+.footer-widget-wrap .footer-widget:nth-child(3) {
+
+}
+
+.footer-wrap .footer-top .footer-menu li {
+
+}
+
+.footer-wrap .footer-top .footer-menu li i {
+
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+.footer-wrap .footer-top .footer-menu li i,
+.footer-wrap .footer-top .footer-menu li:hover i {
+
+}
+
+.footer-wrap .footer-top .contact-item {
+
+}
+
+.contact-box .contact-info {
+
+}
+
+.footer-wrap .footer-bottom .copyright {
+
+}
+
+.footer-wrap .footer-bottom .footer-bottom-menu {
+
+}
+
+.footer-wrap .footer-bottom .footer-bottom-menu li::after {
+
+}
+
+.footer-wrap .footer-bottom .footer-bottom-menu li:first-child {
+
+}
+
+.footer-wrap .footer-bottom .footer-bottom-menu li:last-child {
+
+}
+
+
+/*-------------------------------------
+       Responsive CSS
+-----------------------------------*/
+
+/*# sourceMappingURL=rtl.css.map */

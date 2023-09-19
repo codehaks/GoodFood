@@ -1,0 +1,67 @@
+﻿        <!-- partial:partials/_sidebar.html -->
+<nav class="sidebar">
+    <div class="sidebar-header">
+        <a href="#" class="sidebar-brand">
+            Noble<span>UI</span>
+        </a>
+        <div class="sidebar-toggler not-active">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+    <div class="sidebar-body">
+        <ul class="nav">
+            <li class="nav-item nav-category">اصلی</li>
+            <li class="nav-item">
+                <a href="dashboard.html" class="nav-link">
+                    <i class="link-icon" data-feather="box"></i>
+                    <span class="link-title">داشبورد</span>
+                </a>
+            </li>
+            <li class="nav-item nav-category">رستوران</li>
+            <li class="nav-item">
+                <a asp-page="/foods/index" asp-area="admin" class="nav-link">
+                    <i class="link-icon" data-feather="message-square"></i>
+                    <span class="link-title">غذاها</span>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+</nav>
+<nav class="settings-sidebar">
+    <div class="sidebar-body">
+        <a href="#" class="settings-sidebar-toggler">
+            <i data-feather="settings"></i>
+        </a>
+        <h6 class="text-muted mb-2">سایدبار : </h6>
+        <div class="mb-3 pb-3 border-bottom">
+            <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" name="sidebarThemeSettings" id="sidebarLight"
+                       value="sidebar-light" checked>
+                <label class="form-check-label" for="sidebarLight">
+                    روشن
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input type="radio" class="form-check-input" name="sidebarThemeSettings" id="sidebarDark"
+                       value="sidebar-dark">
+                <label class="form-check-label" for="sidebarDark">
+                    تاریک
+                </label>
+            </div>
+        </div>
+        <div class="theme-wrapper">
+            <h6 class="text-muted mb-2">تم روشن : </h6>
+            <a class="theme-item active" href="dashboard.html">
+                <img src="~/admin/assets/images/screenshots/light.jpg" alt="light theme">
+            </a>
+            <h6 class="text-muted mb-2">تم تاریک : </h6>
+            <a class="theme-item" href="../demo2-rtl/dashboard.html">
+                <img src="~/admin/assets/images/screenshots/dark.jpg" alt="light theme">
+            </a>
+        </div>
+    </div>
+</nav>
+<!-- partial -->
