@@ -15,4 +15,5 @@ public class GoodFoodDbContext:DbContext
     }
 
     public DbSet<FoodData> Foods { get; set; }
+    public DbSet<MenuLineData> MenuLines { get; set; }  
 }

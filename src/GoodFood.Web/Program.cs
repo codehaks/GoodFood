@@ -15,6 +15,9 @@ builder.Services.AddDbContext<GoodFoodDbContext>(options => options.UseSqlite(bu
 builder.Services.AddScoped<IFoodService, FoodService>();
 builder.Services.AddScoped<IFoodRepository, FoodRepository>();
 
+builder.Services.AddScoped<IMenuService,MenuService>();
+builder.Services.AddScoped<IMenuRepository, MenuRepository>();
+
 
 var app = builder.Build();
 

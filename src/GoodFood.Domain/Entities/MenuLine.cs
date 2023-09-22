@@ -2,7 +2,7 @@
 
 namespace GoodFood.Domain.Entities;
 
-class MenuLine
+public class MenuLine
 {
     public int FoodId { get; set; }
     public int Count { get; set; }

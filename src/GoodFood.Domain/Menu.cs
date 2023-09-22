@@ -2,17 +2,22 @@
 
 namespace GoodFood.Domain;
 
-class Menu
+public class Menu
 {
-    public IList<MenuLine> Lines { get; set; }
+    public IList<MenuLine> Lines { get;}
 
-    public void Add(Food food)
+    public Menu(IList<MenuLine> lines)
     {
-
+        Lines = lines;
     }
 
-    public void Remove(Food food)
+    public void Add(MenuLine line)
     {
+        Lines.Add(line);
+    }
 
+    public void Remove(MenuLine line)
+    {
+        Lines.Remove(line);
     }
 }
