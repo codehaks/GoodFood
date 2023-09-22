@@ -18,6 +18,9 @@ builder.Services.AddScoped<IFoodRepository, FoodRepository>();
 builder.Services.AddScoped<IMenuService,MenuService>();
 builder.Services.AddScoped<IMenuRepository, MenuRepository>();
 
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+
 
 var app = builder.Build();
 

@@ -28,4 +28,23 @@ public class MenuRepository : IMenuRepository
 
         return new Menu(lines);
     }
+
+    public void Update(Menu menu)
+    {
+        var lines = _db.MenuLines;
+        foreach (var line in lines)
+        {
+            lines.Remove(line);
+        }
+
+        foreach (var line in menu.Lines)
+        {
+            _db.MenuLines.Add(new Models.MenuLineData
+            {
+                Count = line.Count,
+                FoodId = line.FoodId,
+                Price = line.Price.Value
+            });
+        }
+    }
 }

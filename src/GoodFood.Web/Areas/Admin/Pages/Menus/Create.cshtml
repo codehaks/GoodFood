@@ -1,0 +1,40 @@
+﻿@page
+@model GoodFood.Web.Areas.Admin.Pages.Menus.CreateModel
+@{
+}
+
+<div class="col-md-6 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+
+            <h6 class="card-title">غذای جدید در منو</h6>
+
+            <form class="forms-sample" method="post">
+                <div class="mb-3">
+                    <label asp-for="Input.FoodId" class="form-label">غذا</label>
+                    <select asp-for="Input.FoodId" class="form-control"
+                            asp-items="@Model.FoodSelectList">
+                        <option>انتخاب کنید...</option>
+                    </select>
+                    <span asp-validation-for="Input.FoodId" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Input.Count" class="form-label">تعداد</label>
+                    <input asp-for="Input.Count" class="form-control">
+                    <span asp-validation-for="Input.Count" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Input.Price" class="form-label">قیمت</label>
+                    <input asp-for="Input.Price" class="form-control">
+                    <span asp-validation-for="Input.Price" class="text-danger"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary me-2">ثبت</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<partial name="_ValidationScriptsPartial" />

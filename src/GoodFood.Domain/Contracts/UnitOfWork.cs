@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace GoodFood.Domain.Contracts;
-public interface IMenuRepository
+public interface IUnitOfWork
 {
-    Menu GetMenu();
-    void Update(Menu menu);
+    public IMenuRepository MenuRepository { get; }
+    Task CommitAsync();
 }
