@@ -4,8 +4,15 @@ using GoodFood.Domain.Contracts;
 using GoodFood.Infrastructure.Persistence;
 using GoodFood.Infrastructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Host.UseSerilog();
+
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .CreateLogger();
 
 // Add services to the container.
 builder.Services.AddRazorPages();
