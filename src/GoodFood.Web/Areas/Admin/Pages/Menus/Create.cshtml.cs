@@ -1,4 +1,4 @@
-﻿using GoodFood.Application.Contracts;
+using GoodFood.Application.Contracts;
 using GoodFood.Application.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -20,14 +20,14 @@ public class CreateModel : PageModel
 
     [BindProperty]
     public InputModel Input { get; set; }
-    public IActionResult OnPost()
+    public async Task<IActionResult> OnPost()
     {
         if (!ModelState.IsValid)
         {
             return Page();
         }
 
-        _menuService.AddLine(new MenuLineDto
+        await _menuService.AddLine(new MenuLineDto
         {
             Count = Input.Count,
             FoodId = Input.FoodId,
