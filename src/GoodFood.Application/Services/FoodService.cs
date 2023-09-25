@@ -1,6 +1,7 @@
-﻿using GoodFood.Application.Contracts;
+using GoodFood.Application.Contracts;
 using GoodFood.Domain.Contracts;
 using GoodFood.Domain.Entities;
+using Mapster;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,9 +21,7 @@ public class FoodService : IFoodService
     public IList<FoodDto> FindAll()
     {
         return _foodRepository.GetAll()
-            .Select(f => new FoodDto { Id = f.Id, Name = f.Name })
-            .ToList();
-
+            .Adapt<IList<FoodDto>>();
     }
 }
 
