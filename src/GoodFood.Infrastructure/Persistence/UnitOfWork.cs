@@ -1,4 +1,4 @@
-﻿using GoodFood.Domain.Contracts;
+using GoodFood.Domain.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +11,7 @@ public class UnitOfWork : IUnitOfWork
     private readonly GoodFoodDbContext _db;
     public IMenuRepository MenuRepository { get; }
 
-    public UnitOfWork(GoodFoodDbContext db,IMenuRepository menuRepository)
+    public UnitOfWork(GoodFoodDbContext db, IMenuRepository menuRepository)
     {
         MenuRepository = menuRepository;
         _db = db;
@@ -19,6 +19,10 @@ public class UnitOfWork : IUnitOfWork
 
     public async Task CommitAsync()
     {
-        await _db.SaveChangesAsync();
+        var changes = await _db.SaveChangesAsync();
+        if (changes == 0)
+        {
+            // Log warning "No changes commited.";
+        }
     }
 }

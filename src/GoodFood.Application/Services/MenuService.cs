@@ -24,6 +24,7 @@ public class MenuService : IMenuService
 
     public async Task AddLine(MenuLineDto menuLine)
     {
+        // Fluent Validation
 
         var line = new MenuLine
         {
@@ -37,6 +38,8 @@ public class MenuService : IMenuService
 
         _unitOfWork.MenuRepository.Update(menu);
         await _unitOfWork.CommitAsync();
+
+        // 
 
 
     }
