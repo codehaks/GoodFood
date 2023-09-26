@@ -1,4 +1,4 @@
-﻿using GoodFood.Domain.Common;
+using GoodFood.Domain.Common;
 
 namespace GoodFood.Domain.Values;
 
@@ -8,7 +8,7 @@ public class Money : ValueObject
     {
         if (value < 0)
         {
-            throw new Exception("Money can not be less than 0");
+            throw new ArgumentOutOfRangeException("Money can not be less than 0");
         }
 
         Value = value;
@@ -19,6 +19,12 @@ public class Money : ValueObject
     public Money ConvertToTomans()
     {
         return new Money(Value / 10);
+    }
+
+    public Money ConvertToDollars(decimal rate)
+    {
+
+        return new Money(Math.Ceiling(Value * rate));
     }
 
     protected override IEnumerable<object> GetEqualityComponents()

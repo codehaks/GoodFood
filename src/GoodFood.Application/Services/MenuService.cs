@@ -1,4 +1,4 @@
-﻿using GoodFood.Application.Contracts;
+using GoodFood.Application.Contracts;
 using GoodFood.Domain;
 using GoodFood.Domain.Contracts;
 using GoodFood.Domain.Entities;
@@ -6,7 +6,9 @@ using GoodFood.Domain.Values;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace GoodFood.Application.Services;
@@ -22,6 +24,7 @@ public class MenuService : IMenuService
 
     public async Task AddLine(MenuLineDto menuLine)
     {
+
         var line = new MenuLine
         {
             Count = menuLine.Count,
@@ -49,9 +52,11 @@ public class MenuService : IMenuService
     }
 }
 
+public record MyMenuLineDto(int FoodId,int Count,decimal Price);
+
 public class MenuLineDto
 {
-    public int FoodId { get; set; }
-    public int Count { get; set; }
-    public decimal Price { get; set; }
+    public required int FoodId { get; init; }
+    public int Count { get; init; }
+    public decimal Price { get; init; }
 }
