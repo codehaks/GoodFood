@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,5 +15,7 @@ public class FoodData
 
     public int CategoryId { get; set; }
     public FoodCategoryData? Category { get; set; }
+
+    public MenuLineData MenuLine { get; set; }
 
 }

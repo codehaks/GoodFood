@@ -1,12 +1,8 @@
-﻿using GoodFood.Domain;
+using GoodFood.Domain;
 using GoodFood.Domain.Contracts;
 using GoodFood.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using Mapster;
+using Microsoft.EntityFrameworkCore;
 namespace GoodFood.Infrastructure.Persistence.Repositories;
 public class MenuRepository : IMenuRepository
 {
@@ -19,11 +15,12 @@ public class MenuRepository : IMenuRepository
 
     public Menu GetMenu()
     {
-        var lines = _db.MenuLines.Select(l => new MenuLine
+        var lines = _db.MenuLines.Include(m => m.Food).Select(l => new MenuLine
         {
             Count = l.Count,
-            FoodId=l.FoodId,
-            Price=new Domain.Values.Money(l.Price)
+            FoodId = l.FoodId,
+            Food = l.Food.Adapt<Food>(),
+            Price = new Domain.Values.Money(l.Price)
         }).ToList();
 
         return new Menu(lines);

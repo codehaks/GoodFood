@@ -1,28 +1,22 @@
 using GoodFood.Domain.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GoodFood.Infrastructure.Persistence;
 public class UnitOfWork : IUnitOfWork
 {
     private readonly GoodFoodDbContext _db;
     public IMenuRepository MenuRepository { get; }
+    public IFoodRepository FoodRepository { get; }
 
-    public UnitOfWork(GoodFoodDbContext db, IMenuRepository menuRepository)
+    public UnitOfWork(GoodFoodDbContext db, IMenuRepository menuRepository, IFoodRepository foodRepository)
     {
-        MenuRepository = menuRepository;
         _db = db;
+
+        MenuRepository = menuRepository;
+        FoodRepository = foodRepository;
     }
 
     public async Task CommitAsync()
     {
-        var changes = await _db.SaveChangesAsync();
-        if (changes == 0)
-        {
-            // Log warning "No changes commited.";
-        }
+        await _db.SaveChangesAsync();
     }
 }

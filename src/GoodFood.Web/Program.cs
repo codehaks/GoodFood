@@ -3,6 +3,7 @@ using GoodFood.Application.Services;
 using GoodFood.Domain.Contracts;
 using GoodFood.Infrastructure.Persistence;
 using GoodFood.Infrastructure.Persistence.Repositories;
+using GoodFood.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
@@ -21,13 +22,12 @@ builder.Services.AddDbContext<GoodFoodDbContext>(options => options.UseSqlite(bu
 
 builder.Services.AddScoped<IFoodService, FoodService>();
 builder.Services.AddScoped<IFoodRepository, FoodRepository>();
+builder.Services.AddScoped<IFoodCategoryService, FoodCategoryService>();
 
-builder.Services.AddScoped<IMenuService,MenuService>();
+builder.Services.AddScoped<IMenuService, MenuService>();
 builder.Services.AddScoped<IMenuRepository, MenuRepository>();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-
-
 
 var app = builder.Build();
 

@@ -1,0 +1,144 @@
+@page
+@model GoodFood.Web.Pages.Shop.IndexModel
+@{
+}
+
+
+
+<div class="content-wrapper">
+
+    <div class="breadcrumb-wrap bg-f br-1">
+        <div class="overlay bg-black op-9"></div>
+        <img src="assets/img/shape-1.png" alt="Image" class="br-shape-1">
+        <img src="assets/img/shape-2.png" alt="Image" class="br-shape-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="breadcrumb-title">
+                        <h2>منوی روز</h2>
+                        <ul class="breadcrumb-menu list-style">
+                            <li><a href="index.html">خانه </a></li>
+                            <li>منوی روز</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <section class="Shop-wrap ptb-100">
+        <div class="container">
+            <div class="row gx-5">
+                <div class="col-xl-4 col-lg-12 order-xl-1 order-lg-2 order-md-2 order-2">
+                    <div class="sidebar">
+                        <div class="sidebar-widget search-box">
+                            <h4>جستجو </h4>
+                            <div class="form-group">
+                                <input type="search" placeholder="جستجو">
+                                <button type="submit"> <i class="flaticon-search"></i></button>
+                            </div>
+                        </div>
+                        <div class="sidebar-widget categories">
+                            <h4>دسته بندی</h4>
+                            <div class="category-box">
+                                <ul class="list-style">
+                                    @foreach (var category in Model.FoodCategories)
+                                    {
+                                        <li><a asp-page="Index" asp-route-categoryid="@category.Id">@category.Name<i class="flaticon-back"></i> </a></li>
+
+                                    }
+
+                                </ul>
+                            </div>
+                        </div>
+                    
+                    </div>
+                </div>
+                <div class="col-xl-8 col-lg-12 order-xl-2 order-lg-1 order-md-1 order-1">
+               @*      <div class="row align-items-center mb-25">
+                        <div class="col-xl-6 col-lg-5 col-md-4">
+                            <div class="profuct-result">
+                                <p>نمایش 10 از 120 محصول</p>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-4">
+                            <div class="filter-item-cat">
+                                <select>
+                                    <option value="1">مرتب سازی بر اساس محبوب ترین</option>
+                                    <option value="2">مرتب سازی بر اساس بالا به پایین</option>
+                                    <option value="3">مرتب سازی بر اساس کم به زیاد</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xl-2 col-lg-3 col-md-4">
+                            <div class="filter-item-num">
+                                <select>
+                                    <option value="1">نمایش 10</option>
+                                    <option value="2">نمایش 20</option>
+                                    <option value="3">نمایش 30</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div> *@
+                    <div class="row justify-content-center">
+                        @foreach (var food in Model.MenuFoods)
+                        {
+                            <div class="col-lg-6 col-md-6">
+                                <div class="feature-card style1">
+                                    <div class="feature-img">
+                                        <img src="assets/img/feature/feature-item-1.jpg" alt="Image">
+                                    </div>
+                                    <div class="feature-info">
+                                        <h3 class="feature-title">
+                                            <a href="shop-details.html">@food.FoodName</a>
+                                        </h3>
+                                        <div class="feature-meta">
+                                            <p class="feature-price">
+                                                @food.Price تومان
+                                                @*  <span>30000 تومان</span> *@
+                                            </p>
+                                            @*  <div class="ratings">
+                                        <span>4.9</span><i class="flaticon-star-1"></i>
+                                        </div> *@
+                                        </div>
+                                        <a class="btn style2" href="cart.html"><i class="flaticon-shopping-bag-1"></i>افزودن سبد خرید</a>
+                                        @*   <div class="discount-tag">
+                                    <img src="assets/img/feature/circle-1.png" alt="Image">
+                                    <p>
+                                    <span>تخفیف</span>
+                                    30%
+                                    </p>
+                                    </div> *@
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+
+                    </div>
+               @*      <div class="page-navigation">
+                        <div class="row align-items-center">
+                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 text-sm-start text-center smb-20">
+                                <a href="shop-left-sidebar.html" class="btn prev">صفحه قبلی</a>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 text-center smb-20">
+                                <ul class="page-nav list-style">
+                                    <li><a class="active" href="shop-left-sidebar.html">1</a></li>
+                                    <li><a href="shop-left-sidebar.html">2</a></li>
+                                    <li><a href="shop-left-sidebar.html">3</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 text-sm-end text-center">
+                                <a href="shop-left-sidebar.html" class="btn next">صفحه بعدی </a>
+                            </div>
+                        </div>
+                    </div> *@
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+

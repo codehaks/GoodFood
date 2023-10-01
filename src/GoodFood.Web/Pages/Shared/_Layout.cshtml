@@ -1,51 +1,198 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - GoodFood.Web</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/GoodFood.Web.styles.css" asp-append-version="true" />
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="HTML5,CSS3,HTML,Template,multi-page,Caban - Restaurant & Cafe HTML Template">
+    <meta name="description" content="Caban - Restaurant & Cafe HTML Template">
+    <meta name="author" content="Barat Hadian">
+
+    <link rel="stylesheet" href="~/assets/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="~/assets/css/line-awesome.min.css">
+    <link rel="stylesheet" href="~/assets/css/flaticon.css">
+    <link rel="stylesheet" href="~/assets/css/swiper-min.css">
+    <link rel="stylesheet" href="~/assets/css/magnific-popup.css">
+    <link rel="stylesheet" href="~/assets/css/fancybox.css">
+    <link rel="stylesheet" href="~/assets/css/aos.css">
+    <link rel="stylesheet" href="~/assets/css/odometre.css">
+    <link rel="stylesheet" href="~/assets/css/style.css">
+    <link rel="stylesheet" href="~/assets/css/responsive.css">
+    <link rel="stylesheet" href="~/assets/css/dark-theme.css">
+    <link rel="stylesheet" href="~/assets/css/rtl.css">
+    <title>گود فود | @ViewData["title"]</title>
+    <link rel="icon" type="image/png" href="~/assets/img/favicon.png">
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">GoodFood.Web</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+
+    <div class="preloader js-preloader">
+        <img src="~/assets/img/preloader.gif" alt="Image">
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - GoodFood.Web - <a asp-area="" asp-page="/Privacy">Privacy</a>
-        </div>
-    </footer>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <div class="switch-theme-mode">
+        <label id="switch" class="switch">
+            <input type="checkbox" onchange="toggleTheme()" id="slider">
+            <span class="slider round"></span>
+        </label>
+    </div>
 
-    @await RenderSectionAsync("Scripts", required: false)
+
+    <div class="page-wrapper ">
+
+        <partial name="_header" />
+
+        @RenderBody()
+
+        <footer class="footer-wrap">
+            <div class="footer-top bg-f footer-bg-1 pt-100 pb-70">
+                <div class="overlay op-9 bg-black"></div>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="footer-widget-wrap">
+                                <div class="footer-widget">
+                                    <a href="index.html" class="footer-logo">
+                                        <img src="~/assets/img/logo-white.png" alt="Image">
+                                    </a>
+                                    <p class="comp-desc">
+                                        پاهای ما روی زمین است، اما آرزوی ما این است
+                                        بر فراز ابرها در اینجا نحوه حرکت ما برای جلب رضایت مشتریان است
+                                    </p>
+                                    <div class="contact-item-wrap">
+                                        <div class="contact-item">
+                                            <i class="flaticon-mail-1"></i>
+                                            <a href="mailto:hello@caban.com">hello@caban.com</a>
+                                        </div>
+                                        <div class="contact-item">
+                                            <i class="flaticon-phone-call"></i>
+                                            <a href="tel:44345467890">+44-3454-678-90</a>
+                                        </div>
+                                    </div>
+                                    <ul class="social-profile style1 list-style">
+                                        <li><a target="_blank" href="https://facebook.com"><i class="flaticon-facebook"></i> </a></li>
+                                        <li><a target="_blank" href="https://twitter.com"> <i class="flaticon-twitter-1"></i> </a></li>
+                                        <li><a target="_blank" href="https://instagram.com"> <i class="flaticon-instagram"></i> </a></li>
+                                        <li><a target="_blank" href="https://youtube.com"> <i class="flaticon-youtube"></i> </a></li>
+                                    </ul>
+                                </div>
+                                <div class="footer-widget">
+                                    <h4 class="footer-widget-title">
+                                        لینکهای سریع
+                                    </h4>
+                                    <ul class="footer-menu list-style">
+                                        <li><a href="about.html">درباره ما</a></li>
+                                        <li><a href="menus.html">منوها</a></li>
+                                        <li><a href="shop-left-sidebar.html">فروشگاه</a></li>
+                                        <li><a href="wishlist.html">فهرست</a></li>
+                                        <li><a href="contact.html">تماس با ما</a></li>
+                                        <li><a href="contact.html">شغل</a></li>
+                                    </ul>
+                                </div>
+                                <div class="footer-widget">
+                                    <h4 class="footer-widget-title">
+                                        ساعت های کاری
+                                    </h4>
+                                    <ul class="office-schedule  list-style">
+                                        <li>
+                                            <p>دوشنبه</p>
+                                            <p>09:00 - 18:00</p>
+                                        </li>
+                                        <li>
+                                            <p>سه شنبه</p>
+                                            <p>10:00 - 18:00</p>
+                                        </li>
+                                        <li>
+                                            <p>چهارشنبه</p>
+                                            <p>11:00 - 18:00</p>
+                                        </li>
+                                        <li>
+                                            <p>پنج شنبه</p>
+                                            <p>12:00 - 18:00</p>
+                                        </li>
+                                        <li>
+                                            <p>جمعه</p>
+                                            <p>14:00 - 18:00</p>
+                                        </li>
+                                        <li>
+                                            <p>شنبه، یکشنبه</p>
+                                            <p>بسته شده</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="footer-widget">
+                                    <h4 class="footer-widget-title">
+                                        اینستاگرام
+                                    </h4>
+                                    <div class="instagram-img-wrap">
+                                        <a href="https://instagram.com" target="_blank" class="insta-box">
+                                            <img src="~/assets/img/instagram/instagram-1.jpg" alt="Image">
+                                        </a>
+                                        <a href="https://instagram.com" target="_blank" class="insta-box">
+                                            <img src="~/assets/img/instagram/instagram-2.jpg" alt="Image">
+                                        </a>
+                                        <a href="https://instagram.com" target="_blank" class="insta-box">
+                                            <img src="~/assets/img/instagram/instagram-3.jpg" alt="Image">
+                                        </a>
+                                        <a href="https://instagram.com" target="_blank" class="insta-box">
+                                            <img src="~/assets/img/instagram/instagram-4.jpg" alt="Image">
+                                        </a>
+                                        <a href="https://instagram.com" target="_blank" class="insta-box">
+                                            <img src="~/assets/img/instagram/instagram-5.jpg" alt="Image">
+                                        </a>
+                                        <a href="https://instagram.com" target="_blank" class="insta-box">
+                                            <img src="~/assets/img/instagram/instagram-6.jpg" alt="Image">
+                                        </a>
+                                        <a href="https://instagram.com" target="_blank" class="insta-box">
+                                            <img src="~/assets/img/instagram/instagram-7.jpg" alt="Image">
+                                        </a>
+                                        <a href="https://instagram.com" target="_blank" class="insta-box">
+                                            <img src="~/assets/img/instagram/instagram-8.jpg" alt="Image">
+                                        </a>
+                                        <a href="https://instagram.com" target="_blank" class="insta-box">
+                                            <img src="~/assets/img/instagram/instagram-9.jpg" alt="Image">
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom bg-black">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6 col-md-12 col-12 order-lg-1 order-md-2 order-2">
+                            <p class="copyright"><span class="las la-copyright"></span><script>document.write(new Date().getFullYear())</script> تمام حقوق قالب محفوظ است . طراحی و توسعه <a href="https://www.rtl-theme.com/author/barat" target="_blank">Barat Hadian</a></p>
+                        </div>
+                        <div class="col-lg-6 col-md-12 col-12 order-lg-2 order-md-1 order-1">
+                            <ul class="footer-bottom-menu list-style">
+                                <li><a href="privacy-policy.html">حریم خصوصی</a></li>
+                                <li><a href="terms-conditions.html">قوانین و ضوابط</a></li>
+                                <li><a href="contact.html">مرکز کمک</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+
+    <a href="javascript:void(0)" class="back-to-top"><i class="las la-arrow-up"></i></a>
+
+
+    <script src="~/assets/js/jquery.min.js"></script>
+    <script src="~/assets/js/bootstrap.min.js"></script>
+    <script src="~/assets/js/form-validator.min.js"></script>
+    <script src="~/assets/js/contact-form-script.js"></script>
+    <script src="~/assets/js/aos.js"></script>
+    <script src="~/assets/js/swiper-min.js"></script>
+    <script src="~/assets/js/jquery-magnific-popup.js"></script>
+    <script src="~/assets/js/fancybox.js"></script>
+    <script src="~/assets/js/jquery.appear.js"></script>
+    <script src="~/assets/js/odometre.min.js"></script>
+    <script src="~/assets/js/main.js"></script>
 </body>
 </html>
