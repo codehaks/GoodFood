@@ -1,3 +1,4 @@
+using System.Globalization;
 using GoodFood.Application.Contracts;
 using GoodFood.Application.Services;
 using GoodFood.Domain.Contracts;
@@ -9,7 +10,7 @@ using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Host.UseSerilog();
+builder.Host.UseSerilog(WriteLogs());
 
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
@@ -49,3 +50,17 @@ app.UseAuthorization();
 app.MapRazorPages();
 
 app.Run();
+
+static Action<HostBuilderContext, LoggerConfiguration> WriteLogs()
+    => (webHostBuilderContext, logger) =>
+    {
+        logger.ReadFrom.Configuration(webHostBuilderContext.Configuration);
+
+        if (webHostBuilderContext.HostingEnvironment.IsProduction())
+        {
+            var connectionString = webHostBuilderContext.Configuration.GetConnectionString("Log") ?? "";
+
+            var cultureInfo = CultureInfo.CurrentCulture;
+            //logger.WriteTo.PostgreSQL(connectionString, "Logs", needAutoCreateTable: true, formatProvider: cultureInfo);
+        }
+    };
