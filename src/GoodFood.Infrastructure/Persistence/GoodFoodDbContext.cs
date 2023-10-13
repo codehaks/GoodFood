@@ -1,12 +1,6 @@
 using GoodFood.Infrastructure.Persistence.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GoodFood.Infrastructure.Persistence;
 public class GoodFoodDbContext : IdentityDbContext<ApplicationUser>
@@ -21,12 +15,14 @@ public class GoodFoodDbContext : IdentityDbContext<ApplicationUser>
 
     public DbSet<FoodCategoryData> FoodCategories { get; set; }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder builder)
     {
-        modelBuilder.Entity<FoodData>()
+        builder.Entity<FoodData>()
             .HasOne(e => e.MenuLine)
             .WithOne(e => e.Food)
             .HasForeignKey<MenuLineData>(e => e.FoodId)
             .IsRequired();
+
+        base.OnModelCreating(builder);
     }
 }
