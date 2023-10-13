@@ -52,11 +52,14 @@ builder.Services.Configure<IdentityOptions>(options =>
 builder.Services.AddScoped<IEmailSender, EmailSender>();
 
 builder.Services.AddScoped<IFoodService, FoodService>();
-builder.Services.AddScoped<IFoodRepository, FoodRepository>();
+
 builder.Services.AddScoped<IFoodCategoryService, FoodCategoryService>();
 builder.Services.AddScoped<IMenuService, MenuService>();
 
 builder.Services.AddScoped<IMenuRepository, MenuRepository>();
+builder.Services.AddScoped<IFoodRepository, FoodRepository>();
+builder.Services.AddScoped<ICartRepository, CartRepository>();
+
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();

@@ -12,8 +12,10 @@ public class GoodFoodDbContext : IdentityDbContext<ApplicationUser>
 
     public DbSet<FoodData> Foods { get; set; }
     public DbSet<MenuLineData> MenuLines { get; set; }
-
     public DbSet<FoodCategoryData> FoodCategories { get; set; }
+
+    public DbSet<CartData> Carts { get; set; }
+    public DbSet<CartLineData> CartLines { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
