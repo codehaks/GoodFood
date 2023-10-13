@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="~/assets/css/rtl.css">
     <title>گود فود | @ViewData["title"]</title>
     <link rel="icon" type="image/png" href="~/assets/img/favicon.png">
+    <base href="~/" />
 </head>
 <body>
 
@@ -182,6 +183,7 @@
 
     <a href="javascript:void(0)" class="back-to-top"><i class="las la-arrow-up"></i></a>
 
+    <script src="~/_framework/blazor.server.js"></script>
 
     <script src="~/assets/js/jquery.min.js"></script>
     <script src="~/assets/js/bootstrap.min.js"></script>
@@ -194,5 +196,7 @@
     <script src="~/assets/js/jquery.appear.js"></script>
     <script src="~/assets/js/odometre.min.js"></script>
     <script src="~/assets/js/main.js"></script>
+
+    @RenderSection("scripts",required:false)
 </body>
 </html>

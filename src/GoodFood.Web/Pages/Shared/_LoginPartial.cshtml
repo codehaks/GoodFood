@@ -1,0 +1,29 @@
+@using GoodFood.Infrastructure.Persistence.Models;
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+
+<ul class="sub-menu list-style">
+@if (SignInManager.IsSignedIn(User))
+{
+    <li >
+        <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"> @UserManager.GetUserName(User)</a>
+    </li>
+    <li >
+        <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
+            <button id="logout" type="submit" class="nav-link btn btn-link text-dark border-0">خروج</button>
+        </form>
+    </li>
+}
+else
+{
+    <li >
+        <a  id="register" asp-area="Identity" asp-page="/Account/Register">عضویت</a>
+    </li>
+    <li >
+        <a  id="login" asp-area="Identity" asp-page="/Account/Login">ورود</a>
+    </li>
+}
+</ul>

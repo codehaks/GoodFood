@@ -1,4 +1,5 @@
 using GoodFood.Infrastructure.Persistence.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace GoodFood.Infrastructure.Persistence;
-public class GoodFoodDbContext : DbContext
+public class GoodFoodDbContext : IdentityDbContext<ApplicationUser>
 {
     public GoodFoodDbContext(DbContextOptions<GoodFoodDbContext> options)
     : base(options)
