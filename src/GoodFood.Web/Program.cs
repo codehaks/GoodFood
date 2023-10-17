@@ -23,6 +23,7 @@ Log.Logger = new LoggerConfiguration()
 // Add services to the container.
 
 builder.Services.AddServerSideBlazor();
+builder.Services.AddControllers();
 
 builder.Services.AddRazorPages()
     .AddRazorPagesOptions(options =>
@@ -84,7 +85,7 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-
+app.MapControllers();
 app.MapBlazorHub();
 app.MapRazorPages();
 

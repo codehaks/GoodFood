@@ -19,6 +19,7 @@ public class CartRepository : ICartRepository
     public void Add(Cart cart)
     {
         var cartData = cart.Adapt<CartData>();
+        cartData.UserId = cart.Customer.UserId;
         _db.Carts.Add(cartData);
 
     }

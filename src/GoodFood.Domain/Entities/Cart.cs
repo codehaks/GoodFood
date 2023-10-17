@@ -35,7 +35,7 @@ public class Cart
         if (existingLine != null)
         {
             // If a line with the same FoodId already exists, update the quantity.
-            existingLine.Quantity = cartLine.Quantity;
+            existingLine.Quantity = existingLine.Quantity + 1;
         }
         else
         {
