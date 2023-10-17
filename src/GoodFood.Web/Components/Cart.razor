@@ -1,63 +1,114 @@
 @using GoodFood.Application.Services
 <h3>Cart</h3>
 
-<div class="wishlist-table ">
-    @if (!CartLines.Any())
-    {
-        <p>هیچ آیتمی در سبد خرید وجود ندارد</p>
-    }
-    else
-    {
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th scope="col">محصول</th>
-                    <th scope="col">تعداد</th>
-                    <th scope="col">مجموع قیمت</th>
-                    <th scope="col">حذف کردن</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var line in CartLines)
-                {
-                    <tr>
-                        <td>
-                            <div class="wh_item">
-                                <img src="assets/img/blog/post-thumb-1.jpg" alt="Image">
-                                <div class="wh-item-info">
-                                    <a href="shop-details.html">ساندویچ مرغ</a>
-                                    <p>
-                                        تنوع زیادی از مرغ وجود دارد. شما می توانید انتخاب کنید
-                                        مورد علاقه شما
-                                    </p>
-                                    <span>@line.Price تومان</span>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="wh_qty">
-                                <div class="product-quantity style2">
-                                    <div class="qtySelector">
-                                        <span class="las la-minus decreaseQty" @onclick="()=>DecreaseQuantity(line)"></span>
-                                        <input type="text" class="qtyValue" value="@line.Quantity" />
-                                        <span class="las la-plus increaseQty" @onclick="()=>IncreaseQuantity(line)"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <p class="wh-tem-price">@line.LineTotalPrice تومان</p>
-                        </td>
-                        <td>
-                            <button type="button"><i class="las la-times" @onclick="()=>RemoveLine(line)"></i></button>
-                        </td>
-                    </tr>
-                }
 
-            </tbody>
-        </table>
-    }
+<div class="row">
+    <div class="col-md-12 mb-20">
+        <div class="wishlist-table ">
+            @if (!CartLines.Any())
+            {
+                <p>هیچ آیتمی در سبد خرید وجود ندارد</p>
+            }
+            else
+            {
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">محصول</th>
+                            <th scope="col">تعداد</th>
+                            <th scope="col">مجموع قیمت</th>
+                            <th scope="col">حذف کردن</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var line in CartLines)
+                        {
+                            <tr>
+                                <td>
+                                    <div class="wh_item">
+                                        <img src="assets/img/blog/post-thumb-1.jpg" alt="Image">
+                                        <div class="wh-item-info">
+                                            <a href="shop-details.html">ساندویچ مرغ</a>
+                                            <p>
+                                                تنوع زیادی از مرغ وجود دارد. شما می توانید انتخاب کنید
+                                                مورد علاقه شما
+                                            </p>
+                                            <span>@line.Price تومان</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="wh_qty">
+                                        <div class="product-quantity style2">
+                                            <div class="qtySelector">
+                                                <span class="las la-minus decreaseQty" @onclick="()=>DecreaseQuantity(line)"></span>
+                                                <input type="text" class="qtyValue" value="@line.Quantity" />
+                                                <span class="las la-plus increaseQty" @onclick="()=>IncreaseQuantity(line)"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <p class="wh-tem-price">@line.LineTotalPrice تومان</p>
+                                </td>
+                                <td>
+                                    <button type="button"><i class="las la-times" @onclick="()=>RemoveLine(line)"></i></button>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            }
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-12">
+        <div class="checkout-details">
+            <div class="content-box-title">
+                <h4 class="mb-20">کد تخفیف</h4>
+            </div>
+            <div class="bill-details">
+                <div class="subtotal-wrap">
+                    <div class="subtotal-item">
+                        <p>لورم ایپسوم به سادگی ساختار چاپ و متن را در بر می گیرد. لورم ایپسوم به مدت 40 سال استاندارد صنعت بوده است.</p>
+                        <div class="form-group mb-0 w-100">
+                            <input class="w-100" type="text" placeholder="کد تخفیف شما">
+                            <button type="submit">اعمال کد</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-20">
+                <div class="col-md-5">
+                    <a href="cart.html" class="btn style1">بروزرسانی خرید<i class="las la-redo-alt"></i></a>
+                </div>
+                <div class="col-md-7 text-md-end">
+                    <a href="shop-left-sidebar.html" class="btn style1">ادامه خرید<i class="flaticon-left-arrow"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-12">
+        <div class="checkout-details smt-30">
+            <div class="content-box-title">
+                <h4 class="mb-20">صورت حساب کل</h4>
+            </div>
+            <div class="bill-details">
+
+                <div class="total-wrap">
+                    <h5>مجموع خرید</h5>
+                    <span>@CartLines.Sum(l=>l.LineTotalPrice).ToString("0") تومان</span>
+                </div>
+            </div>
+            <div class="col-lg-12 mt-3">
+                <a href="checkout.html" class="btn style1 w-100 d-block">بررسی پرداخت<i class="lar la-check-circle"></i></a>
+            </div>
+        </div>
+    </div>
 </div>
+
+
+
 
 @code {
     public IList<CartLineModel> CartLines { get; set; } = [];
