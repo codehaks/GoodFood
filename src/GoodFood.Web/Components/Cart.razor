@@ -1,0 +1,109 @@
+@using GoodFood.Application.Services
+<h3>Cart</h3>
+
+<div class="wishlist-table ">
+    @if (!CartLines.Any())
+    {
+        <p>هیچ آیتمی در سبد خرید وجود ندارد</p>
+    }
+    else
+    {
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">محصول</th>
+                    <th scope="col">تعداد</th>
+                    <th scope="col">مجموع قیمت</th>
+                    <th scope="col">حذف کردن</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var line in CartLines)
+                {
+                    <tr>
+                        <td>
+                            <div class="wh_item">
+                                <img src="assets/img/blog/post-thumb-1.jpg" alt="Image">
+                                <div class="wh-item-info">
+                                    <a href="shop-details.html">ساندویچ مرغ</a>
+                                    <p>
+                                        تنوع زیادی از مرغ وجود دارد. شما می توانید انتخاب کنید
+                                        مورد علاقه شما
+                                    </p>
+                                    <span>@line.Price تومان</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="wh_qty">
+                                <div class="product-quantity style2">
+                                    <div class="qtySelector">
+                                        <span class="las la-minus decreaseQty" @onclick="()=>DecreaseQuantity(line)"></span>
+                                        <input type="text" class="qtyValue" value="@line.Quantity" />
+                                        <span class="las la-plus increaseQty" @onclick="()=>IncreaseQuantity(line)"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <p class="wh-tem-price">@line.LineTotalPrice تومان</p>
+                        </td>
+                        <td>
+                            <button type="button"><i class="las la-times" @onclick="()=>RemoveLine(line)"></i></button>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    }
+</div>
+
+@code {
+    public IList<CartLineModel> CartLines { get; set; } = [];
+
+    protected override void OnInitialized()
+    {
+        CartLines = [
+            new CartLineModel
+                {
+                    UserId = "101",
+                    UserName = "User1",
+                    FoodId = 1,
+                    Price = 125000,
+                    Quantity = 1
+                },
+            new CartLineModel
+                {
+                    UserId = "101",
+                    UserName = "User1",
+                    FoodId = 3,
+                    Price = 90000,
+                    Quantity = 3
+                }];
+    }
+
+    public void DecreaseQuantity(CartLineModel line)
+    {
+        if (line.Quantity > 1)
+        {
+            line.Quantity -= 1;
+        }
+
+    }
+
+    public void IncreaseQuantity(CartLineModel line)
+    {
+        if (line.Quantity < 10)
+        {
+            line.Quantity += 1;
+        }
+    }
+
+    public void RemoveLine(CartLineModel line)
+    {
+        CartLines.Remove(line);
+    }
+
+
+}
