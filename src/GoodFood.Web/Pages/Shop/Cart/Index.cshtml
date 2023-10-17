@@ -1,4 +1,5 @@
 @page
+@using GoodFood.Web.Common
 @model GoodFood.Web.Pages.Shop.Cart.IndexModel
 @{
 }
@@ -28,7 +29,7 @@
     <section class="wishlist-wrap ptb-100">
         <div class="container">
 
-            <component type="typeof(Components.Cart)" render-mode="ServerPrerendered" />
+            <component type="typeof(Components.Cart)" render-mode="ServerPrerendered" param-userInfo="@User.GetUserInfo()"/>
 
  
         </div>

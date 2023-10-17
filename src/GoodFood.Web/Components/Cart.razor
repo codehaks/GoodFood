@@ -1,4 +1,8 @@
+@using GoodFood.Application.Contracts
+@using GoodFood.Application.Models
 @using GoodFood.Application.Services
+@inject ICartService CartService
+
 <h3>Cart</h3>
 
 
@@ -111,28 +115,37 @@
 
 
 @code {
+
+    [Parameter]
+    public required UserInfo UserInfo { get; set; }
+
     public IList<CartLineModel> CartLines { get; set; } = [];
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        CartLines = [
-            new CartLineModel
-                {
-                    UserId = "101",
-                    UserName = "User1",
-                    FoodId = 1,
-                    Price = 125000,
-                    Quantity = 1
-                },
-            new CartLineModel
-                {
-                    UserId = "101",
-                    UserName = "User1",
-                    FoodId = 3,
-                    Price = 90000,
-                    Quantity = 3
-                }];
+        CartLines =await CartService.GetByUserIdAsync(UserInfo);
     }
+
+    // protected override void OnInitialized()
+    // {
+    //     CartLines = [
+    //         new CartLineModel
+    //             {
+    //                 UserId = "101",
+    //                 UserName = "User1",
+    //                 FoodId = 1,
+    //                 Price = 125000,
+    //                 Quantity = 1
+    //             },
+    //         new CartLineModel
+    //             {
+    //                 UserId = "101",
+    //                 UserName = "User1",
+    //                 FoodId = 3,
+    //                 Price = 90000,
+    //                 Quantity = 3
+    //             }];
+    // }
 
     public void DecreaseQuantity(CartLineModel line)
     {
