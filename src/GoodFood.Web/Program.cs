@@ -32,7 +32,7 @@ builder.Services.AddRazorPages()
     //options.Conventions.AuthorizeAreaFolder("admin", "/", "RequireAdminRole");
 });
 
-builder.Services.AddDbContext<GoodFoodDbContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddDbContext<GoodFoodDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddSignInManager()
