@@ -1,9 +1,15 @@
-﻿namespace GoodFood.Domain.Entities;
+using GoodFood.Domain.Values;
 
-class OrderLine
+namespace GoodFood.Domain.Entities;
+
+public class OrderLine
 {
     public Guid OrderId { get; set; }
     public int FoodId { get; set; }
-    public MenuLine MenuLine { get; set; }
-    public int Count { get; set; }
+    public required Money FoodPrice { get; set; }
+
+    public int Quantity { get; set; }
+
+    public Money LineTotal { get { return new Money(FoodPrice.Value * Quantity); } }
 }
+

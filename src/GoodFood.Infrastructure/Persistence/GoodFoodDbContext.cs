@@ -17,6 +17,9 @@ public class GoodFoodDbContext : IdentityDbContext<ApplicationUser>
     public DbSet<CartData> Carts { get; set; }
     public DbSet<CartLineData> CartLines { get; set; }
 
+    public DbSet<OrderData> Orders { get; set; }
+    public DbSet<OrderLineData> OrderLines { get; set; }
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.Entity<FoodData>()
@@ -24,6 +27,9 @@ public class GoodFoodDbContext : IdentityDbContext<ApplicationUser>
             .WithOne(e => e.Food)
             .HasForeignKey<MenuLineData>(e => e.FoodId)
             .IsRequired();
+
+        builder.Entity<OrderLineData>()
+            .HasKey(o => new { o.OrderId, o.FoodId });
 
         base.OnModelCreating(builder);
     }

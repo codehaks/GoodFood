@@ -2,7 +2,7 @@
 @using GoodFood.Application.Models
 @using GoodFood.Application.Services
 @inject ICartService CartService
-
+@inject IOrderService OrderService
 <h3>Cart</h3>
 
 
@@ -105,7 +105,7 @@
                 </div>
             </div>
             <div class="col-lg-12 mt-3">
-                <a href="checkout.html" class="btn style1 w-100 d-block">بررسی پرداخت<i class="lar la-check-circle"></i></a>
+                <button @onclick="() => Update()" class="btn style1 w-100 d-block">بررسی پرداخت<i class="lar la-check-circle"></i></button>
             </div>
         </div>
     </div>
@@ -169,5 +169,13 @@
         CartLines.Remove(line);
     }
 
+    public async Task Update()
+    {
+        await CartService.Update(CartLines, UserInfo);
+        await OrderService.Place(UserInfo);
+
+        // Redirect to Gateway!
+
+    }
 
 }

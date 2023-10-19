@@ -9,13 +9,16 @@ public class UnitOfWork : IUnitOfWork
     public IFoodRepository FoodRepository { get; }
     public ICartRepository CartRepository { get; }
 
-    public UnitOfWork(GoodFoodDbContext db, IMenuRepository menuRepository, IFoodRepository foodRepository, ICartRepository cartRepository)
+    public IOrderRepository OrderRepository { get; }
+
+    public UnitOfWork(GoodFoodDbContext db, IMenuRepository menuRepository, IFoodRepository foodRepository, ICartRepository cartRepository, IOrderRepository orderRepository)
     {
         _db = db;
 
         MenuRepository = menuRepository;
         FoodRepository = foodRepository;
         CartRepository = cartRepository;
+        OrderRepository = orderRepository;
     }
 
     public async Task CommitAsync()

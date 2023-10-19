@@ -6,5 +6,7 @@ public interface IUnitOfWork
     public IMenuRepository MenuRepository { get; }
     public IFoodRepository FoodRepository { get; }
     public ICartRepository CartRepository { get; }
+
+    public IOrderRepository OrderRepository { get; }
     Task CommitAsync();
 }
