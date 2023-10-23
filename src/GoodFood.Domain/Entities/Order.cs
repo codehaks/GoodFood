@@ -16,8 +16,17 @@ public enum OrderStatus
 
 public class Order
 {
+    public Order(Customer customer, OrderStatus status, DateTime lastUpdate)
+    {
+        Customer = customer;
+        Lines = [];
+        Status = status;
+        LastUpdate = lastUpdate;
+
+    }
+
     public Guid Id { get; set; }
-    public required Customer Customer { get; init; }
+    public Customer Customer { get; init; }
     public IList<OrderLine> Lines { get; private set; } = new List<OrderLine>();
 
     public Money TotalAmount { get; private set; } = new Money(0);
@@ -58,6 +67,12 @@ public class Order
     {
         Lines.Add(line);
         UpdateAmount();
+    }
+
+    public void Confirm()
+    {
+        Status = OrderStatus.Confirmed;
+        LastUpdate = DateTime.UtcNow;
     }
 
     private void UpdateAmount()

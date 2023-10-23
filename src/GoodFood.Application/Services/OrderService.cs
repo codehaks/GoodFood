@@ -16,6 +16,17 @@ public class OrderService : IOrderService
         _unitOfWork = unitOfWork;
     }
 
+    public async Task ConfirmedAsync(Guid orderId)
+    {
+        // Validation 
+        var order = await _unitOfWork.OrderRepository.FindByIdAsync(orderId);
+
+        order.Confirm();
+
+        await _unitOfWork.OrderRepository.UpdateAsync(order);
+        await _unitOfWork.CommitAsync();
+    }
+
     public async Task Place(UserInfo userInfo)
     {
         var cart = _unitOfWork.CartRepository.FindByCustomerId(userInfo.Adapt<CustomerInfo>());

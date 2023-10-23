@@ -3,6 +3,7 @@ using GoodFood.Domain.Entities;
 namespace GoodFood.Domain.Contracts;
 public interface IOrderRepository
 {
+    Task<Order> FindByIdAsync(Guid orderId);
     Task Place(Order order);
-    void Update(Order order);
+    Task UpdateAsync(Order order);
 }

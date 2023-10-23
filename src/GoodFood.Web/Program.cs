@@ -2,11 +2,13 @@ using System.Globalization;
 using GoodFood.Application.Contracts;
 using GoodFood.Application.Services;
 using GoodFood.Domain.Contracts;
+using GoodFood.Domain.Values;
 using GoodFood.Infrastructure.Persistence;
 using GoodFood.Infrastructure.Persistence.Models;
 using GoodFood.Infrastructure.Persistence.Repositories;
 using GoodFood.Infrastructure.Services;
 using GoodFood.Web.Services;
+using Mapster;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
@@ -68,6 +70,9 @@ builder.Services.AddScoped<ICartRepository, CartRepository>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+// Mappings
+TypeAdapterConfig<Money, decimal>.NewConfig().MapWith((src) => src.Value);
 
 var app = builder.Build();
 
