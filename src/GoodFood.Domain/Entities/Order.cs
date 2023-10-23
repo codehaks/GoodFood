@@ -16,6 +16,14 @@ public enum OrderStatus
 
 public class Order
 {
+    private Order(Customer customer)
+    {
+        Customer = customer;
+        Lines = [];
+        Status = OrderStatus.Pending;
+        LastUpdate = DateTime.UtcNow;
+        Id = Guid.NewGuid();
+    }
     public Order(Customer customer, OrderStatus status, DateTime lastUpdate)
     {
         Customer = customer;
@@ -36,15 +44,11 @@ public class Order
 
     public static Order FromCart(Cart cart)
     {
-        var order = new Order()
+        var order = new Order(new Customer
         {
-            Id = Guid.NewGuid(),
-            Customer = new Customer
-            {
-                UserId = cart.Customer.UserId,
-                UserName = cart.Customer.UserName,
-            }
-        };
+            UserId = cart.Customer.UserId,
+            UserName = cart.Customer.UserName,
+        });
 
         order.Status = OrderStatus.Pending;
         order.Lines = new List<OrderLine>();
