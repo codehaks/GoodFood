@@ -1,9 +1,31 @@
+using System.Net.WebSockets;
 using GoodFood.Domain.Values;
 
 namespace GoodFood.Domain.Tests;
 
 public class MoneyTests
 {
+    [Fact]
+    public void Convert_to_Tomans()
+    {
+        var price = 10000; //rials
+        var m = new Money(price);
+
+        var t = m.ConvertToTomans();
+
+        Assert.Equal(1000, t.Value);
+    }
+
+    [Theory]
+    [InlineData(-0.1)]
+    [InlineData(-10.0)]
+    [InlineData(-1000.00)]
+    public void Money_raises_exception_When_Value_is_less_than_Zero(decimal value)
+    {
+        // assert
+        Assert.Throws<ArgumentOutOfRangeException>(() => new Money(value));
+    }
+
     [Fact]
     public void Money_ObjectsWithSameValue_ShouldBeEqual()
     {
