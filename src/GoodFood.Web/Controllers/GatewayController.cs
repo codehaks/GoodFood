@@ -14,7 +14,7 @@ public class GatewayController : ControllerBase
         _orderService = orderService;
     }
 
-    public async Task<IActionResult> GetAsync(string orderId) // TransactionId, OrderId
+    public async Task<IActionResult> GetAsync([FromQuery]string orderId) // TransactionId, OrderId
     {
         // Validation
         // Confirm Gateway

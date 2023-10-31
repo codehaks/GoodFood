@@ -87,4 +87,14 @@ public class OrderRepository : IOrderRepository
         orderData.Lines = order.Lines.Adapt<ICollection<OrderLineData>>();
         _db.Entry(orderData).State = EntityState.Modified;
     }
+
+    public async Task<IList<Order>> GetAllAsync()
+    {
+        var orders = await _db.Orders.Select(o => new Order(
+            new Customer { UserId = o.UserId, UserName = o.UserName }, o.Status, o.LastUpdate)
+        { Id = o.Id })
+            .ToListAsync();
+
+        return orders;
+    }
 }

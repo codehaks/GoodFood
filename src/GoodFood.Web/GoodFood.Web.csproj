@@ -26,6 +26,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Areas\Admin\Pages\Orders\Details.cshtml" />
+    <None Include="Areas\Admin\Pages\Orders\Index.cshtml" />
     <None Include="Areas\Identity\Pages\Account\AccessDenied.cshtml" />
     <None Include="Areas\Identity\Pages\Account\ConfirmEmail.cshtml" />
     <None Include="Areas\Identity\Pages\Account\ConfirmEmailChange.cshtml" />

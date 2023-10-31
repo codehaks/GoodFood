@@ -1,0 +1,72 @@
+@page
+@model GoodFood.Web.Areas.Admin.Pages.Orders.DetailsModel
+@{
+}
+
+@{
+    var i = 1;
+}
+
+<div class="d-flex align-items-center justify-content-between p-3 border-bottom tx-16">
+    <div class="d-flex align-items-center">
+        <span>جزئیات سفارش</span>
+    </div>
+
+</div>
+<br />
+<div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    @if (Model.Order is null)
+                    {
+                        <p>سفارش یافت نشد</p>
+                    }
+                    else
+                    {
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>غذا</th>
+                                    <th>تعداد</th>
+                                    <th>قیمت</th>
+                                    <th>
+
+                                    </th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Order?.Lines!)
+                                {
+                                    <tr>
+                                        <th>@i</th>
+                                        <th>@item.FoodName</th>
+                                        <td>@item.Quantity</td>
+                                        <td>@item.FoodPriceValue</td>
+                                        <td>
+                                        </td>
+                                    </tr>
+
+                                    i++;
+                                }
+
+
+                            </tbody>
+                        </table>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<form method="post">
+    <input asp-for="OrderId" hidden />
+
+    <button class="btn btn-primary">آماده ارسال</button>
+</form>

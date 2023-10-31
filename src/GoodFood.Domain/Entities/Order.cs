@@ -84,6 +84,10 @@ public class Order
         TotalAmount = new Money(Lines.Sum(l => l.LineTotal.Value));
     }
 
-
+    public void ReadyForPickup()
+    {
+        Status = OrderStatus.ReadyForPickup;
+        LastUpdate = DateTime.UtcNow;
+    }
 }
 

@@ -1,0 +1,69 @@
+@page
+@model GoodFood.Web.Areas.Admin.Pages.Orders.IndexModel
+@{
+}
+
+@{
+    var i = 1;
+}
+
+<div class="d-flex align-items-center justify-content-between p-3 border-bottom tx-16">
+    <div class="d-flex align-items-center">
+        <span>سفارش</span>
+    </div>
+
+</div>
+<br />
+<div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    @if (Model.OrderList is null)
+                    {
+                        <p>هیچ سفارشی یافت نشد</p>
+                    }
+                    else
+                    {
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>مشتری</th>
+                                    <th>وضعیت</th>
+                                    <th>ساعت</th>
+                                    <th>تعداد</th>
+                                    <th>
+                                        
+                                    </th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.OrderList)
+                                {
+                                    <tr>
+                                        <th>@i</th>
+                                        <th>@item.UserInfo.UserName</th>
+                                        <td>@item.Status</td>
+                                        <td>@item.LastUpdate.ToLocalTime()</td>
+                                        <td></td>
+                                        <td>
+                                            <a asp-page="details" asp-route-orderId="@item.Id">جرئیات سفارش</a>
+                                        </td>
+                                    </tr>
+
+                                    i++;
+                                }
+
+
+                            </tbody>
+                        </table>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
