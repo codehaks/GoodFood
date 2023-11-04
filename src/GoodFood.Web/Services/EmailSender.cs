@@ -15,24 +15,27 @@ public class EmailSender : IEmailSender
 
     public async Task SendEmailAsync(string email, string subject, string htmlMessage)
     {
-        //var client = new SmtpClient("smtp.gmail.com")
-        //{
-        //    Credentials = new NetworkCredential(_configuration["email:address"], _configuration["email:password"]),
-        //    Port = 587,
-        //    EnableSsl = true,
-        //    UseDefaultCredentials = false,
-        //};
-        //var address = _configuration["email:address"];
+        using var client = new SmtpClient("smtp.gmail.com")
+        {
+            Credentials = new NetworkCredential(_configuration["email:address"], _configuration["email:password"]),
+            Port = 587,
+            EnableSsl = true,
+            UseDefaultCredentials = false,
+        };
 
-        //var mailMessage = new MailMessage
-        //{
-        //    From = new MailAddress(address),
-        //    IsBodyHtml = true,
-        //    Body = htmlMessage,
-        //    Subject = subject,
-        //};
-        //mailMessage.To.Add(email);
-        //client.SendAsync(mailMessage, CancellationToken.None);
+        var address = _configuration["email:address"];
+
+        ArgumentNullException.ThrowIfNull(address);
+
+        using var mailMessage = new MailMessage
+        {
+            From = new MailAddress(address),
+            IsBodyHtml = true,
+            Body = htmlMessage,
+            Subject = subject,
+        };
+        mailMessage.To.Add(email);
+        client.SendAsync(mailMessage, CancellationToken.None);
 
         await Task.CompletedTask;
     }
