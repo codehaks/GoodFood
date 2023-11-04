@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Text.Encodings.Web;
 using GoodFood.Infrastructure.Persistence.Models;
+using GoodFood.Web.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
@@ -23,15 +24,14 @@ public class RegisterModel : PageModel
     private readonly IUserEmailStore<ApplicationUser> _emailStore;
     private readonly ILogger<RegisterModel> _logger;
     private readonly IEmailSender _emailSender;
-    private readonly IWebHostEnvironment _webHostEnvironment;
-
+    private readonly BannedWordChecker _bannedWordChecker;
     public RegisterModel(
         UserManager<ApplicationUser> userManager,
         IUserStore<ApplicationUser> userStore,
         SignInManager<ApplicationUser> signInManager,
         ILogger<RegisterModel> logger,
         IEmailSender emailSender,
-        IWebHostEnvironment webHostEnvironment)
+        BannedWordChecker bannedWordChecker)
     {
         _userManager = userManager;
         _userStore = userStore;
@@ -39,7 +39,7 @@ public class RegisterModel : PageModel
         _signInManager = signInManager;
         _logger = logger;
         _emailSender = emailSender;
-        _webHostEnvironment = webHostEnvironment;
+        _bannedWordChecker = bannedWordChecker;
     }
 
     /// <summary>
@@ -108,18 +108,8 @@ public class RegisterModel : PageModel
         returnUrl ??= Url.Content("~/");
         ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
-        var usernameContainsBannedWord = false;
 
-        var bannedWordFilePath = System.IO.Path.Combine(_webHostEnvironment.ContentRootPath, "Files", "banned-words.txt");
-        if (System.IO.File.Exists(bannedWordFilePath))
-        {
-            var bannedWords = await System.IO.File.ReadAllLinesAsync(bannedWordFilePath);
-            if (bannedWords.Any(b => Input.Email.Contains(b, StringComparison.OrdinalIgnoreCase)))
-            {
-                usernameContainsBannedWord = true;
-            }
-        }
-
+        var usernameContainsBannedWord = await _bannedWordChecker.CheckForBannedWordAsync(Input.Email);
         if (usernameContainsBannedWord)
         {
             ModelState.AddModelError("Input.Email", "Username contains banned word");

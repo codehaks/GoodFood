@@ -29,8 +29,4 @@
     <ProjectReference Include="..\..\src\GoodFood.Web\GoodFood.Web.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Web\" />
-  </ItemGroup>
-
 </Project>
