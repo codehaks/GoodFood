@@ -44,9 +44,6 @@ public class FoodService : IFoodService
             ImagePath = fullFileName
         };
 
-
-        //food.ImageData = dto.ImageData;
-
         _unitOfWork.FoodRepository.Add(food);
         await _unitOfWork.CommitAsync();
     }
