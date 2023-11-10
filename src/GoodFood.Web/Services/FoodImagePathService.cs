@@ -1,4 +1,4 @@
-using GoodFood.Application.Services;
+using GoodFood.Application.Contracts;
 
 namespace GoodFood.Web.Services;
 
