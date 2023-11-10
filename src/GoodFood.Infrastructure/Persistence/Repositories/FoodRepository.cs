@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Mapster;
 using GoodFood.Infrastructure.Persistence.Models;
+using Microsoft.EntityFrameworkCore;
 namespace GoodFood.Infrastructure.Persistence.Repositories;
 public class FoodRepository : IFoodRepository
 {
@@ -28,6 +29,31 @@ public class FoodRepository : IFoodRepository
         };
 
         _db.Foods.Add(data);
+    }
+
+    public async Task<Food> FindByIdAsync(int id)
+    {
+        var food = await _db.Foods.FindAsync(id);
+        if (food is not null)
+        {
+            return food.Adapt<Food>();
+        }
+
+        throw new InvalidOperationException();
+    }
+
+    public async Task UpdateAsync(Food food)
+    {
+        var data = await _db.Foods.FindAsync(food.Id);
+
+        if (data is null) { throw new InvalidOperationException(); }
+        data.Name = food.Name;
+        data.Description = food.Description;
+        data.CategoryId = food.CategoryId;
+        data.ImagePath = food.ImagePath;
+
+        _db.Entry(data).State = EntityState.Modified;
+
     }
 
     public IList<Food> GetAll()

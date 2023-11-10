@@ -9,5 +9,7 @@ namespace GoodFood.Domain.Contracts;
 public interface IFoodRepository
 {
     void Add(Food food);
+    Task<Food> FindByIdAsync(int id);
     IList<Food> GetAll();
+    Task UpdateAsync(Food food);
 }

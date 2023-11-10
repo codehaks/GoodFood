@@ -46,6 +46,32 @@ public class FoodService : IFoodService
         return _foodRepository.GetAll()
             .Adapt<IList<FoodDto>>();
     }
+
+    public async Task<FoodDetailsDto> FindByIdAsync(int id)
+    {
+        var food = await _unitOfWork.FoodRepository.FindByIdAsync(id);
+        return food.Adapt<FoodDetailsDto>();
+    }
+
+    public async Task UpdateAsync(FoodEditDto dto)
+    {
+
+        var fullFileName = string.Empty;
+
+        var food = new Food()
+        {
+            Id = dto.Id,
+            Name = dto.Name,
+            Description = dto.Description,
+            CategoryId = dto.CategoryId,
+            ImagePath = fullFileName,
+        };
+
+        await _unitOfWork.FoodRepository.UpdateAsync(food);
+        await _unitOfWork.CommitAsync();
+    }
+
+
 }
 
 public class FoodDto

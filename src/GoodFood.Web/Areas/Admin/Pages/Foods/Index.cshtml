@@ -22,18 +22,18 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th>#</th>
                                 <th>نام</th>
-
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var item in Model.FoodList)
                             {
                                 <tr>
-                                    <th>@item.Id</th>
                                     <td>@item.Name</td>
-
+                                    <td>
+                                        <a class="btn btn-primary" asp-page="edit" asp-route-foodid="@item.Id">ویرایش</a>
+                                    </td>
                                 </tr>
                             }
 
