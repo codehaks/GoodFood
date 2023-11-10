@@ -1,0 +1,40 @@
+@page
+@model GoodFood.Web.Areas.Admin.Pages.Foods.CreateModel
+@{
+    ViewData["Title"] = "Create Food";
+}
+
+<h2>ثبت اطلاعات غذا</h2>
+
+<form method="post" enctype="multipart/form-data">
+
+    <div class="mb-3">
+        <label asp-for="FoodInput.CategoryId" class="control-label"></label>
+        <select asp-for="FoodInput.CategoryId" asp-items="Model.CategorySelectList" class="form-control">
+            <option value="">Select a category</option>
+        </select>
+        <span asp-validation-for="FoodInput.CategoryId" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="FoodInput.ImageFile"></label>
+        <input asp-for="FoodInput.ImageFile" class="form-control" />
+        <span asp-validation-for="FoodInput.ImageFile" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="FoodInput.Name"></label>
+        <input asp-for="FoodInput.Name" class="form-control" />
+        <span asp-validation-for="FoodInput.Name" class="text-danger"></span>
+    </div>
+
+
+
+    <div class="mb-3">
+        <label asp-for="FoodInput.Description"></label>
+        <textarea asp-for="FoodInput.Description" class="form-control"></textarea>
+        <span asp-validation-for="FoodInput.Description" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">ثبت</button>
+</form>

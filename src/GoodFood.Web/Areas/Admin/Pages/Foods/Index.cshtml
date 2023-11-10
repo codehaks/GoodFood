@@ -1,7 +1,18 @@
-﻿@page
+@page
 @model GoodFood.Web.Areas.Admin.Pages.Foods.IndexModel
 @{
 }
+
+<div class="d-flex align-items-center justify-content-between p-3 border-bottom tx-16">
+    <div class="d-flex align-items-center">
+        <span> غذاها</span>
+    </div>
+    <div>
+        <a class="btn btn-primary" asp-page="./create" target="_blank">جدید</a>
+
+    </div>
+</div>
+<br />
 <div class="row">
     <div class="col-md-6 grid-margin stretch-card">
         <div class="card">

@@ -12,10 +12,33 @@ namespace GoodFood.Application.Services;
 public class FoodService : IFoodService
 {
     private readonly IFoodRepository _foodRepository;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public FoodService(IFoodRepository foodRepository)
+    public FoodService(IFoodRepository foodRepository, IUnitOfWork unitOfWork)
     {
         _foodRepository = foodRepository;
+        _unitOfWork = unitOfWork;
+    }
+
+    public async Task CreateAsync(FoodCreateDto dto)
+    {
+
+        // TODO: Store ImageData to file
+        // TODO: Get ImageUrl
+
+        var food = new Food
+        {
+            Name = dto.Name,
+            Description = dto.Description,
+            CategoryId = dto.CategoryId,
+            ImagePath = ""
+        };
+
+
+        //food.ImageData = dto.ImageData;
+
+        _unitOfWork.FoodRepository.Add(food);
+        await _unitOfWork.CommitAsync();
     }
 
     public IList<FoodDto> FindAll()

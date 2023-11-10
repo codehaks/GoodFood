@@ -8,5 +8,6 @@ using System.Threading.Tasks;
 namespace GoodFood.Domain.Contracts;
 public interface IFoodRepository
 {
+    void Add(Food food);
     IList<Food> GetAll();
 }

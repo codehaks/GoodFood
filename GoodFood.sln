@@ -28,7 +28,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "root", "root", "{21B35F9C-C
 		run_coverage_report.bat = run_coverage_report.bat
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoodFood.Tests", "tests\GoodFood.Tests\GoodFood.Tests.csproj", "{9DAC1525-54D2-4B33-837D-FEC221A51D54}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoodFood.Tests", "tests\GoodFood.Tests\GoodFood.Tests.csproj", "{9DAC1525-54D2-4B33-837D-FEC221A51D54}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
