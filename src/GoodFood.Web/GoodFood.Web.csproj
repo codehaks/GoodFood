@@ -123,4 +123,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Files\FoodImages\" />
+  </ItemGroup>
+
 </Project>

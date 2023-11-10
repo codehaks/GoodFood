@@ -13,25 +13,35 @@ public class FoodService : IFoodService
 {
     private readonly IFoodRepository _foodRepository;
     private readonly IUnitOfWork _unitOfWork;
+    private readonly IFoodImageStorageService _foodImageStorageService;
+    private readonly IFoodImagePathService _foodImagePathService;
 
-    public FoodService(IFoodRepository foodRepository, IUnitOfWork unitOfWork)
+    public FoodService(IFoodRepository foodRepository, IUnitOfWork unitOfWork, IFoodImageStorageService foodImageStorageService, IFoodImagePathService foodImagePathService)
     {
         _foodRepository = foodRepository;
         _unitOfWork = unitOfWork;
+        _foodImageStorageService = foodImageStorageService;
+        _foodImagePathService = foodImagePathService;
     }
 
     public async Task CreateAsync(FoodCreateDto dto)
     {
 
-        // TODO: Store ImageData to file
-        // TODO: Get ImageUrl
+        var fileName = Guid.NewGuid().ToString() + ".jpg";
+        var path = _foodImagePathService.GetPath();
+        var fullFileName = Path.Combine(path, fileName);
+
+        if (dto.ImageData is not null)
+        {
+            await _foodImageStorageService.StoreAsync(dto.ImageData, fullFileName);
+        }
 
         var food = new Food
         {
             Name = dto.Name,
             Description = dto.Description,
             CategoryId = dto.CategoryId,
-            ImagePath = ""
+            ImagePath = fullFileName
         };
 
 
@@ -56,7 +66,15 @@ public class FoodService : IFoodService
     public async Task UpdateAsync(FoodEditDto dto)
     {
 
-        var fullFileName = string.Empty;
+        // TODO: Store ImageData to file
+        var fileName = Guid.NewGuid().ToString() + ".jpg";
+        var path = _foodImagePathService.GetPath();
+        var fullFileName = Path.Combine(path, fileName);
+        if (dto.GetImageData() is not null)
+        {
+            await _foodImageStorageService.StoreAsync(dto.GetImageData(), fullFileName);
+        }
+
 
         var food = new Food()
         {

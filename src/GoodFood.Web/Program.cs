@@ -63,6 +63,8 @@ builder.Services.AddScoped<IFoodCategoryService, FoodCategoryService>();
 builder.Services.AddScoped<IMenuService, MenuService>();
 builder.Services.AddScoped<ICartService,CartService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IFoodImagePathService, FoodImagePathService>();
+builder.Services.AddScoped<IFoodImageStorageService, FoodImageStorageService>();
 
 builder.Services.AddScoped<IMenuRepository, MenuRepository>();
 builder.Services.AddScoped<IFoodRepository, FoodRepository>();
