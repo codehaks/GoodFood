@@ -56,7 +56,7 @@ public class CartTests
 
         var cartLines = new Collection<CartLine>() { cartLine1, cartLine2 };
 
-        var cart = new Cart(1, cartLines, customer);
+        var cart = new Cart(1, cartLines, customer, DateTime.UtcNow, DateTime.UtcNow);
         // Act
         cart.AddOrUpdate(cartLine3);
 
@@ -65,4 +65,6 @@ public class CartTests
         Assert.Equal(2, cart.Lines.Count);
         Assert.Equal(5, cart.Lines.First(l => l.FoodId == 2).Quantity);
     }
+
+    
 }
