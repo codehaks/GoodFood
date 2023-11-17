@@ -6,6 +6,9 @@ public class CartData
 
     public required string UserId { get; set; }
     public ICollection<CartLineData>? Lines { get; set; }
+
+    public DateTime TimeCreated { get; set; }
+    public DateTime TimeUpdated { get; set; }
 }
 
 public class CartLineData

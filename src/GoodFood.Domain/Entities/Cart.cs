@@ -15,12 +15,16 @@ public class Cart
         Id = default;
         Lines = [];
         Customer = customer;
+        TimeCreated = DateTime.UtcNow;
+        TimeUpdated = TimeCreated;
     }
-    public Cart(int id, Collection<CartLine>? lines, CustomerInfo customer)
+    public Cart(int id, Collection<CartLine>? lines, CustomerInfo customer, DateTime timeCreated, DateTime timeUpdated)
     {
         Id = id;
         Lines = lines ?? [];
         Customer = customer;
+        TimeCreated = timeCreated;
+        TimeUpdated = timeUpdated;
     }
 
     public void Clear()
@@ -42,7 +46,18 @@ public class Cart
             // If no existing line found, add the new cartLine to the collection.
             Lines.Add(cartLine);
         }
+
+        TimeUpdated = DateTime.UtcNow;
     }
+
+    public bool IsAvailable()
+    {
+        var cartAgePerMinutes = (DateTime.UtcNow - TimeCreated).TotalMinutes;
+        return cartAgePerMinutes < 60;
+    }
+
+    public DateTime TimeCreated { get; init; }
+    public DateTime TimeUpdated { get; private set; }
 }
 
 public class CartLine

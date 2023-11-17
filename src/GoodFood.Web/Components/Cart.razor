@@ -126,27 +126,6 @@
         CartLines =await CartService.GetByUserIdAsync(UserInfo);
     }
 
-    // protected override void OnInitialized()
-    // {
-    //     CartLines = [
-    //         new CartLineModel
-    //             {
-    //                 UserId = "101",
-    //                 UserName = "User1",
-    //                 FoodId = 1,
-    //                 Price = 125000,
-    //                 Quantity = 1
-    //             },
-    //         new CartLineModel
-    //             {
-    //                 UserId = "101",
-    //                 UserName = "User1",
-    //                 FoodId = 3,
-    //                 Price = 90000,
-    //                 Quantity = 3
-    //             }];
-    // }
-
     public void DecreaseQuantity(CartLineModel line)
     {
         if (line.Quantity > 1)

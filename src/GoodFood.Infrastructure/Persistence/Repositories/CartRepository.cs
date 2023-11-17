@@ -35,7 +35,9 @@ public class CartRepository : ICartRepository
 
     public Cart? FindByCustomerId(CustomerInfo customer)
     {
-        var cartData = _db.Carts.Include(c => c.Lines).FirstOrDefault(c => c.UserId == customer.UserId);
+        var cartData = _db.Carts.Include(c => c.Lines)
+            .OrderByDescending(c => c.TimeUpdated)
+            .FirstOrDefault(c => c.UserId == customer.UserId);
         if (cartData is null)
         {
             return null;
@@ -43,7 +45,7 @@ public class CartRepository : ICartRepository
 
         var lines = cartData.Lines?.Adapt<Collection<CartLine>>();
 
-        var cart = new Cart(cartData.Id, lines, customer);
+        var cart = new Cart(cartData.Id, lines, customer, cartData.TimeCreated, cartData.TimeUpdated);
         return cart;
     }
 

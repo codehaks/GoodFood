@@ -19,7 +19,7 @@ public class CartService : ICartService
     public async Task AddToCartAsync(CartLineAddModel model)
     {
         var cart = _unitOfWork.CartRepository.FindByCustomerId(model.UserInfo.Adapt<CustomerInfo>());
-        if (cart is null)
+        if (cart is null || !cart.IsAvailable())
         {
             cart = new Cart(new Domain.Values.CustomerInfo(model.UserInfo.UserId, model.UserInfo.UserName));
             _unitOfWork.CartRepository.Add(cart);
@@ -39,9 +39,9 @@ public class CartService : ICartService
     {
         var cart = await Task.FromResult(_unitOfWork.CartRepository.FindByCustomerId(userInfo.Adapt<CustomerInfo>()));
 
-        if (cart is null)
+        if (cart is null || !cart.IsAvailable())
         {
-            return new List<CartLineModel>();
+            return [];
         }
         return cart.Lines.Adapt<IList<CartLineModel>>();
 
