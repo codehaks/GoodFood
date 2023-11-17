@@ -10,21 +10,25 @@ public class Cart
     public CustomerInfo Customer { get; init; }
     public Collection<CartLine> Lines { get; }
 
-    public Cart(CustomerInfo customer)
+    private readonly TimeProvider _timeProvider;
+
+    public Cart(CustomerInfo customer, TimeProvider timeProvider)
     {
         Id = default;
         Lines = [];
         Customer = customer;
-        TimeCreated = DateTime.UtcNow;
+        TimeCreated = timeProvider.GetUtcNow().UtcDateTime;//DateTime.UtcNow;
         TimeUpdated = TimeCreated;
+        _timeProvider = timeProvider;
     }
-    public Cart(int id, Collection<CartLine>? lines, CustomerInfo customer, DateTime timeCreated, DateTime timeUpdated)
+    public Cart(int id, Collection<CartLine>? lines, CustomerInfo customer, DateTime timeCreated, DateTime timeUpdated, TimeProvider timeProvider)
     {
         Id = id;
         Lines = lines ?? [];
         Customer = customer;
         TimeCreated = timeCreated;
         TimeUpdated = timeUpdated;
+        _timeProvider = timeProvider;
     }
 
     public void Clear()
@@ -47,12 +51,12 @@ public class Cart
             Lines.Add(cartLine);
         }
 
-        TimeUpdated = DateTime.UtcNow;
+        TimeUpdated = _timeProvider.GetUtcNow().UtcDateTime;
     }
 
     public bool IsAvailable()
     {
-        var cartAgePerMinutes = (DateTime.UtcNow - TimeCreated).TotalMinutes;
+        var cartAgePerMinutes = (_timeProvider.GetUtcNow().UtcDateTime - TimeCreated).TotalMinutes;
         return cartAgePerMinutes < 60;
     }
 

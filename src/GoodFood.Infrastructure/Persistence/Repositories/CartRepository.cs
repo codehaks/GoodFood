@@ -10,10 +10,11 @@ namespace GoodFood.Infrastructure.Persistence.Repositories;
 public class CartRepository : ICartRepository
 {
     private readonly GoodFoodDbContext _db;
-
-    public CartRepository(GoodFoodDbContext db)
+    private readonly TimeProvider _timeProvider;
+    public CartRepository(GoodFoodDbContext db, TimeProvider timeProvider)
     {
         _db = db;
+        _timeProvider = timeProvider;
     }
 
     public void Add(Cart cart)
@@ -45,7 +46,7 @@ public class CartRepository : ICartRepository
 
         var lines = cartData.Lines?.Adapt<Collection<CartLine>>();
 
-        var cart = new Cart(cartData.Id, lines, customer, cartData.TimeCreated, cartData.TimeUpdated);
+        var cart = new Cart(cartData.Id, lines, customer, cartData.TimeCreated, cartData.TimeUpdated,_timeProvider);
         return cart;
     }
 

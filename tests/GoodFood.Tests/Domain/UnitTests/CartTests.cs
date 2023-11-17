@@ -1,23 +1,19 @@
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GoodFood.Domain.Entities;
 using GoodFood.Domain.Values;
-using Microsoft.VisualBasic;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Query.ExpressionTranslators.Internal;
+using Moq;
 
 namespace GoodFood.Tests.Domain.UnitTests;
 public class CartTests
 {
+    private readonly TimeProvider timeProvider = TimeProvider.System;
+
     [Fact]
     public void New_Line_Is_Added_to_CartLines()
     {
         // Arrange
         var customer = new CustomerInfo("1", "u");
-        var cart = new Cart(customer);
+        var cart = new Cart(customer, timeProvider);
         var cartLine = new CartLine { FoodId = 1, Quantity = 1, Price = 10.0M };
         // Act
         cart.AddOrUpdate(cartLine);
@@ -31,7 +27,7 @@ public class CartTests
     {
         // Arrange
         var customer = new CustomerInfo("1", "u");
-        var cart = new Cart(customer);
+        var cart = new Cart(customer, timeProvider);
         var cartLine1 = new CartLine { FoodId = 1, Quantity = 1, Price = 10.0M };
         var cartLine2 = new CartLine { FoodId = 1, Quantity = 3, Price = 10.0M };
         // Act
@@ -56,7 +52,7 @@ public class CartTests
 
         var cartLines = new Collection<CartLine>() { cartLine1, cartLine2 };
 
-        var cart = new Cart(1, cartLines, customer, DateTime.UtcNow, DateTime.UtcNow);
+        var cart = new Cart(1, cartLines, customer, DateTime.UtcNow, DateTime.UtcNow, timeProvider);
         // Act
         cart.AddOrUpdate(cartLine3);
 
@@ -65,6 +61,24 @@ public class CartTests
         Assert.Equal(2, cart.Lines.Count);
         Assert.Equal(5, cart.Lines.First(l => l.FoodId == 2).Quantity);
     }
+    [Fact]
+    public void IsAvailable_ReturnsFalseAfter60Minutes()
+    {
+        // Arrange
+        var customer = new CustomerInfo("1", "u");
 
-    
+        var timeCreated = new DateTimeOffset(DateTime.UtcNow);
+
+        var timerMock = new Mock<TimeProvider>();
+
+        timerMock.Setup(t => t.GetUtcNow()).Returns(timeCreated);
+        var cart = new Cart(customer, timerMock.Object);
+
+        timerMock.Setup(t => t.GetUtcNow()).Returns(timeCreated.AddMinutes(61));
+        // Act
+        var result = cart.IsAvailable();
+
+        // Assert
+        Assert.False(result);
+    }
 }

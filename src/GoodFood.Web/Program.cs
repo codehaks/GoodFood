@@ -55,13 +55,15 @@ builder.Services.Configure<IdentityOptions>(options =>
 
 });
 
+builder.Services.AddSingleton(TimeProvider.System);
+
 builder.Services.AddScoped<IEmailSender, EmailSender>();
 
 builder.Services.AddScoped<IFoodService, FoodService>();
 
 builder.Services.AddScoped<IFoodCategoryService, FoodCategoryService>();
 builder.Services.AddScoped<IMenuService, MenuService>();
-builder.Services.AddScoped<ICartService,CartService>();
+builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IFoodImagePathService, FoodImagePathService>();
 builder.Services.AddScoped<IFoodImageStorageService, FoodImageStorageService>();

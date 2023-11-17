@@ -10,10 +10,12 @@ namespace GoodFood.Application.Services;
 public class CartService : ICartService
 {
     private readonly IUnitOfWork _unitOfWork;
+    private readonly TimeProvider _timeProvider;
 
-    public CartService(IUnitOfWork unitOfWork)
+    public CartService(IUnitOfWork unitOfWork, TimeProvider timeProvider)
     {
         _unitOfWork = unitOfWork;
+        _timeProvider = timeProvider;
     }
 
     public async Task AddToCartAsync(CartLineAddModel model)
@@ -21,7 +23,7 @@ public class CartService : ICartService
         var cart = _unitOfWork.CartRepository.FindByCustomerId(model.UserInfo.Adapt<CustomerInfo>());
         if (cart is null || !cart.IsAvailable())
         {
-            cart = new Cart(new Domain.Values.CustomerInfo(model.UserInfo.UserId, model.UserInfo.UserName));
+            cart = new Cart(new Domain.Values.CustomerInfo(model.UserInfo.UserId, model.UserInfo.UserName),_timeProvider);
             _unitOfWork.CartRepository.Add(cart);
             await _unitOfWork.CommitAsync();
 
@@ -52,7 +54,7 @@ public class CartService : ICartService
         var cart = _unitOfWork.CartRepository.FindByCustomerId(userInfo.Adapt<CustomerInfo>());
         if (cart is null)
         {
-            cart = new Cart(new Domain.Values.CustomerInfo(userInfo.UserId, userInfo.UserName));
+            cart = new Cart(new Domain.Values.CustomerInfo(userInfo.UserId, userInfo.UserName),_timeProvider);
 
             _unitOfWork.CartRepository.Add(cart);
             await _unitOfWork.CommitAsync();
