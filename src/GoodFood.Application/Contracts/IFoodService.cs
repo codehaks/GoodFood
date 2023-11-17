@@ -18,7 +18,7 @@ public class FoodDetailsDto
     public int CategoryId { get; set; }
 
     public byte[]? ImageData { get; set; }
-
+    public string? ImagePath { get; set; }
 }
 
 public class FoodEditDto
