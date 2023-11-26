@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using GoodFood.Application.Contracts;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;
@@ -15,16 +16,14 @@ public class CreateModel : PageModel
     {
         _foodService = foodService;
         _foodCategoryService = foodCategoryService;
+
+        var categories = _foodCategoryService.GetAll();
+        CategorySelectList = new SelectList(categories, "Id", "Name");
     }
 
     [BindProperty]
     public FoodInputModel FoodInput { get; set; }
     public SelectList CategorySelectList { get; set; }
-    public void OnGet()
-    {
-        var categories = _foodCategoryService.GetAll();
-        CategorySelectList = new SelectList(categories, "Id", "Name");
-    }
 
     public async Task<IActionResult> OnPost()
     {
@@ -38,7 +37,16 @@ public class CreateModel : PageModel
 
         dto.ImageData = await GetImageDataAsync(FoodInput.ImageFile);
 
-        await _foodService.CreateAsync(dto);
+        try
+        {
+            await _foodService.CreateAsync(dto);
+        }
+        catch (InvalidOperationException ex)
+        {
+            ModelState.AddModelError("", ex.Message);
+            return Page();
+        }
+
 
         return RedirectToPage("./index");
     }
@@ -55,6 +63,7 @@ public class CreateModel : PageModel
 
 public class FoodInputModel
 {
+    [Length(1, 50, ErrorMessage = "")]
     public required string Name { get; set; }
     public required string Description { get; set; }
     public int CategoryId { get; set; }

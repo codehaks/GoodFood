@@ -26,7 +26,16 @@ public class FoodService : IFoodService
 
     public async Task CreateAsync(FoodCreateDto dto)
     {
+        // Validate DTO
 
+        // Check duplicates
+        var alreadyExists = await _unitOfWork.FoodRepository.ExistsByNameAsyncc(dto.Name);
+        if (alreadyExists)
+        {
+            throw new InvalidOperationException("Food name already exists");
+        }
+
+        // Upload Image
         var fileName = Guid.NewGuid().ToString() + ".jpg";
         var path = _foodImagePathService.GetPath();
         var fullFileName = Path.Combine(path, fileName);
