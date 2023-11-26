@@ -1,5 +1,6 @@
 using System.Reflection;
 using GoodFood.Application.Contracts;
+using GoodFood.Application.Mappers;
 using GoodFood.Application.Models;
 using GoodFood.Domain.Contracts;
 using GoodFood.Domain.Entities;
@@ -27,7 +28,7 @@ public class CartService : ICartService
             _unitOfWork.CartRepository.Add(cart);
             await _unitOfWork.CommitAsync();
 
-            cart = _unitOfWork.CartRepository.FindByCustomerId(model.UserInfo.Adapt<CustomerInfo>());
+            cart = _unitOfWork.CartRepository.FindByCustomerId(UserMapper.MapUserToCustomer(model.UserInfo));
         }
 
         cart.AddOrUpdate(new CartLine { FoodId = model.FoodId, Price = model.Price, Quantity = model.Quantity });
@@ -35,6 +36,22 @@ public class CartService : ICartService
         _unitOfWork.CartRepository.Update(cart);
 
         await _unitOfWork.CommitAsync();
+    }
+
+    public async Task<CartDto> FindByUserIdAsync(UserInfo userInfo)
+    {
+        var cart = await Task.FromResult(_unitOfWork.CartRepository.FindByCustomerId(new CustomerInfo(userInfo.UserId, userInfo.UserName)));
+        if (cart.IsAvailable())
+        {
+            var dto = CartMapper.MapToDto(cart);
+            return dto;
+        }
+        else
+        {
+            var dto = CartMapper.MapToDto(new Cart(new CustomerInfo(userInfo.UserId, userInfo.UserName), _timeProvider));
+            return dto;
+        }
+
     }
 
     public async Task<IList<CartLineModel>> GetByUserIdAsync(UserInfo userInfo)

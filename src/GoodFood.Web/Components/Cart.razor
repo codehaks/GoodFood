@@ -101,7 +101,7 @@
 
                 <div class="total-wrap">
                     <h5>مجموع خرید</h5>
-                    <span>@CartLines.Sum(l=>l.LineTotalPrice).ToString("0") تومان</span>
+                    <span>@CartLines.Sum(l => l.LineTotalPrice).ToString("0") تومان</span>
                 </div>
             </div>
             <div class="col-lg-12 mt-3">
@@ -123,7 +123,8 @@
 
     protected override async Task OnInitializedAsync()
     {
-        CartLines =await CartService.GetByUserIdAsync(UserInfo);
+        var cart = await CartService.FindByUserIdAsync(UserInfo);
+        CartLines = cart.Lines;
     }
 
     public void DecreaseQuantity(CartLineModel line)
