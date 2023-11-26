@@ -1,0 +1,77 @@
+@page
+@model GoodFood.Web.Areas.User.Pages.Orders.DetailsModel
+@{
+}
+
+@section header{
+    <div class="breadcrumb-title">
+        <h2>حساب من</h2>
+        <ul class="breadcrumb-menu list-style">
+            <li><a href="index.html">خانه </a></li>
+            <li>جزئیات سفارش</li>
+        </ul>
+    </div>
+}
+
+@{
+    var i = 1;
+}
+
+
+<div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+
+
+                <div class="table-responsive">
+                    @if (Model.Order is null)
+                    {
+                        <p>سفارش یافت نشد</p>
+                    }
+                    else
+                    {
+                        <p>
+                            وضعیت سفارش : @Model.Order.Status
+                        </p>
+
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>غذا</th>
+                                    <th>تعداد</th>
+                                    <th>قیمت</th>
+                                    <th>
+
+                                    </th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Order?.Lines!)
+                                {
+                                    <tr>
+                                        <th>@i</th>
+                                        <th>@item.FoodName</th>
+                                        <td>@item.Quantity</td>
+                                        <td>@item.FoodPriceValue</td>
+                                        <td>
+                                        </td>
+                                    </tr>
+
+                                    i++;
+                                }
+
+
+                            </tbody>
+                        </table>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

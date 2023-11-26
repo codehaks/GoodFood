@@ -68,6 +68,13 @@
     <None Include="Areas\Identity\Pages\_ValidationScriptsPartial.cshtml" />
     <None Include="Areas\Identity\Pages\_ViewImports.cshtml" />
     <None Include="Areas\Identity\Pages\_ViewStart.cshtml" />
+    <None Include="Areas\User\Pages\Index.cshtml" />
+    <None Include="Areas\User\Pages\Orders\Details.cshtml" />
+    <None Include="Areas\User\Pages\Orders\Index.cshtml" />
+    <None Include="Areas\User\Pages\Shared\_Layout.cshtml" />
+    <None Include="Areas\User\Pages\Shared\_Sidebar.cshtml" />
+    <None Include="Areas\User\Pages\_ViewImports.cshtml" />
+    <None Include="Areas\User\Pages\_ViewStart.cshtml" />
   </ItemGroup>
 
   <ItemGroup>

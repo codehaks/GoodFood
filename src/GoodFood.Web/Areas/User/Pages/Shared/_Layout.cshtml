@@ -1,0 +1,38 @@
+@{
+    Layout = "~/pages/shared/_Layout.cshtml";
+}
+
+
+<div class="content-wrapper">
+
+    <div class="breadcrumb-wrap bg-f br-1">
+        <div class="overlay bg-black op-9"></div>
+        <img src="assets/img/shape-1.png" alt="Image" class="br-shape-1">
+        <img src="assets/img/shape-2.png" alt="Image" class="br-shape-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                  @RenderSectionAsync("header",false)
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <section class="Shop-wrap ptb-100">
+        <div class="container">
+            <div class="row gx-5">
+                <div class="col-xl-4 col-lg-12 order-xl-1 order-lg-2 order-md-2 order-2">
+                    <partial name="_sidebar"/>
+                </div>
+                <div class="col-xl-8 col-lg-12 order-xl-2 order-lg-1 order-md-1 order-1">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+
+
