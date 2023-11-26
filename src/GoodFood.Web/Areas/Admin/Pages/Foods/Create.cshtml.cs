@@ -39,9 +39,14 @@ public class CreateModel : PageModel
 
         try
         {
-            await _foodService.CreateAsync(dto);
+            var result = await _foodService.CreateAsync(dto);
+            if (!result.Success)
+            {
+                ModelState.AddModelError("", result.Message);
+                return Page();
+            }
         }
-        catch (InvalidOperationException ex)
+        catch (Exception ex)
         {
             ModelState.AddModelError("", ex.Message);
             return Page();

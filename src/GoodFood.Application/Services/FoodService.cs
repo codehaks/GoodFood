@@ -2,11 +2,6 @@ using GoodFood.Application.Contracts;
 using GoodFood.Domain.Contracts;
 using GoodFood.Domain.Entities;
 using Mapster;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GoodFood.Application.Services;
 public class FoodService : IFoodService
@@ -24,15 +19,16 @@ public class FoodService : IFoodService
         _foodImagePathService = foodImagePathService;
     }
 
-    public async Task CreateAsync(FoodCreateDto dto)
+    public async Task<OperationResult> CreateAsync(FoodCreateDto dto)
     {
         // Validate DTO
 
         // Check duplicates
-        var alreadyExists = await _unitOfWork.FoodRepository.ExistsByNameAsyncc(dto.Name);
+        var alreadyExists = await _unitOfWork.FoodRepository.ExistsByNameAsync(dto.Name);
         if (alreadyExists)
         {
-            throw new InvalidOperationException("Food name already exists");
+            //  throw new InvalidOperationException("Food name already exists");
+            return new OperationResult { Message = "Food name already exists", Success = false };
         }
 
         // Upload Image
@@ -55,6 +51,7 @@ public class FoodService : IFoodService
 
         _unitOfWork.FoodRepository.Add(food);
         await _unitOfWork.CommitAsync();
+        return new OperationResult { Message = "Food saved successfully.", Success = true };
     }
 
     public IList<FoodDto> FindAll()
@@ -102,4 +99,11 @@ public class FoodDto
 {
     public int Id { get; set; }
     public string Name { get; set; }
+}
+
+
+public class OperationResult
+{
+    public bool Success { get; set; }
+    public required string Message { get; set; }
 }

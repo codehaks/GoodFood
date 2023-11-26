@@ -63,6 +63,6 @@ public class FoodRepository : IFoodRepository
             .ToList();
     }
 
-    public async Task<bool> ExistsByNameAsyncc(string name)
+    public async Task<bool> ExistsByNameAsync(string name)
         => await _db.Foods.AnyAsync(f => f.Name == name);
 }

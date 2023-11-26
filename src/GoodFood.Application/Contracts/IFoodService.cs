@@ -4,7 +4,7 @@ using GoodFood.Domain.Entities;
 namespace GoodFood.Application.Contracts;
 public interface IFoodService
 {
-    Task CreateAsync(FoodCreateDto dto);
+    Task<OperationResult> CreateAsync(FoodCreateDto dto);
     IList<FoodDto> FindAll();
     Task<FoodDetailsDto> FindByIdAsync(int id);
     Task UpdateAsync(FoodEditDto dto);
