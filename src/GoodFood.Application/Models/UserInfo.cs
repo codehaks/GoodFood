@@ -1,4 +1,4 @@
-﻿namespace GoodFood.Application.Models;
+namespace GoodFood.Application.Models;
 
 public record UserInfo
 {
