@@ -9,5 +9,5 @@ public class MenuLineData
     public int Count { get; set; }
     public decimal Price { get; set; }
 
-    public FoodData Food { get; set; }
+    public FoodData? Food { get; set; }
 }
