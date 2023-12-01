@@ -56,7 +56,7 @@ builder.Services.Configure<IdentityOptions>(options =>
 });
 
 builder.Services.AddSingleton(TimeProvider.System);
-
+builder.Services.AddScoped<BannedWordChecker>();
 builder.Services.AddScoped<IEmailSender, EmailSender>();
 
 builder.Services.AddScoped<IFoodService, FoodService>();
