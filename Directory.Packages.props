@@ -6,31 +6,31 @@
   <ItemGroup>
     <PackageVersion Include="coverlet.collector" Version="6.0.0" />
     <PackageVersion Include="Mapster" Version="7.4.1-pre01" />
-    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.0-rc.2.23480.2" />
-    <PackageVersion Include="Microsoft.AspNetCore.Mvc.Testing" Version="7.0.13" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="8.0.0-rc.2.23480.1" />
+    <PackageVersion Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="8.0.0" />
+    <PackageVersion Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.0" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.0-rc.2.23480.1" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.0-rc.2.23480.1" />
-    <PackageVersion Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.0-rc.2.23480.2" />
-    <PackageVersion Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.0-rc.2.23480.2" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.0" />
+    <PackageVersion Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.0" />
+    <PackageVersion Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.0" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.9.0-preview-23503-02" />
-    <PackageVersion Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.0-rc.2.23509.1" />
-    <PackageVersion Include="Moq" Version="4.20.69" />
-    <PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.0-rc.2" />
-    <PackageVersion Include="Serilog.AspNetCore" Version="7.0.1-dev-00320" />
-    <PackageVersion Include="Serilog.Sinks.Console" Version="5.0.0-dev-00923" />
-    <PackageVersion Include="xunit" Version="2.5.2" />
-    <PackageVersion Include="xunit.runner.visualstudio" Version="2.5.3" />
+    <PackageVersion Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.0" />
+    <PackageVersion Include="Moq" Version="4.20.70" />
+    <PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.0" />
+    <PackageVersion Include="Serilog.AspNetCore" Version="8.0.0" />
+    <PackageVersion Include="Serilog.Sinks.Console" Version="5.0.1" />
+    <PackageVersion Include="xunit" Version="2.6.2" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="2.5.4" />
     <PackageVersion Include="Microsoft.CodeAnalysis.BannedApiAnalyzers" Version="3.11.0-beta1.23472.1" />
     <PackageVersion Include="Microsoft.CodeAnalysis.Common" Version="4.5.0" />
-    <PackageVersion Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="8.0.0-preview.23472.1" />
+    <PackageVersion Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="8.0.0" />
     <PackageVersion Include="Microsoft.CodeAnalysis.Scripting" Version="4.5.0" />
-    <PackageVersion Include="Roslynator.Analyzers" Version="4.5.0" />
-    <PackageVersion Include="Roslynator.CodeAnalysis.Analyzers" Version="4.5.0" />
-    <PackageVersion Include="Roslynator.Formatting.Analyzers" Version="4.5.0" />
+    <PackageVersion Include="Roslynator.Analyzers" Version="4.6.4" />
+    <PackageVersion Include="Roslynator.CodeAnalysis.Analyzers" Version="4.6.4" />
+    <PackageVersion Include="Roslynator.Formatting.Analyzers" Version="4.6.4" />
     <packageVersion Include="SecurityCodeScan.VS2019" Version="5.6.7" />
-    <PackageVersion Include="SonarAnalyzer.CSharp" Version="9.12.0.78982" />
-    <PackageVersion Include="Meziantou.Analyzer" Version="2.0.93" />
-    <PackageVersion Include="Microsoft.VisualStudio.Threading.Analyzers" Version="17.7.30" />
+    <PackageVersion Include="SonarAnalyzer.CSharp" Version="9.14.0.81108" />
+    <PackageVersion Include="Meziantou.Analyzer" Version="2.0.116" />
+    <PackageVersion Include="Microsoft.VisualStudio.Threading.Analyzers" Version="17.8.14" />
   </ItemGroup>
 </Project>
