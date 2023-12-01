@@ -28,6 +28,13 @@ public class GoodFoodDbContext : IdentityDbContext<ApplicationUser>
             .HasForeignKey<MenuLineData>(e => e.FoodId)
             .IsRequired();
 
+        builder.Entity<MenuLineData>()
+            .OwnsOne(e => e.Details, b =>
+            {
+                b.OwnsOne(b => b.Food);
+                b.ToJson();
+            });
+
         builder.Entity<OrderLineData>()
             .HasKey(o => new { o.OrderId, o.FoodId });
         var foodCategories = new List<FoodCategoryData>

@@ -18,11 +18,15 @@ public class MenuService : IMenuService
     {
         // Fluent Validation
 
+        var food = await _unitOfWork.FoodRepository.FindByIdAsync(menuLine.FoodId);
+
         var line = new MenuLine
         {
             Count = menuLine.Count,
             FoodId = menuLine.FoodId,
-            Price = new Domain.Values.Money(menuLine.Price)
+            Price = new Domain.Values.Money(menuLine.Price),
+            Food = food,
+            Details = new MenuLineDetails { Food = food }
         };
 
         var menu = _menuRepository.GetMenu();

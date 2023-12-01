@@ -20,8 +20,9 @@ public class MenuRepository : IMenuRepository
             Count = l.Count,
             FoodId = l.FoodId,
             Food = l.Food.Adapt<Food>(),
-            Price = new Domain.Values.Money(l.Price)
-        }).ToList();
+            Price = new Domain.Values.Money(l.Price),
+            Details = l.Details
+        }).AsNoTracking().ToList();
 
         return new Menu(lines);
     }
@@ -40,7 +41,8 @@ public class MenuRepository : IMenuRepository
             {
                 Count = line.Count,
                 FoodId = line.FoodId,
-                Price = line.Price.Value
+                Price = line.Price.Value,
+                Details = line.Details
             });
         }
     }

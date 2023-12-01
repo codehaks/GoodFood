@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using GoodFood.Domain.Entities;
 
 namespace GoodFood.Infrastructure.Persistence.Models;
 public class MenuLineData
@@ -10,4 +11,5 @@ public class MenuLineData
     public decimal Price { get; set; }
 
     public FoodData? Food { get; set; }
+    public required MenuLineDetails Details { get; set; }
 }
