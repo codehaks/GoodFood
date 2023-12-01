@@ -4,6 +4,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace GoodFood.Infrastructure.Migrations
 {
     /// <inheritdoc />
@@ -59,7 +61,9 @@ namespace GoodFood.Infrastructure.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    UserId = table.Column<string>(type: "text", nullable: false)
+                    UserId = table.Column<string>(type: "text", nullable: false),
+                    TimeCreated = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    TimeUpdated = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -77,6 +81,22 @@ namespace GoodFood.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_FoodCategories", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Orders",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    UserId = table.Column<string>(type: "text", nullable: false),
+                    UserName = table.Column<string>(type: "text", nullable: false),
+                    TotalAmount = table.Column<decimal>(type: "numeric", nullable: false),
+                    Status = table.Column<int>(type: "integer", nullable: false),
+                    LastUpdate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Orders", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -215,7 +235,8 @@ namespace GoodFood.Infrastructure.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
-                    CategoryId = table.Column<int>(type: "integer", nullable: false)
+                    CategoryId = table.Column<int>(type: "integer", nullable: false),
+                    ImagePath = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -247,6 +268,66 @@ namespace GoodFood.Infrastructure.Migrations
                         principalTable: "Foods",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OrderLines",
+                columns: table => new
+                {
+                    OrderId = table.Column<Guid>(type: "uuid", nullable: false),
+                    FoodId = table.Column<int>(type: "integer", nullable: false),
+                    Quantity = table.Column<int>(type: "integer", nullable: false),
+                    FoodPrice = table.Column<decimal>(type: "numeric", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OrderLines", x => new { x.OrderId, x.FoodId });
+                    table.ForeignKey(
+                        name: "FK_OrderLines_Foods_FoodId",
+                        column: x => x.FoodId,
+                        principalTable: "Foods",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_OrderLines_Orders_OrderId",
+                        column: x => x.OrderId,
+                        principalTable: "Orders",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "FoodCategories",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "غذای ایرانی" },
+                    { 2, "خوراک" },
+                    { 3, "اقتصادی" },
+                    { 4, "پیش غذا" },
+                    { 5, "نوشیدنی" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Foods",
+                columns: new[] { "Id", "CategoryId", "Description", "ImagePath", "Name" },
+                values: new object[,]
+                {
+                    { 1, 1, "دو عدد کباب کوبیده مخلوط گوشت گوساله و گوسفندی 130 گرمی، 450 گرم برنج ایرانی، دورچین متناسب فصل", "1.jpg", "چلو کباب کوبیده" },
+                    { 2, 1, "جوجه کباب سینه مرغ زعفرانی 350 گرمی، 450 گرم برنج ایرانی، دورچین متناسب فصل", "2.jpg", "چلو جوجه کباب" },
+                    { 3, 1, "یک تکه مرغ سس پز 480 گرمی، 450 گرم برنج ایرانی، دورچین متناسب فصل", "3.jpg", "چلو مرغ" },
+                    { 4, 2, "450 گرم ماهی قزل آلا شکم پر، دورچین متناسب فصل", "4.jpg", "خوراک ماهی" },
+                    { 5, 2, "یک تکه مرغ سس پز 480 گرمی، دورچین متناسب فصل", "5.jpg", "خوراک مرغ" },
+                    { 6, 2, "500 گرم گوشت گوسفندی، دورچین متناسب فصل", "6.jpg", "خوراک گوشت بره" },
+                    { 7, 2, "کباب شیشلیک گوسفندی 450 گرمی، دورچین متناسب فصل", "7.jpg", "کباب شیشلیک" },
+                    { 8, 3, "80 گرم گوشت گوسفندی، 250 گرم برنج محلی", "8.jpg", "چلو خورشت قیمه" },
+                    { 9, 3, "80 گرم گوشت گوسفندی، 250 گرم برنج محلی", "9.jpg", "چلو خورشت قورمه" },
+                    { 10, 3, "200 گرم گوشت، 250 گرم برنج محلی", "10.jpg", "سبزی پلو با گوشت" },
+                    { 11, 4, "مرغ ریش شده، جو پرک، سبزی سوپ", "11.jpg", "سوپ جو" },
+                    { 12, 4, "کاهو، گوجه، خیار، هویج رنده شده", "12.jpg", "سالاد فصل" },
+                    { 13, 4, "ماست بورانی", "13.jpg", "ماست" },
+                    { 14, 5, "نوشابه قوطی", "14.jpg", "نوشابه" },
+                    { 15, 5, "گازدار", "15.jpg", "دوغ" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -301,6 +382,11 @@ namespace GoodFood.Infrastructure.Migrations
                 table: "MenuLines",
                 column: "FoodId",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_OrderLines_FoodId",
+                table: "OrderLines",
+                column: "FoodId");
         }
 
         /// <inheritdoc />
@@ -328,6 +414,9 @@ namespace GoodFood.Infrastructure.Migrations
                 name: "MenuLines");
 
             migrationBuilder.DropTable(
+                name: "OrderLines");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
@@ -338,6 +427,9 @@ namespace GoodFood.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Foods");
+
+            migrationBuilder.DropTable(
+                name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "FoodCategories");

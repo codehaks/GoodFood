@@ -17,7 +17,7 @@ namespace GoodFood.Infrastructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.0-rc.2.23480.1")
+                .HasAnnotation("ProductVersion", "8.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -102,6 +102,12 @@ namespace GoodFood.Infrastructure.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<DateTime>("TimeCreated")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("TimeUpdated")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("text");
@@ -153,6 +159,33 @@ namespace GoodFood.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("FoodCategories");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "غذای ایرانی"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "خوراک"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "اقتصادی"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "پیش غذا"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "نوشیدنی"
+                        });
                 });
 
             modelBuilder.Entity("GoodFood.Infrastructure.Persistence.Models.FoodData", b =>
@@ -182,6 +215,128 @@ namespace GoodFood.Infrastructure.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Foods");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 8,
+                            CategoryId = 3,
+                            Description = "80 گرم گوشت گوسفندی، 250 گرم برنج محلی",
+                            ImagePath = "8.jpg",
+                            Name = "چلو خورشت قیمه"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            CategoryId = 3,
+                            Description = "80 گرم گوشت گوسفندی، 250 گرم برنج محلی",
+                            ImagePath = "9.jpg",
+                            Name = "چلو خورشت قورمه"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            CategoryId = 3,
+                            Description = "200 گرم گوشت، 250 گرم برنج محلی",
+                            ImagePath = "10.jpg",
+                            Name = "سبزی پلو با گوشت"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            CategoryId = 4,
+                            Description = "کاهو، گوجه، خیار، هویج رنده شده",
+                            ImagePath = "12.jpg",
+                            Name = "سالاد فصل"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            CategoryId = 4,
+                            Description = "ماست بورانی",
+                            ImagePath = "13.jpg",
+                            Name = "ماست"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            CategoryId = 5,
+                            Description = "نوشابه قوطی",
+                            ImagePath = "14.jpg",
+                            Name = "نوشابه"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CategoryId = 2,
+                            Description = "450 گرم ماهی قزل آلا شکم پر، دورچین متناسب فصل",
+                            ImagePath = "4.jpg",
+                            Name = "خوراک ماهی"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CategoryId = 2,
+                            Description = "کباب شیشلیک گوسفندی 450 گرمی، دورچین متناسب فصل",
+                            ImagePath = "7.jpg",
+                            Name = "کباب شیشلیک"
+                        },
+                        new
+                        {
+                            Id = 1,
+                            CategoryId = 1,
+                            Description = "دو عدد کباب کوبیده مخلوط گوشت گوساله و گوسفندی 130 گرمی، 450 گرم برنج ایرانی، دورچین متناسب فصل",
+                            ImagePath = "1.jpg",
+                            Name = "چلو کباب کوبیده"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            CategoryId = 4,
+                            Description = "مرغ ریش شده، جو پرک، سبزی سوپ",
+                            ImagePath = "11.jpg",
+                            Name = "سوپ جو"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            CategoryId = 5,
+                            Description = "گازدار",
+                            ImagePath = "15.jpg",
+                            Name = "دوغ"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CategoryId = 1,
+                            Description = "جوجه کباب سینه مرغ زعفرانی 350 گرمی، 450 گرم برنج ایرانی، دورچین متناسب فصل",
+                            ImagePath = "2.jpg",
+                            Name = "چلو جوجه کباب"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CategoryId = 1,
+                            Description = "یک تکه مرغ سس پز 480 گرمی، 450 گرم برنج ایرانی، دورچین متناسب فصل",
+                            ImagePath = "3.jpg",
+                            Name = "چلو مرغ"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CategoryId = 2,
+                            Description = "یک تکه مرغ سس پز 480 گرمی، دورچین متناسب فصل",
+                            ImagePath = "5.jpg",
+                            Name = "خوراک مرغ"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CategoryId = 2,
+                            Description = "500 گرم گوشت گوسفندی، دورچین متناسب فصل",
+                            ImagePath = "6.jpg",
+                            Name = "خوراک گوشت بره"
+                        });
                 });
 
             modelBuilder.Entity("GoodFood.Infrastructure.Persistence.Models.MenuLineData", b =>
