@@ -12,10 +12,12 @@ public record CartLineInput(int FoodId, decimal FoodPrice);
 public class CartController : ControllerBase
 {
     private readonly ICartService _cartService;
+    private readonly ILogger<CartController> _logger;
 
-    public CartController(ICartService cartService)
+    public CartController(ICartService cartService, ILogger<CartController> logger)
     {
         _cartService = cartService;
+        _logger = logger;
     }
 
     [Authorize]
@@ -24,8 +26,15 @@ public class CartController : ControllerBase
     public async Task<IActionResult> AddToCartAsync(CartLineInput model)
     {
         await _cartService.AddToCartAsync(new CartLineAddModel(model.FoodId, User.GetUserInfo(), model.FoodPrice, 1));
+
+        //_logger.LogInformation("Item added to cart {@FoodInput}", model);
+        _logger.ItemAddedToCart(model);
         return Ok();
     }
 }
 
-
+internal static partial class Log
+{
+    [LoggerMessage(LogLevel.Information, "Item added to cart {cartLine}")]
+    public static partial void ItemAddedToCart(this ILogger logger, [LogProperties] CartLineInput cartLine);
+}
