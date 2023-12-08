@@ -1,4 +1,5 @@
 using GoodFood.Application.Contracts;
+using GoodFood.Application.HubClients;
 using GoodFood.Web.Hubs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -8,10 +9,10 @@ namespace GoodFood.Web.Areas.Admin.Pages.Orders;
 
 public class DetailsModel : PageModel
 {
-    private readonly IHubContext<OrderStatusHub> _hubContext;
+    private readonly IHubContext<OrderStatusHub, IOrderStatusHubClient> _hubContext;
     private readonly IOrderService _orderService;
 
-    public DetailsModel(IOrderService orderService, IHubContext<OrderStatusHub> hubContext)
+    public DetailsModel(IOrderService orderService, IHubContext<OrderStatusHub, IOrderStatusHubClient> hubContext)
     {
         _orderService = orderService;
         _hubContext = hubContext;
@@ -30,11 +31,14 @@ public class DetailsModel : PageModel
     public async Task<IActionResult> OnPostAsync()
     {
         await _orderService.ReadyForPickupAsync(OrderId);
+
         var order = await _orderService.GetOrderDetailsAsync(OrderId);
+
         await _hubContext
             .Clients
             .User(order.UserId)
-            .SendAsync("UpdateOrderStatus", order.Status.ToString());
+            .UpdateOrderStatus(order.Status.ToString());
+
 
         return RedirectToPage("index");
     }
