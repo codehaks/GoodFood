@@ -8,6 +8,7 @@ using GoodFood.Infrastructure.Persistence.Models;
 using GoodFood.Infrastructure.Persistence.Repositories;
 using GoodFood.Infrastructure.Services;
 using GoodFood.Web.Common;
+using GoodFood.Web.Hubs;
 using GoodFood.Web.Services;
 using Mapster;
 using Microsoft.AspNetCore.Identity;
@@ -103,6 +104,8 @@ app.UseAuthorization();
 app.MapControllers();
 app.MapBlazorHub();
 app.MapRazorPages();
+
+app.MapHub<OrderStatusHub>("/orderstatushub");
 
 app.Run();
 

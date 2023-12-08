@@ -3,7 +3,7 @@
 @{
 }
 
-@section header{
+@section header {
     <div class="breadcrumb-title">
         <h2>حساب من</h2>
         <ul class="breadcrumb-menu list-style">
@@ -31,9 +31,9 @@
                     }
                     else
                     {
-                        <p>
-                            وضعیت سفارش : @Model.Order.Status
-                        </p>
+                        <div id="orderStatus">
+                            @Model.Order.Status
+                        </div>
 
                         <table class="table">
                             <thead>
@@ -75,3 +75,33 @@
 
 </div>
 
+@section scripts {
+    <script src="~/lib/signalr/dist/browser/signalr.js"></script>
+
+    <script>
+
+
+        var connection = new signalR.HubConnectionBuilder().withUrl("/orderstatushub").build();
+
+        connection.on("UpdateOrderStatus", function (message) {
+            $("#orderStatus").text(message);
+            console.log(message);
+        });
+
+        connection.start().then(function () {
+
+            // connection.invoke("SendUpdate")
+            //     .catch(function (err) {
+            //         return console.error(err.toString());
+            //     });
+
+        }).catch(function (err) {
+            return console.error(err.toString());
+        });
+
+        $(document).ready(function () {
+
+
+        });
+    </script>
+}
