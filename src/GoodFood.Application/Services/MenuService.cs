@@ -14,7 +14,7 @@ public class MenuService : IMenuService
         _unitOfWork = unitOfWork;
     }
 
-    public async Task AddLine(MenuLineDto menuLine)
+    public async Task AddLine(MenuLineCreateDto menuLine)
     {
         // Fluent Validation
 
@@ -47,7 +47,8 @@ public class MenuService : IMenuService
             Count = l.Count,
             FoodId = l.FoodId,
             Price = l.Price.Value,
-            FoodName = l.Food.Name
+            FoodName = l.Food.Name,
+            Details = l.Details
         }).ToList();
     }
 
@@ -59,7 +60,8 @@ public class MenuService : IMenuService
             Count = l.Count,
             FoodId = l.FoodId,
             Price = l.Price.Value,
-            FoodName = l.Food.Name
+            FoodName = l.Food.Name,
+            Details = l.Details
         }).ToList();
     }
 }
@@ -67,6 +69,16 @@ public class MenuService : IMenuService
 public record MyMenuLineDto(int FoodId, int Count, decimal Price);
 
 public class MenuLineDto
+{
+    public string? FoodName { get; set; }
+    public required int FoodId { get; init; }
+    public int Count { get; init; }
+    public decimal Price { get; init; }
+
+    public required MenuLineDetails Details { get; set; }
+}
+
+public class MenuLineCreateDto
 {
     public string? FoodName { get; set; }
     public required int FoodId { get; init; }

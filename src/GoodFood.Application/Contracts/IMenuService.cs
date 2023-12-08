@@ -5,6 +5,6 @@ namespace GoodFood.Application.Contracts;
 public interface IMenuService
 {
     IList<MenuLineDto> GetAll();
-    Task AddLine(MenuLineDto menuLine);
+    Task AddLine(MenuLineCreateDto menuLine);
     IList<MenuLineDto> GetAllFoods(int categoryId);
 }

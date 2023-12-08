@@ -27,7 +27,7 @@ public class CreateModel : PageModel
             return Page();
         }
 
-        await _menuService.AddLine(new MenuLineDto
+        await _menuService.AddLine(new MenuLineCreateDto
         {
             Count = Input.Count,
             FoodId = Input.FoodId,
