@@ -18,9 +18,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Host.UseSerilog(WriteLogs());
 
+#pragma warning disable CA1305 // Specify IFormatProvider
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
     .CreateLogger();
+#pragma warning restore CA1305 // Specify IFormatProvider
 
 // Add services to the container.
 
