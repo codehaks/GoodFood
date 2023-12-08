@@ -27,12 +27,12 @@
     <PackageVersion Include="Microsoft.CodeAnalysis.Common" Version="4.5.0" />
     <PackageVersion Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="8.0.0" />
     <PackageVersion Include="Microsoft.CodeAnalysis.Scripting" Version="4.5.0" />
-    <PackageVersion Include="Roslynator.Analyzers" Version="4.6.4" />
-    <PackageVersion Include="Roslynator.CodeAnalysis.Analyzers" Version="4.6.4" />
-    <PackageVersion Include="Roslynator.Formatting.Analyzers" Version="4.6.4" />
+    <PackageVersion Include="Roslynator.Analyzers" Version="4.7.0" />
+    <PackageVersion Include="Roslynator.CodeAnalysis.Analyzers" Version="4.7.0" />
+    <PackageVersion Include="Roslynator.Formatting.Analyzers" Version="4.7.0" />
     <packageVersion Include="SecurityCodeScan.VS2019" Version="5.6.7" />
-    <PackageVersion Include="SonarAnalyzer.CSharp" Version="9.14.0.81108" />
-    <PackageVersion Include="Meziantou.Analyzer" Version="2.0.116" />
+    <PackageVersion Include="SonarAnalyzer.CSharp" Version="9.15.0.81779" />
+    <PackageVersion Include="Meziantou.Analyzer" Version="2.0.119" />
     <PackageVersion Include="Microsoft.VisualStudio.Threading.Analyzers" Version="17.8.14" />
   </ItemGroup>
 </Project>
