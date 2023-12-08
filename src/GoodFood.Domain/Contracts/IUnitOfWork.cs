@@ -8,5 +8,6 @@ public interface IUnitOfWork
     public ICartRepository CartRepository { get; }
 
     public IOrderRepository OrderRepository { get; }
+    Task CommitAsync(CancellationToken stoppingToken);
     Task CommitAsync();
 }

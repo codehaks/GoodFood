@@ -57,7 +57,7 @@ public class Cart
     public bool IsAvailable()
     {
         var cartAgePerMinutes = (_timeProvider.GetUtcNow().UtcDateTime - TimeCreated).TotalMinutes;
-        return cartAgePerMinutes < 60;
+        return cartAgePerMinutes < 1;
     }
 
     public DateTime TimeCreated { get; init; }

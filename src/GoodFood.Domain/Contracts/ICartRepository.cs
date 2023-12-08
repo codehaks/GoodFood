@@ -8,4 +8,5 @@ public interface ICartRepository
     Cart? FindByCustomerId(CustomerInfo customer);
     void Update(Cart cart);
     void Remove(int cartId);
+    void RemoveExpiredCarts();
 }

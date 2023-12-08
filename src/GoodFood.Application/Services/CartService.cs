@@ -66,6 +66,12 @@ public class CartService : ICartService
 
     }
 
+    public async Task RemoveExpiredCartsAsync(CancellationToken stoppingToken)
+    {
+        _unitOfWork.CartRepository.RemoveExpiredCarts();
+        await _unitOfWork.CommitAsync(stoppingToken);
+    }
+
     public async Task Update(IList<CartLineModel> cartLines, UserInfo userInfo)
     {
         var cart = _unitOfWork.CartRepository.FindByCustomerId(userInfo.Adapt<CustomerInfo>());

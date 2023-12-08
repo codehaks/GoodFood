@@ -7,6 +7,7 @@ using GoodFood.Infrastructure.Persistence;
 using GoodFood.Infrastructure.Persistence.Models;
 using GoodFood.Infrastructure.Persistence.Repositories;
 using GoodFood.Infrastructure.Services;
+using GoodFood.Web.Common;
 using GoodFood.Web.Services;
 using Mapster;
 using Microsoft.AspNetCore.Identity;
@@ -26,6 +27,7 @@ Log.Logger = new LoggerConfiguration()
 
 // Add services to the container.
 
+builder.Services.AddHostedService<RemoveExpiredCartsWorker>();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddControllers();
 

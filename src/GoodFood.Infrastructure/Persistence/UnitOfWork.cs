@@ -25,4 +25,9 @@ public class UnitOfWork : IUnitOfWork
     {
         await _db.SaveChangesAsync();
     }
+
+    public async Task CommitAsync(CancellationToken stoppingToken)
+    {
+        await _db.SaveChangesAsync(stoppingToken);
+    }
 }

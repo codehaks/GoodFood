@@ -12,6 +12,7 @@ public interface ICartService
 
     Task Update(IList<CartLineModel> cartLines, UserInfo userInfo);
     Task<CartDto> FindByUserIdAsync(UserInfo userInfo);
+    Task RemoveExpiredCartsAsync(CancellationToken stoppingToken);
 }
 
 public class CartDto

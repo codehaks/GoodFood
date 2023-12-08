@@ -4,6 +4,7 @@ using GoodFood.Domain.Values;
 using GoodFood.Infrastructure.Persistence.Models;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace GoodFood.Infrastructure.Persistence.Repositories;
 
@@ -11,10 +12,12 @@ public class CartRepository : ICartRepository
 {
     private readonly GoodFoodDbContext _db;
     private readonly TimeProvider _timeProvider;
-    public CartRepository(GoodFoodDbContext db, TimeProvider timeProvider)
+    private readonly ILogger<CartRepository> _logger;
+    public CartRepository(GoodFoodDbContext db, TimeProvider timeProvider, ILogger<CartRepository> logger)
     {
         _db = db;
         _timeProvider = timeProvider;
+        _logger = logger;
     }
 
     public void Add(Cart cart)
@@ -46,7 +49,7 @@ public class CartRepository : ICartRepository
 
         var lines = cartData.Lines?.Adapt<Collection<CartLine>>();
 
-        var cart = new Cart(cartData.Id, lines, customer, cartData.TimeCreated, cartData.TimeUpdated,_timeProvider);
+        var cart = new Cart(cartData.Id, lines, customer, cartData.TimeCreated, cartData.TimeUpdated, _timeProvider);
         return cart;
     }
 
@@ -59,5 +62,20 @@ public class CartRepository : ICartRepository
             _db.Entry(oldCart).State = EntityState.Modified;
         }
 
+    }
+
+    public void RemoveExpiredCarts()
+    {
+        var carts = _db.Carts
+            .Select(c => new Cart(c.Id, null, new CustomerInfo(c.UserId, c.UserId), c.TimeCreated, c.TimeUpdated, _timeProvider))
+            .ToList()
+            .Where(c => !c.IsAvailable())
+            .Select(c => c.Id);
+
+        var cartsToRemove = _db.Carts.Where(c => carts.Contains(c.Id));
+
+        _db.Carts.RemoveRange(cartsToRemove);
+
+        _logger.LogInformation("{Count} expired carts found.", carts.Count());
     }
 }
