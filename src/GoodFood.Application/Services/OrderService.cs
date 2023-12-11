@@ -27,7 +27,7 @@ public class OrderService : IOrderService
         await _unitOfWork.CommitAsync();
     }
 
-    public async Task Place(UserInfo userInfo)
+    public async Task<Guid> PlaceAsync(UserInfo userInfo)
     {
         var cart = _unitOfWork.CartRepository.FindByCustomerId(userInfo.Adapt<CustomerInfo>());
         if (cart == null)
@@ -36,8 +36,14 @@ public class OrderService : IOrderService
         }
 
         var order = Order.FromCart(cart);
-        await _unitOfWork.OrderRepository.Place(order);
+        //cart.MarkAsOrdered();
+
+        _unitOfWork.OrderRepository.Place(order);
+        _unitOfWork.CartRepository.Update(cart);
+
         await _unitOfWork.CommitAsync();
+
+        return order.Id;
     }
 
     public async Task<IList<OrderInfo>> GetAllAsync()
@@ -75,5 +81,14 @@ public class OrderService : IOrderService
 
         await _unitOfWork.OrderRepository.UpdateAsync(order);
         await _unitOfWork.CommitAsync();
+    }
+
+    public async Task<IList<OrderInfo>> GetAllByUserIdAsync(string userId)
+    {
+        var orders= await _unitOfWork.OrderRepository.GetAllByUserIdAsync(userId);
+        return orders.Select(o => new OrderInfo(o.Id,
+         new UserInfo(o.Customer.UserId, o.Customer.UserName),
+         o.LastUpdate, o.Status))
+         .ToList();
     }
 }

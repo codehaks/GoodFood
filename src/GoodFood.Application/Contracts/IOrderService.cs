@@ -6,9 +6,11 @@ public interface IOrderService
 {
     Task ConfirmedAsync(Guid orderId);
 
-    Task Place(UserInfo userInfo);
+    Task<Guid> PlaceAsync(UserInfo userInfo);
 
     Task<IList<OrderInfo>> GetAllAsync();
+
+    Task<IList<OrderInfo>> GetAllByUserIdAsync(string userId);
     Task<OrderDetails> GetOrderDetailsAsync(Guid orderId);
     Task ReadyForPickupAsync(Guid orderId);
 }

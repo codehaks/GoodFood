@@ -3,6 +3,7 @@
 @using GoodFood.Application.Services
 @inject ICartService CartService
 @inject IOrderService OrderService
+@inject NavigationManager Navigation
 <h3>Cart</h3>
 
 
@@ -152,9 +153,10 @@
     public async Task Update()
     {
         await CartService.Update(CartLines, UserInfo);
-        await OrderService.Place(UserInfo);
+        var orderId=await OrderService.PlaceAsync(UserInfo);
 
         // Redirect to Gateway!
+        Navigation.NavigateTo($"api/gateway/{orderId.ToString()}", true);
 
     }
 

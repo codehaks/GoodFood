@@ -5,6 +5,7 @@ public interface IOrderRepository
 {
     Task<Order> FindByIdAsync(Guid orderId);
     Task<IList<Order>> GetAllAsync();
-    Task Place(Order order);
+    Task<IList<Order>> GetAllByUserIdAsync(string userId);
+    void Place(Order order);
     Task UpdateAsync(Order order);
 }

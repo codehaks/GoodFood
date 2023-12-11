@@ -19,14 +19,15 @@ public class GatewayController : ControllerBase
         _userManager = userManager;
     }
 
-    public async Task<IActionResult> GetAsync([FromQuery] string orderId) // TransactionId, OrderId
+    [Route("{orderId:guid}")]
+    public async Task<IActionResult> GetAsync([FromQuery] Guid orderId) // TransactionId, OrderId
     {
         // Validation
         // Confirm Gateway
 
         // Confirm Order
 
-        await _orderService.ConfirmedAsync(Guid.Parse(orderId));
+        await _orderService.ConfirmedAsync(orderId);
 
         var user = await _userManager.GetUserAsync(User);
         if (user is not null)
@@ -35,6 +36,6 @@ public class GatewayController : ControllerBase
         }
 
         // Redirect to Order Page
-        return Ok();
+        return RedirectToPage("/Orders/Details", new { area = "user", OrderId = orderId });
     }
 }

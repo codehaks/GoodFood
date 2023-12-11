@@ -45,7 +45,7 @@ public class OrderRepository : IOrderRepository
         return order;
     }
 
-    public async Task Place(Order order)
+    public void Place(Order order)
     {
         var orderData = new OrderData
         {
@@ -97,4 +97,15 @@ public class OrderRepository : IOrderRepository
 
         return orders;
     }
+
+    public async Task<IList<Order>> GetAllByUserIdAsync(string userId)
+    {
+        return await _db.Orders
+            .Where(o => o.UserId == userId)
+            .Select(o => new Order(
+            new Customer { UserId = o.UserId, UserName = o.UserName }, o.Status, o.LastUpdate)
+            { Id = o.Id })
+            .ToListAsync();
+    }
+
 }

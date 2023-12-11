@@ -1,6 +1,7 @@
 @page
 @model GoodFood.Web.Areas.User.Pages.Orders.IndexModel
 @{
+    int i = 0;
 }
 
 @section header {
@@ -12,3 +13,57 @@
         </ul>
     </div>
 }
+
+<div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    @if (Model.Orders is null)
+                    {
+                        <p>هیچ سفارشی یافت نشد</p>
+                    }
+                    else
+                    {
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>مشتری</th>
+                                    <th>وضعیت</th>
+                                    <th>ساعت</th>
+                                    <th>تعداد</th>
+                                    <th>
+
+                                    </th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Orders)
+                                {
+                                    <tr>
+                                        <th>@i</th>
+                                        <th>@item.UserInfo.UserName</th>
+                                        <td>@item.Status</td>
+                                        <td>@item.LastUpdate.ToLocalTime()</td>
+                                        <td></td>
+                                        <td>
+                                            <a asp-page="details" asp-route-orderId="@item.Id">جرئیات سفارش</a>
+                                        </td>
+                                    </tr>
+
+                                    i++;
+                                }
+
+
+                            </tbody>
+                        </table>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
