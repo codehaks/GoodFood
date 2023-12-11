@@ -20,7 +20,7 @@ public class GatewayController : ControllerBase
     }
 
     [Route("{orderId:guid}")]
-    public async Task<IActionResult> GetAsync([FromQuery] Guid orderId) // TransactionId, OrderId
+    public async Task<IActionResult> GetAsync(Guid orderId) // TransactionId, OrderId
     {
         // Validation
         // Confirm Gateway
