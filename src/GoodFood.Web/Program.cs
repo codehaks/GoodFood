@@ -11,6 +11,7 @@ using GoodFood.Web.Common;
 using GoodFood.Web.Hubs;
 using GoodFood.Web.Services;
 using Mapster;
+using MediatR.NotificationPublishers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
@@ -27,6 +28,14 @@ Log.Logger = new LoggerConfiguration()
 #pragma warning restore CA1305 // Specify IFormatProvider
 
 // Add services to the container.
+
+builder.Services.AddMediatR(cfg =>
+{
+    cfg.RegisterServicesFromAssemblyContaining<GoodFood.Application.AssembelyHolder>();
+    cfg.RegisterServicesFromAssemblyContaining<GoodFood.Infrastructure.AssembelyHolder>();
+    cfg.NotificationPublisher = new TaskWhenAllPublisher();
+    
+});
 
 builder.Services.AddHostedService<RemoveExpiredCartsWorker>();
 builder.Services.AddServerSideBlazor();
