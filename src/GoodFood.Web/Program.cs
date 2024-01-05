@@ -38,6 +38,8 @@ builder.Services.AddMediatR(cfg =>
 });
 
 builder.Services.AddHostedService<RemoveExpiredCartsWorker>();
+builder.Services.AddHostedService<EmailSenderWorker>();
+
 builder.Services.AddServerSideBlazor();
 builder.Services.AddControllers();
 
@@ -69,7 +71,10 @@ builder.Services.Configure<IdentityOptions>(options =>
 
 });
 
+builder.Services.AddSingleton<IEmailQueueService, EmailQueueService>();
+
 builder.Services.AddSingleton(TimeProvider.System);
+
 builder.Services.AddScoped<BannedWordChecker>();
 builder.Services.AddScoped<IEmailSender, EmailSender>();
 
