@@ -2,6 +2,7 @@ using System.Security.Claims;
 using GoodFood.Application.Contracts;
 using GoodFood.Infrastructure.Persistence.Models;
 using GoodFood.Web.Controllers;
+using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Moq;
@@ -25,10 +26,10 @@ public class GatewayControllerTests
 
         userManagerMock.Setup(u => u.GetUserAsync(It.IsAny<ClaimsPrincipal>())).ReturnsAsync(user);
 
-        var sut = new GatewayController(orderMock.Object, emailSeder.Object, userManagerMock.Object);
+        var sut = new GatewayController(orderMock.Object, new Mock<UserManager<ApplicationUser>>().Object,new Mock<IMediator>().Object,new Mock<IServiceProvider>().Object);
 
         //Act
-        await sut.GetAsync(Guid.NewGuid().ToString());
+        await sut.GetAsync(Guid.NewGuid());
 
         //Assert
         emailSeder.Verify(e => e.SendEmailAsync(user.Email, "ثبت سفارش", "سفارش با موفقیت ثبت شد"), Times.Once);
