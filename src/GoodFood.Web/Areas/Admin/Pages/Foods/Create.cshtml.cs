@@ -1,11 +1,25 @@
-using System.ComponentModel.DataAnnotations;
+using FluentValidation;
+using FluentValidation.Results;
 using GoodFood.Application.Contracts;
+using GoodFood.Domain.Entities;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace GoodFood.Web.Areas.Admin.Pages.Foods;
+
+public static class Extensions
+{
+    public static void AddToModelState(this ValidationResult result, ModelStateDictionary modelState)
+    {
+        foreach (var error in result.Errors)
+        {
+            modelState.AddModelError("FoodInput."+error.PropertyName, error.ErrorMessage);
+        }
+    }
+}
 
 public class CreateModel : PageModel
 {
@@ -25,13 +39,22 @@ public class CreateModel : PageModel
     public FoodInputModel FoodInput { get; set; }
     public SelectList CategorySelectList { get; set; }
 
-    public async Task<IActionResult> OnPost()
+    public async Task<IActionResult> OnPost(CancellationToken cancellationToken)
     {
+        var validator = new FoodInputValidator();
+        var validationResult = await validator.ValidateAsync(FoodInput, cancellationToken);
 
-        if (!ModelState.IsValid)
+        if (!validationResult.IsValid)
         {
+            validationResult.AddToModelState(ModelState);
             return Page();
         }
+
+
+        //if (!ModelState.IsValid)
+        //{
+        //    return Page();
+        //}
 
         var dto = FoodInput.Adapt<FoodCreateDto>();
 
@@ -66,10 +89,21 @@ public class CreateModel : PageModel
     }
 }
 
+public class FoodInputValidator : AbstractValidator<FoodInputModel>
+{
+    public FoodInputValidator()
+    {
+        RuleFor(food => food.Name)
+            .NotNull().WithMessage("الزامی است")
+            .MaximumLength(50).WithMessage("نام طولانی است");
+
+
+    }
+}
+
 public class FoodInputModel
 {
-    [Length(1, 50, ErrorMessage = "")]
-    public required string Name { get; set; }
+    public string? Name { get; set; }
     public required string Description { get; set; }
     public int CategoryId { get; set; }
     public required IFormFile ImageFile { get; set; }
