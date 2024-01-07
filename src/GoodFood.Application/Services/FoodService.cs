@@ -69,8 +69,6 @@ public class FoodService : IFoodService
     public async Task<bool> IsDuplicatedNameAsync(string foodName)
     => await _unitOfWork.FoodRepository.ExistsByNameAsync(foodName);
 
-
-
     public async Task UpdateAsync(FoodEditDto dto)
     {
 
