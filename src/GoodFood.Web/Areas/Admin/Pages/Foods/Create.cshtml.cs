@@ -1,6 +1,7 @@
 using FluentValidation;
 using FluentValidation.Results;
 using GoodFood.Application.Contracts;
+using GoodFood.Web.Filters;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
