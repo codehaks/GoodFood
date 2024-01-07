@@ -8,6 +8,8 @@ public interface IFoodService
     IList<FoodDto> FindAll();
     Task<FoodDetailsDto> FindByIdAsync(int id);
     Task UpdateAsync(FoodEditDto dto);
+
+    Task<bool> IsDuplicatedNameAsync(string foodName);
 }
 
 public class FoodDetailsDto

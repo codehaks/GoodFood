@@ -4,14 +4,19 @@ using GoodFood.Application.Contracts;
 using GoodFood.Web.Filters;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace GoodFood.Web.Areas.Admin.Pages.Foods;
 
-[ValidatePage]
-[ValidateImage("FoodInput.ImageFile")]
+
+
+//[ValidatePage]
+//[ValidateImage("FoodInput.ImageFile")]
+//[TypeFilter(typeof(ValidateFoodNameAttribute))]
+
 public class CreateModel : PageModel
 {
     private readonly IFoodService _foodService;
@@ -30,6 +35,7 @@ public class CreateModel : PageModel
     public FoodInputModel FoodInput { get; set; }
     public SelectList CategorySelectList { get; set; }
 
+    [TypeFilter<ValidateFoodNameAttribute>]
     public async Task<IActionResult> OnPost(CancellationToken cancellationToken)
     {
         var dto = FoodInput.Adapt<FoodCreateDto>();

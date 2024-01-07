@@ -7,6 +7,7 @@ using GoodFood.Infrastructure.Persistence;
 using GoodFood.Infrastructure.Persistence.Models;
 using GoodFood.Infrastructure.Persistence.Repositories;
 using GoodFood.Infrastructure.Services;
+using GoodFood.Web.Areas.Admin.Pages.Foods;
 using GoodFood.Web.Common;
 using GoodFood.Web.Hubs;
 using GoodFood.Web.Services;
@@ -72,6 +73,7 @@ builder.Services.Configure<IdentityOptions>(options =>
 });
 
 builder.Services.AddSingleton<IEmailQueueService, EmailQueueService>();
+//builder.Services.AddScoped<ValidateFoodNameAttribute>();
 
 builder.Services.AddSingleton(TimeProvider.System);
 
