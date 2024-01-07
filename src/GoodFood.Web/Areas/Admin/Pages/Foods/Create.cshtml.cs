@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace GoodFood.Web.Areas.Admin.Pages.Foods;
 
+[ValidatePage]
 public class CreateModel : PageModel
 {
     private readonly IFoodService _foodService;
@@ -29,21 +30,6 @@ public class CreateModel : PageModel
 
     public async Task<IActionResult> OnPost(CancellationToken cancellationToken)
     {
-        var validator = new FoodInputValidator();
-        var validationResult = await validator.ValidateAsync(FoodInput, cancellationToken);
-
-        if (!validationResult.IsValid)
-        {
-            validationResult.AddToModelState(ModelState);
-            return Page();
-        }
-
-
-        //if (!ModelState.IsValid)
-        //{
-        //    return Page();
-        //}
-
         var dto = FoodInput.Adapt<FoodCreateDto>();
 
         dto.ImageData = await GetImageDataAsync(FoodInput.ImageFile);
