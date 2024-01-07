@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 namespace GoodFood.Web.Areas.Admin.Pages.Foods;
 
 [ValidatePage]
+[ValidateImage("FoodInput.ImageFile")]
 public class CreateModel : PageModel
 {
     private readonly IFoodService _foodService;
@@ -81,7 +82,7 @@ public class FoodInputModel
     public string? Name { get; set; }
     public required string Description { get; set; }
     public int CategoryId { get; set; }
-    public required IFormFile ImageFile { get; set; }
+    public IFormFile? ImageFile { get; set; }
 }
 
 public static class Extensions
