@@ -1,7 +1,6 @@
 using FluentValidation;
 using FluentValidation.Results;
 using GoodFood.Application.Contracts;
-using GoodFood.Domain.Entities;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -9,17 +8,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace GoodFood.Web.Areas.Admin.Pages.Foods;
-
-public static class Extensions
-{
-    public static void AddToModelState(this ValidationResult result, ModelStateDictionary modelState)
-    {
-        foreach (var error in result.Errors)
-        {
-            modelState.AddModelError("FoodInput."+error.PropertyName, error.ErrorMessage);
-        }
-    }
-}
 
 public class CreateModel : PageModel
 {
@@ -107,4 +95,15 @@ public class FoodInputModel
     public required string Description { get; set; }
     public int CategoryId { get; set; }
     public required IFormFile ImageFile { get; set; }
+}
+
+public static class Extensions
+{
+    public static void AddToModelState(this ValidationResult result, ModelStateDictionary modelState)
+    {
+        foreach (var error in result.Errors)
+        {
+            modelState.AddModelError("FoodInput." + error.PropertyName, error.ErrorMessage);
+        }
+    }
 }
