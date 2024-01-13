@@ -58,11 +58,9 @@ public class CreateModel : PageModel
 
     private static async Task<byte[]> GetImageDataAsync(IFormFile imageFile)
     {
-        using (var memoryStream = new MemoryStream())
-        {
-            await imageFile.CopyToAsync(memoryStream);
-            return memoryStream.ToArray();
-        }
+        using var memoryStream = new MemoryStream();
+        await imageFile.CopyToAsync(memoryStream);
+        return memoryStream.ToArray();
     }
 }
 
