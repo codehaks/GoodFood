@@ -35,7 +35,7 @@ public class CreateModel : PageModel
     {
         var dto = FoodInput.Adapt<FoodCreateDto>();
 
-        dto.ImageData = await GetImageDataAsync(FoodInput.ImageFile);
+        //dto.ImageData = await GetImageDataAsync(FoodInput.ImageFile);
 
         try
         {
