@@ -12,7 +12,7 @@ namespace GoodFood.Web.Areas.Admin.Pages.Foods;
 
 [ValidatePage]
 [ValidateImage("FoodInput.ImageFile")]
-[TypeFilter<ValidateFoodNameAttribute>(Arguments = ["FoodInput.Name"])]
+
 public class CreateModel : PageModel
 {
     private readonly IFoodService _foodService;
