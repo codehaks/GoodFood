@@ -73,7 +73,7 @@ builder.Services.Configure<IdentityOptions>(options =>
 });
 
 builder.Services.AddSingleton<IEmailQueueService, EmailQueueService>();
-//builder.Services.AddScoped<ValidateFoodNameAttribute>();
+//builder.Services.AddScoped<ValidateDuplicateFoodNameAttribute>();
 
 builder.Services.AddSingleton(TimeProvider.System);
 

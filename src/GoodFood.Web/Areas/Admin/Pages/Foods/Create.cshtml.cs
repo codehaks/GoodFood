@@ -4,15 +4,70 @@ using GoodFood.Application.Contracts;
 using GoodFood.Web.Filters;
 using Mapster;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace GoodFood.Web.Areas.Admin.Pages.Foods;
 
+[AttributeUsage(AttributeTargets.Class)]
+public sealed class ValidateDuplicateFoodNameAttribute : Attribute, IAsyncPageFilter
+{
+    private readonly IFoodService _foodService;
+
+    public ValidateDuplicateFoodNameAttribute(IFoodService foodService)
+    {
+        _foodService = foodService;
+    }
+
+    public async Task OnPageHandlerExecutionAsync(PageHandlerExecutingContext context, PageHandlerExecutionDelegate next)
+    {
+        if (IsPostHandler(context))
+        {
+
+            var foodName = context.HttpContext.Request.Form["FoodInput.Name"];
+            if (string.IsNullOrEmpty(foodName))
+            {
+                return;
+            }
+            var isDuplicated = await _foodService.IsDuplicatedNameAsync(foodName!);
+            if (isDuplicated)
+            {
+                context.ModelState.AddModelError("FoodInput.Name", "نام غذا تکراری است");
+                context.Result = new PageResult();
+            }
+            else
+            {
+                await next();
+            }
+        }
+        else
+        {
+            await next();
+        }
+
+
+
+
+        // after
+    }
+
+    public Task OnPageHandlerSelectionAsync(PageHandlerSelectedContext context)
+    {
+        return Task.CompletedTask;
+    }
+
+    private static bool IsPostHandler(PageHandlerExecutingContext context)
+    {
+        return string.Equals(context?.HttpContext?.Request?.Method, "POST", StringComparison.OrdinalIgnoreCase);
+    }
+}
+
+[TypeFilter<ValidateDuplicateFoodNameAttribute>]
+
 [ValidatePage]
 [ValidateImage("FoodInput.ImageFile")]
-
 public class CreateModel : PageModel
 {
     private readonly IFoodService _foodService;
@@ -35,7 +90,7 @@ public class CreateModel : PageModel
     {
         var dto = FoodInput.Adapt<FoodCreateDto>();
 
-        //dto.ImageData = await GetImageDataAsync(FoodInput.ImageFile);
+        dto.ImageData = await GetImageDataAsync(FoodInput.ImageFile);
 
         try
         {
