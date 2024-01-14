@@ -14,6 +14,30 @@ public enum OrderStatus
     Failed,         // The order could not be fulfilled and has failed.
 }
 
+public interface ICalculateDiscountService
+{
+    Money CalculateDiscount(Order order);
+}
+
+public class CalculateDiscountService : ICalculateDiscountService
+{
+    public Money CalculateDiscount(Order order)
+    {
+        if (order.TotalAmount.Value > new Money(500_000).Value)
+        {
+            return new Money(order.TotalAmount.Value * 0.05M);
+        }
+        else if (order.TotalAmount.Value > new Money(1_000_000).Value)
+        {
+            return new Money(order.TotalAmount.Value * 0.05M);
+        }
+        else
+        {
+            return new Money(0);
+        }
+    }
+}
+
 public class Order
 {
     private Order(Customer customer)
@@ -34,8 +58,16 @@ public class Order
     }
 
     public Guid Id { get; set; }
+
+    public Money DiscountAmount { get; private set; }
+
+    public void ApplyDiscount(Money discount)
+    {
+        DiscountAmount = discount;
+    }
+
     public Customer Customer { get; init; }
-    public IList<OrderLine> Lines { get; private set; } = new List<OrderLine>();
+    public IList<OrderLine> Lines { get; private set; }
 
     public Money TotalAmount { get; private set; } = new Money(0);
 
@@ -73,6 +105,14 @@ public class Order
         UpdateAmount();
     }
 
+    public void Place()
+    {
+        var discountService = new CalculateDiscountService();
+        var discount = discountService.CalculateDiscount(this);
+        ApplyDiscount(discount);
+
+        //
+    }
     public void Confirm()
     {
         Status = OrderStatus.Confirmed;
@@ -81,7 +121,9 @@ public class Order
 
     private void UpdateAmount()
     {
-        TotalAmount = new Money(Lines.Sum(l => l.LineTotal.Value));
+        var lineAmount = new Money(Lines.Sum(l => l.LineTotal.Value));
+        TotalAmount = new Money(lineAmount.Value - DiscountAmount.Value);
+
     }
 
     public void ReadyForPickup()

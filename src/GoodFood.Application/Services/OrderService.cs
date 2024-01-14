@@ -36,7 +36,8 @@ public class OrderService : IOrderService
         }
 
         var order = Order.FromCart(cart);
-        //cart.MarkAsOrdered();
+
+        order.Place();
 
         _unitOfWork.OrderRepository.Place(order);
         _unitOfWork.CartRepository.Update(cart);
