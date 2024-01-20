@@ -59,7 +59,7 @@ public class Order
 
     public Guid Id { get; set; }
 
-    public Money DiscountAmount { get; private set; }
+    public Money? DiscountAmount { get; private set; }
 
     public void ApplyDiscount(Money discount)
     {
@@ -122,7 +122,15 @@ public class Order
     private void UpdateAmount()
     {
         var lineAmount = new Money(Lines.Sum(l => l.LineTotal.Value));
-        TotalAmount = new Money(lineAmount.Value - DiscountAmount.Value);
+        if (DiscountAmount != null)
+        {
+            TotalAmount = new Money(lineAmount.Value - DiscountAmount.Value);
+        }
+        else
+        {
+            TotalAmount = new Money(lineAmount.Value);
+        }
+
 
     }
 

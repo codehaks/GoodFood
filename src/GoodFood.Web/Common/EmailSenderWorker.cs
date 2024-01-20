@@ -22,7 +22,7 @@ public class EmailSenderWorker : BackgroundService
             _logger.LogInformation("{Name} Started", nameof(EmailSenderWorker));
             await DoWork(stoppingToken);
             _logger.LogInformation("{Name} Stopped", nameof(EmailSenderWorker));
-            await Task.Delay(3000, stoppingToken);
+            await Task.Delay(600*1000, stoppingToken);
         }
     }
 
