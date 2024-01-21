@@ -36,4 +36,8 @@ public class Money : ValueObject
     {
         return new Money(a.Value + b.Value);
     }
+    public static Money operator -(Money a, Money b)
+    {
+        return new Money(a.Value - b.Value);
+    }
 }

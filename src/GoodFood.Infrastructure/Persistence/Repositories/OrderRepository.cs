@@ -25,7 +25,7 @@ public class OrderRepository : IOrderRepository
 
         var orderLinesData = await _db.OrderLines.Where(l => l.OrderId == orderId).ToListAsync();
 
-        var order = new Order(customer, orderData.Status, orderData.LastUpdate)
+        var order = new Order(customer, orderData.Status, orderData.LastUpdate, orderData.DiscountAmount)
         {
             Id = orderId
         };
@@ -54,6 +54,7 @@ public class OrderRepository : IOrderRepository
             LastUpdate = order.LastUpdate,
             Status = order.Status,
             TotalAmount = order.TotalAmount.Value,
+            DiscountAmount = order.DiscountAmount.Value,
             Id = order.Id
         };
 
@@ -91,7 +92,8 @@ public class OrderRepository : IOrderRepository
     public async Task<IList<Order>> GetAllAsync()
     {
         var orders = await _db.Orders.Select(o => new Order(
-            new Customer { UserId = o.UserId, UserName = o.UserName }, o.Status, o.LastUpdate)
+            new Customer { UserId = o.UserId, UserName = o.UserName },
+            o.Status, o.LastUpdate, o.DiscountAmount)
         { Id = o.Id })
             .ToListAsync();
 
@@ -103,7 +105,7 @@ public class OrderRepository : IOrderRepository
         return await _db.Orders
             .Where(o => o.UserId == userId)
             .Select(o => new Order(
-            new Customer { UserId = o.UserId, UserName = o.UserName }, o.Status, o.LastUpdate)
+            new Customer { UserId = o.UserId, UserName = o.UserName }, o.Status, o.LastUpdate, o.DiscountAmount)
             { Id = o.Id })
             .ToListAsync();
     }

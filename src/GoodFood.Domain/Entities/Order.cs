@@ -29,29 +29,38 @@ public class Order
         LastUpdate = DateTime.UtcNow;
         Id = Guid.NewGuid();
     }
-    public Order(Customer customer, OrderStatus status, DateTime lastUpdate)
+    public Order(Customer customer, OrderStatus status, DateTime lastUpdate, decimal discountAmount)
     {
         Customer = customer;
         Lines = [];
         Status = status;
         LastUpdate = lastUpdate;
+        DiscountAmount = new Money(discountAmount);
 
     }
 
     public Guid Id { get; set; }
 
-    public Money? DiscountAmount { get; private set; }
+    public Money DiscountAmount { get; private set; } = new Money(0);
 
     public void ApplyDiscount(Money discount)
     {
         DiscountAmount = discount;
-        UpdateAmount();
     }
 
     public Customer Customer { get; init; }
     public IList<OrderLine> Lines { get; private set; }
 
-    public Money TotalAmount { get; private set; } = new Money(0);
+    public Money TotalAmount
+    {
+        get
+        {
+            var lineTotal = new Money(Lines.Sum(l => l.LineTotal.Value));
+
+            return lineTotal - DiscountAmount;
+
+        }
+    }
 
     public OrderStatus Status { get; private set; }
     public DateTime LastUpdate { get; private set; }
@@ -84,7 +93,6 @@ public class Order
     public void AddLine(OrderLine line)
     {
         Lines.Add(line);
-        UpdateAmount();
     }
 
     public void Place()
@@ -97,21 +105,6 @@ public class Order
     {
         Status = OrderStatus.Confirmed;
         LastUpdate = DateTime.UtcNow;
-    }
-
-    private void UpdateAmount()
-    {
-        var lineAmount = new Money(Lines.Sum(l => l.LineTotal.Value));
-        if (DiscountAmount! != null!)
-        {
-            TotalAmount = new Money(lineAmount.Value - DiscountAmount.Value);
-        }
-        else
-        {
-            TotalAmount = new Money(lineAmount.Value);
-        }
-
-
     }
 
     public void ReadyForPickup()

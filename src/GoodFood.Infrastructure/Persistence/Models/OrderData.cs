@@ -7,6 +7,8 @@ public class OrderData
     public required string UserId { get; set; }
     public required string UserName { get; set; }
     public decimal TotalAmount { get; set; }
+
+    public decimal DiscountAmount { get; set; }
     public ICollection<OrderLineData>? Lines { get; set; }
     public OrderStatus Status { get; set; }
     public DateTime LastUpdate { get; set; }
