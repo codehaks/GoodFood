@@ -39,7 +39,7 @@ public class OrderService : IOrderService
 
         order.Place();
 
-        _unitOfWork.OrderRepository.Place(order);
+        _unitOfWork.OrderRepository.Add(order);
         _unitOfWork.CartRepository.Update(cart);
 
         await _unitOfWork.CommitAsync();

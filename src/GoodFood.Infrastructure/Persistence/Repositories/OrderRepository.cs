@@ -45,7 +45,7 @@ public class OrderRepository : IOrderRepository
         return order;
     }
 
-    public void Place(Order order)
+    public void Add(Order order)
     {
         var orderData = new OrderData
         {

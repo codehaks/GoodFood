@@ -19,25 +19,6 @@ public interface ICalculateDiscountService
     Money CalculateDiscount(Order order);
 }
 
-public class CalculateDiscountService : ICalculateDiscountService
-{
-    public Money CalculateDiscount(Order order)
-    {
-        if (order.TotalAmount.Value > new Money(500_000).Value)
-        {
-            return new Money(order.TotalAmount.Value * 0.05M);
-        }
-        else if (order.TotalAmount.Value > new Money(1_000_000).Value)
-        {
-            return new Money(order.TotalAmount.Value * 0.05M);
-        }
-        else
-        {
-            return new Money(0);
-        }
-    }
-}
-
 public class Order
 {
     private Order(Customer customer)
@@ -64,6 +45,7 @@ public class Order
     public void ApplyDiscount(Money discount)
     {
         DiscountAmount = discount;
+        UpdateAmount();
     }
 
     public Customer Customer { get; init; }
@@ -110,8 +92,6 @@ public class Order
         var discountService = new CalculateDiscountService();
         var discount = discountService.CalculateDiscount(this);
         ApplyDiscount(discount);
-
-        //
     }
     public void Confirm()
     {
@@ -122,7 +102,7 @@ public class Order
     private void UpdateAmount()
     {
         var lineAmount = new Money(Lines.Sum(l => l.LineTotal.Value));
-        if (DiscountAmount != null)
+        if (DiscountAmount! != null!)
         {
             TotalAmount = new Money(lineAmount.Value - DiscountAmount.Value);
         }
