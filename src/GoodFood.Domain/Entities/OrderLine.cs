@@ -6,6 +6,8 @@ public class OrderLine
 {
     public Guid OrderId { get; set; }
     public int FoodId { get; set; }
+
+    public string FoodName { get; set; }
     public required Money FoodPrice { get; set; }
 
     public int Quantity { get; set; }

@@ -23,7 +23,10 @@ public class OrderRepository : IOrderRepository
 
         var customer = new Customer { UserId = orderData.UserId, UserName = orderData.UserName };
 
-        var orderLinesData = await _db.OrderLines.Where(l => l.OrderId == orderId).ToListAsync();
+        var orderLinesData = await _db.OrderLines
+            .Include(o => o.Food)
+            .Where(l => l.OrderId == orderId)
+            .ToListAsync();
 
         var order = new Order(customer, orderData.Status, orderData.LastUpdate, orderData.DiscountAmount)
         {
@@ -35,6 +38,7 @@ public class OrderRepository : IOrderRepository
             order.AddLine(new OrderLine
             {
                 FoodId = line.FoodId,
+                FoodName = line.Food?.Name ?? "",
                 FoodPrice = new Domain.Values.Money(line.FoodPrice),
                 OrderId = line.OrderId,
                 Quantity = line.Quantity,
