@@ -27,6 +27,9 @@ public static class CartMapper
                 UserId = cart.Customer.UserId,
                 UserName = cart.Customer.UserName,
                 FoodId = line.FoodId,
+                FoodName = line.FoodName,
+                FoodDescription = line.FoodDescription,
+                FoodImagePath = line.FoodImagePath,
                 Quantity = line.Quantity,
                 Price = line.Price
             }).ToList(),

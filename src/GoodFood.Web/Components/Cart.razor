@@ -31,12 +31,11 @@
                             <tr>
                                 <td>
                                     <div class="wh_item">
-                                        <img src="assets/img/blog/post-thumb-1.jpg" alt="Image">
+                                        <img src="@GetFoodImageUrl(line.FoodId)" alt="Image">
                                         <div class="wh-item-info">
-                                            <a href="shop-details.html">ساندویچ مرغ</a>
+                                            <a href="shop-details.html">@line.FoodName</a>
                                             <p>
-                                                تنوع زیادی از مرغ وجود دارد. شما می توانید انتخاب کنید
-                                                مورد علاقه شما
+                                                @line.FoodDescription
                                             </p>
                                             <span>@line.Price تومان</span>
                                         </div>
@@ -153,11 +152,16 @@
     public async Task Update()
     {
         await CartService.Update(CartLines, UserInfo);
-        var orderId=await OrderService.PlaceAsync(UserInfo);
+        var orderId = await OrderService.PlaceAsync(UserInfo);
 
         // Redirect to Gateway!
         Navigation.NavigateTo($"api/gateway/{orderId.ToString()}", true);
 
+    }
+
+    string GetFoodImageUrl(int foodId)
+    {
+        return $"{Navigation.BaseUri}api/Food/{foodId}";
     }
 
 }

@@ -47,7 +47,22 @@ public class CartRepository : ICartRepository
             return null;
         }
 
-        var lines = cartData.Lines?.Adapt<Collection<CartLine>>();
+        var query = from cartLine in cartData.Lines
+                    join food in _db.Foods on cartLine.FoodId equals food.Id
+                    select new CartLine
+                    {
+                        Id = cartLine.Id,
+                        FoodDescription = food.Description,
+                        FoodName = food.Name,
+
+                        FoodId = food.Id,
+                        Price = cartLine.Price,
+                        Quantity = cartLine.Quantity,
+                        FoodImagePath = food.ImagePath,
+                    };
+
+
+        var lines = query.Adapt<Collection<CartLine>>();
 
         var cart = new Cart(cartData.Id, lines, customer, cartData.TimeCreated, cartData.TimeUpdated, _timeProvider);
         return cart;

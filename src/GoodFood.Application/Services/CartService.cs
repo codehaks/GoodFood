@@ -99,6 +99,13 @@ public record CartLineAddModel(int FoodId, UserInfo UserInfo, decimal Price, int
 public record CartLineModel
 {
     public int FoodId { get; init; }
+
+    public string? FoodName { get; init; }
+
+    public string? FoodDescription { get; init; }
+
+    public string? FoodImagePath { get; init; }
+
     public required string UserId { get; init; }
     public required string UserName { get; init; }
 
