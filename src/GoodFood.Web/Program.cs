@@ -16,6 +16,7 @@ using MediatR.NotificationPublishers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
+using NetMQ.Sockets;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -36,6 +37,13 @@ builder.Services.AddMediatR(cfg =>
     cfg.RegisterServicesFromAssemblyContaining<GoodFood.Infrastructure.AssembelyHolder>();
     cfg.NotificationPublisher = new TaskWhenAllPublisher();
     
+});
+
+builder.Services.AddSingleton<PushSocket>(provider =>
+{
+    var pushSocket = new PushSocket();
+    pushSocket.Connect("tcp://127.0.0.1:5556");
+    return pushSocket;
 });
 
 builder.Services.AddHostedService<RemoveExpiredCartsWorker>();
