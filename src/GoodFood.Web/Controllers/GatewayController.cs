@@ -1,3 +1,4 @@
+using System.Text.Json;
 using GoodFood.Application.Contracts;
 using GoodFood.Application.Notfications;
 using GoodFood.Domain.Entities;
@@ -36,7 +37,14 @@ public class GatewayController : ControllerBase
         var order = await _orderService.GetOrderDetailsAsync(orderId);
         var user = await _userManager.GetUserAsync(User);
 
-        _pushSocket.SendFrame(user?.Email!);
+        var msg = new EmailJobDto
+        {
+            EmailAddress = user?.Email!,
+            EmailTitle = "New Order",
+            EmailBody = "Order Confirmed"
+        };
+
+        _pushSocket.SendFrame(JsonSerializer.Serialize<EmailJobDto>(msg));
 
         await _mediator.Publish(new OrderCreatedNotification
         {

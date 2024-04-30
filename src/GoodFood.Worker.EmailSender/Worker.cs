@@ -1,3 +1,5 @@
+using System.Text.Json;
+using GoodFood.Application.Contracts;
 using NetMQ;
 using NetMQ.Sockets;
 
@@ -20,9 +22,11 @@ public class Worker : BackgroundService
         pullSocket.Bind("tcp://127.0.0.1:5556"); // Bind to the PUSH socket
         while (!stoppingToken.IsCancellationRequested)
         {
-            string msg = pullSocket.ReceiveFrameString();
+            var msg = pullSocket.ReceiveFrameString();
 
-            _logger.LogInformation("Worker running at: {time} -> {msg}", DateTimeOffset.Now.TimeOfDay, msg);
+            var dto = JsonSerializer.Deserialize<EmailJobDto>(msg);
+
+            _logger.LogInformation("Worker running at: {time} -> {msg}", DateTimeOffset.Now.TimeOfDay, dto.EmailTitle);
         }
         //while (!stoppingToken.IsCancellationRequested)
         //{
