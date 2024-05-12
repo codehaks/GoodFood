@@ -141,9 +141,7 @@ static Action<HostBuilderContext, LoggerConfiguration> WriteLogs()
         {
             var connectionString = webHostBuilderContext.Configuration.GetConnectionString("Log") ?? "";
             //logger.WriteTo.PostgreSQL(connectionString, "Logs", needAutoCreateTable: true, formatProvider: cultureInfo);
+            logger.WriteTo.Console();
         }
-        else
-        {
-            logger.WriteTo.Console(formatProvider: cultureInfo);
-        }
+       
     };
