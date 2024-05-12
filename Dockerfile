@@ -9,6 +9,8 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
+COPY ["Directory.Packages.props", "."]
+COPY ["Directory.Build.props", "."]
 COPY ["src/GoodFood.Web/GoodFood.Web.csproj", "src/GoodFood.Web/"]
 COPY ["src/GoodFood.Application/GoodFood.Application.csproj", "src/GoodFood.Application/"]
 COPY ["src/GoodFood.Domain/GoodFood.Domain.csproj", "src/GoodFood.Domain/"]
