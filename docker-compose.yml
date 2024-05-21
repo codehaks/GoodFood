@@ -8,10 +8,12 @@ networks:
 services:
   db:
     container_name: 'goodfood_db'
-    image: postgres:13.5
+    image: postgres:16
     hostname: postgres
+    expose:
+      - "5930"
     ports:
-      - 5930:5433
+      - 5930:5432
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: "6859"
