@@ -4,10 +4,8 @@ using GoodFood.Application.Services;
 using GoodFood.Domain.Contracts;
 using GoodFood.Domain.Values;
 using GoodFood.Infrastructure.Persistence;
-using GoodFood.Infrastructure.Persistence.Models;
 using GoodFood.Infrastructure.Persistence.Repositories;
 using GoodFood.Infrastructure.Services;
-using GoodFood.Web.Areas.Admin.Pages.Foods;
 using GoodFood.Web.Common;
 using GoodFood.Web.Hubs;
 using GoodFood.Web.Services;
@@ -16,6 +14,7 @@ using MediatR.NotificationPublishers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
+using NetMQ.Sockets;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -35,7 +34,14 @@ builder.Services.AddMediatR(cfg =>
     cfg.RegisterServicesFromAssemblyContaining<GoodFood.Application.AssembelyHolder>();
     cfg.RegisterServicesFromAssemblyContaining<GoodFood.Infrastructure.AssembelyHolder>();
     cfg.NotificationPublisher = new TaskWhenAllPublisher();
-    
+
+});
+
+builder.Services.AddSingleton<PushSocket>(provider =>
+{
+    var pushSocket = new PushSocket();
+    pushSocket.Connect("tcp://127.0.0.1:5556");
+    return pushSocket;
 });
 
 builder.Services.AddHostedService<RemoveExpiredCartsWorker>();
@@ -129,12 +135,13 @@ static Action<HostBuilderContext, LoggerConfiguration> WriteLogs()
     => (webHostBuilderContext, logger) =>
     {
         logger.ReadFrom.Configuration(webHostBuilderContext.Configuration);
+        var cultureInfo = CultureInfo.CurrentCulture;
 
         if (webHostBuilderContext.HostingEnvironment.IsProduction())
         {
             var connectionString = webHostBuilderContext.Configuration.GetConnectionString("Log") ?? "";
-
-            var cultureInfo = CultureInfo.CurrentCulture;
             //logger.WriteTo.PostgreSQL(connectionString, "Logs", needAutoCreateTable: true, formatProvider: cultureInfo);
+            logger.WriteTo.Console();
         }
+       
     };

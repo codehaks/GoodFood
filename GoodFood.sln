@@ -22,11 +22,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "root", "root", "{21B35F9C-C
 		BannedSymbols.txt = BannedSymbols.txt
 		Directory.Build.props = Directory.Build.props
 		Directory.Packages.props = Directory.Packages.props
+		docker-compose.yml = docker-compose.yml
+		Dockerfile = Dockerfile
 		help.txt = help.txt
 		run_coverage_report.bat = run_coverage_report.bat
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoodFood.Tests", "tests\GoodFood.Tests\GoodFood.Tests.csproj", "{9DAC1525-54D2-4B33-837D-FEC221A51D54}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GoodFood.Worker.EmailSender", "src\GoodFood.Worker.EmailSender\GoodFood.Worker.EmailSender.csproj", "{F036FCA7-FE8E-4CBE-A422-5F54904E6D3A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -54,6 +58,10 @@ Global
 		{9DAC1525-54D2-4B33-837D-FEC221A51D54}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9DAC1525-54D2-4B33-837D-FEC221A51D54}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9DAC1525-54D2-4B33-837D-FEC221A51D54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F036FCA7-FE8E-4CBE-A422-5F54904E6D3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F036FCA7-FE8E-4CBE-A422-5F54904E6D3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F036FCA7-FE8E-4CBE-A422-5F54904E6D3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F036FCA7-FE8E-4CBE-A422-5F54904E6D3A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,6 +72,7 @@ Global
 		{9370B876-4F81-4A89-B675-F1DBB3F563A2} = {BE964223-DB05-43FC-89E2-15FC57FBA4D5}
 		{B9DA72BB-A60C-4277-AEDD-1E61B2DAA4C4} = {BE964223-DB05-43FC-89E2-15FC57FBA4D5}
 		{9DAC1525-54D2-4B33-837D-FEC221A51D54} = {F59B61C1-8837-45A6-B32B-B7A951CBEDED}
+		{F036FCA7-FE8E-4CBE-A422-5F54904E6D3A} = {BE964223-DB05-43FC-89E2-15FC57FBA4D5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {334DC689-FD1A-48E9-9A54-28B8B0D8900C}
