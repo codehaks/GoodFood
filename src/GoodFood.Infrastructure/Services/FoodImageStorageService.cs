@@ -7,6 +7,12 @@ public class FoodImageStorageService : IFoodImageStorageService
     {
         try
         {
+            var directory = Path.GetDirectoryName(fullFileName);
+            if (!Directory.Exists(directory))
+            {
+                Directory.CreateDirectory(directory);
+            }
+
             await File.WriteAllBytesAsync(fullFileName, imageData);
         }
         catch (Exception ex)
