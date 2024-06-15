@@ -1,11 +1,7 @@
-version: "3.9"
 volumes:
   goodfood-data:
   goodfood-docs:
-<<<<<<< HEAD
   foodImages:
-=======
->>>>>>> develop
 networks:
   goodfood-network:
     driver: bridge
@@ -23,16 +19,11 @@ services:
       POSTGRES_PASSWORD: "6859"
     networks:
       - goodfood-network
-
     volumes:
       - goodfood-data:/var/lib/postgresql/data
     restart: unless-stopped
   webapp:
-<<<<<<< HEAD
-    container_name: 'goodfood_web'
-=======
     container_name: 'codehaks_web'
->>>>>>> develop
     environment:
         ASPNETCORE_ENVIRONMENT: "Staging"
     build: .
@@ -42,7 +33,4 @@ services:
       - goodfood-network
     volumes:
       - goodfood-docs:/var/lib/mydocs
-<<<<<<< HEAD
       - foodImages:/app/Files/FoodImages
-=======
->>>>>>> develop
