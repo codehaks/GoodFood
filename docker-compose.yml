@@ -1,0 +1,38 @@
+version: "3.9"
+volumes:
+  goodfood-data:
+  goodfood-docs:
+  foodImages:
+networks:
+  goodfood-network:
+    driver: bridge
+services:
+  db:
+    container_name: 'goodfood_db'
+    image: postgres:16
+    hostname: postgres
+    expose:
+      - "5930"
+    ports:
+      - 5930:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: "6859"
+    networks:
+      - goodfood-network
+
+    volumes:
+      - goodfood-data:/var/lib/postgresql/data
+    restart: unless-stopped
+  webapp:
+    container_name: 'goodfood_web'
+    environment:
+        ASPNETCORE_ENVIRONMENT: "Staging"
+    build: .
+    ports:
+    - "8090:8080"
+    networks:
+      - goodfood-network
+    volumes:
+      - goodfood-docs:/var/lib/mydocs
+      - foodImages:/app/Files/FoodImages

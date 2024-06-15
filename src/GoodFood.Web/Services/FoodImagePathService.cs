@@ -13,6 +13,11 @@ public class FoodImagePathService : IFoodImagePathService
 
     public string GetPath()
     {
-        return Path.Combine(_environment.ContentRootPath, "Files", "FoodImages");
+        var _foodImagesPath = Path.Combine(_environment.ContentRootPath, "Files", "FoodImages");
+        if (!Directory.Exists(_foodImagesPath))
+        {
+            Directory.CreateDirectory(_foodImagesPath);
+        }
+        return _foodImagesPath;
     }
 }
