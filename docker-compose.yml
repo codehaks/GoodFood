@@ -16,7 +16,7 @@ services:
       - "5432:5432"
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_PASSWORD: 6859
       POSTGRES_DB: goodfood_db_pub
     networks:
       - goodfood-network
@@ -33,7 +33,9 @@ services:
     container_name: 'goodfood_web'
     environment:
       ASPNETCORE_ENVIRONMENT: "Staging"
-    build: .
+    build: 
+      context: .
+      target: final
     ports:
       - "8090:8080"
     networks:
@@ -44,6 +46,21 @@ services:
     depends_on:
       db:
         condition: service_healthy
+
+  migrations:
+    container_name: 'goodfood_migrations'
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Docker"
+    build:
+      context: .
+      target: migrations
+    networks:
+      - goodfood-network
+    depends_on:
+      db:
+        condition: service_healthy
+    profiles:
+      - migrations
 
   emailworker:
     container_name: 'goodfood_emailworker'

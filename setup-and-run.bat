@@ -24,10 +24,10 @@ echo Database is ready!
 
 echo.
 echo [4/6] Running database migrations inside Docker container...
-echo Building webapp container for migrations...
-docker-compose build webapp
+echo Building migrations container...
+docker-compose build migrations
 echo Running migrations...
-docker-compose run --rm -e ASPNETCORE_ENVIRONMENT=Docker webapp dotnet ef database update --project /src/src/GoodFood.Infrastructure --startup-project /src/src/GoodFood.Web
+docker-compose run --rm migrations dotnet ef database update --project /src/src/GoodFood.Infrastructure --startup-project /src/src/GoodFood.Web
 
 if %errorlevel% neq 0 (
     echo.
