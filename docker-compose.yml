@@ -2,35 +2,45 @@ volumes:
   goodfood-data:
   goodfood-docs:
   foodImages:
+
 networks:
   goodfood-network:
     driver: bridge
+
 services:
   db:
     container_name: 'goodfood_db'
     image: postgres:16
     hostname: postgres
-    expose:
-      - "5930"
     ports:
-      - 5930:5432
+      - "5432:5432"
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: "6859"
+      POSTGRES_DB: goodfood_db_pub
     networks:
       - goodfood-network
     volumes:
       - goodfood-data:/var/lib/postgresql/data
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d goodfood_db_pub"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
   webapp:
-    container_name: 'codehaks_web'
+    container_name: 'goodfood_web'
     environment:
-        ASPNETCORE_ENVIRONMENT: "Staging"
+      ASPNETCORE_ENVIRONMENT: "Staging"
     build: .
     ports:
-    - "8090:8080"
+      - "8090:8080"
     networks:
       - goodfood-network
     volumes:
       - goodfood-docs:/var/lib/mydocs
       - foodImages:/app/Files/FoodImages
+    depends_on:
+      db:
+        condition: service_healthy
