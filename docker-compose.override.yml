@@ -1,7 +1,0 @@
-services:
-  webapp:
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-    volumes:
-      - ./src:/src
-    working_dir: /src
