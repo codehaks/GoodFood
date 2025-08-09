@@ -8,11 +8,15 @@
 4. Tech Stack (🧰)
 5. Mapping (🗺️)
 6. Logging (🪵)
-7. Prerequisites
-8. Running Locally (Step-by-Step)
+7. Developer Guide (🧑‍💻)
+8. Prerequisites
+9. Running Locally (Step-by-Step)
 	- Using Docker
 	- Manual Setup
-9. Troubleshooting & Tips
+10. Troubleshooting & Tips
+11. Contributing (🤝)
+12. License (📄)
+13. Credits (💜)
 
 ---
 
@@ -50,11 +54,11 @@ Request flow (simplified):
 ```mermaid
 flowchart LR
   UI[Web UI / Controllers] -->|calls| App[Application Services]
-  App -->|uses| Dom[Domain Entities/Values]
+  App --> Dom[Domain Entities & Values]
   App -->|contracts| Repo[Repository Interfaces]
-  Repo -->|implemented by| Infra[Infrastructure (EF Core, Email, Storage)]
-  UI <-->|real-time| Hub[SignalR Hub]
-  App -->|publish| Events[(Domain Notifications)]
+  Repo --> Infra[Infrastructure: EF Core, Email, Storage]
+  UI <-->|realtime| Hub[SignalR Hub]
+  App --> Events[Domain Notifications]
   Events --> Handlers[Infrastructure Handlers]
 ```
 
@@ -149,7 +153,32 @@ builder.Host.UseSerilog((ctx, logger) => logger.ReadFrom.Configuration(ctx.Confi
 
 ---
 
-## 7. Prerequisites
+## 7. Developer Guide (🧑‍💻)
+
+- **Local DB**: PostgreSQL (via Docker or local install). Update `ConnectionStrings:DefaultConnection` in `src/GoodFood.Web/appsettings.*.json`.
+- **Migrations**:
+  - Add: `dotnet ef migrations add <Name> --project src/GoodFood.Infrastructure`
+  - Update: `dotnet ef database update --project src/GoodFood.Infrastructure`
+- **Run**:
+  - Web: `dotnet run --project src/GoodFood.Web`
+  - Worker: `dotnet run --project src/GoodFood.Worker.EmailSender`
+- **Tests**: `dotnet test tests/GoodFood.Tests`
+- **Debugging**:
+  - Enable detailed errors via `appsettings.Development.json` → `DetailedErrors: true`.
+  - Serilog console sink is enabled in Development.
+- **Coding Standards**:
+  - C# 12, nullable enabled, analyzers configured centrally (`Directory.Build.props`).
+  - Prefer domain types internally; map to DTOs at boundaries.
+  - Keep services/application layer free of EF Core types.
+- **Branching & Commits**:
+  - Branches: `feature/<short-description>`, `fix/<short-description>`
+  - Conventional commits: `feat:`, `fix:`, `docs:`, `refactor:`, `test:`, `chore:`
+- **PR Checklist**:
+  - Tests passing, updated docs, no analyzer errors, migrations included when schema changes.
+
+---
+
+## 8. Prerequisites
 
 - [.NET 8 SDK](https://dotnet.microsoft.com/download)
 - [Docker Desktop](https://www.docker.com/products/docker-desktop)
@@ -158,7 +187,7 @@ builder.Host.UseSerilog((ctx, logger) => logger.ReadFrom.Configuration(ctx.Confi
 
 ---
 
-## 8. Running Locally
+## 9. Running Locally
 
 ### Option A: Using Docker (Recommended)
 
@@ -219,7 +248,31 @@ builder.Host.UseSerilog((ctx, logger) => logger.ReadFrom.Configuration(ctx.Confi
 
 ---
 
-## 9. Troubleshooting & Tips
+## 10. Troubleshooting & Tips
+
+---
+
+## 11. Contributing (🤝)
+
+- **Issues**: Open a descriptive issue with steps to reproduce or a proposal.
+- **Fork & Branch**: Fork the repo and create a feature branch.
+- **Code Style**: Follow the analyzers; ensure `dotnet format` is clean.
+- **Tests**: Add/adjust unit tests in `tests/GoodFood.Tests`.
+- **PRs**: Submit a PR linked to an issue, with a clear description and screenshots/logs where helpful.
+
+See `CONTRIBUTING.md` for details.
+
+---
+
+## 12. License (📄)
+
+This project is licensed under the MIT License. See the `LICENSE` file for details.
+
+---
+
+## 13. Credits (💜)
+
+Developed by [codehaks.com](https://codehaks.com).
 
 - **Ports**: If ports are busy, change them in `docker-compose.yml` or `appsettings.json`.
 - **Database Issues**: Ensure migrations are applied and connection strings are correct.
