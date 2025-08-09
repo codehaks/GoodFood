@@ -123,8 +123,105 @@ The application uses different configurations based on the environment:
 | Environment | Used For | Database Host | Database Password | Port |
 |-------------|----------|---------------|-------------------|------|
 | **Development** | Manual/Local setup | `localhost` | `2385` | 5000/7001 |
-| **Staging** | Docker setup | `db` (container) | `6859` | 8090 |
+| **Docker** | Docker migrations (local → Docker DB) | `localhost` | `6859` | N/A |
+| **Staging** | Docker containers | `db` (container) | `6859` | 8090 |
 | **Production** | Production deployment | `localhost` | `2385` | varies |
+
+## 🔗 Connection Strings Configuration
+
+### Understanding Connection Strings
+
+The application uses different connection strings depending on how and where it's running:
+
+#### 📁 Configuration Files Location
+```
+src/GoodFood.Web/
+├── appsettings.json               # Base configuration
+├── appsettings.Development.json   # Manual/Local development
+├── appsettings.Docker.json        # Docker migrations (local to Docker DB)
+├── appsettings.Staging.json       # Docker containers
+└── appsettings.Production.json    # Production deployment
+```
+
+#### 🔄 Connection String Examples
+
+**Development (Manual Setup):**
+```json
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Host=localhost;Port=5432;Database=goodfood_db_pub;Username=postgres;Password=2385"
+  }
+}
+```
+
+**Docker (Migrations):**
+```json
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Host=localhost;Port=5432;Database=goodfood_db_pub;Username=postgres;Password=6859"
+  }
+}
+```
+
+**Staging (Docker Containers):**
+```json
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Host=db;Port=5432;Database=goodfood_db_pub;Username=postgres;Password=6859"
+  }
+}
+```
+
+### 🛠️ How to Modify Connection Strings
+
+#### For Manual Setup:
+Edit `src/GoodFood.Web/appsettings.Development.json`:
+```json
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Host=YOUR_HOST;Port=YOUR_PORT;Database=goodfood_db_pub;Username=YOUR_USER;Password=YOUR_PASSWORD"
+  }
+}
+```
+
+#### For Docker Setup:
+If you need different database credentials:
+
+1. **Edit Docker Compose file** (`docker-compose.yml`):
+```yaml
+db:
+  environment:
+    POSTGRES_USER: your_user
+    POSTGRES_PASSWORD: "your_password"
+    POSTGRES_DB: goodfood_db_pub
+```
+
+2. **Update Docker configuration** (`src/GoodFood.Web/appsettings.Docker.json`):
+```json
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Host=localhost;Port=5432;Database=goodfood_db_pub;Username=your_user;Password=your_password"
+  }
+}
+```
+
+3. **Update Staging configuration** (`src/GoodFood.Web/appsettings.Staging.json`):
+```json
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Host=db;Port=5432;Database=goodfood_db_pub;Username=your_user;Password=your_password"
+  }
+}
+```
+
+### 🚨 Common Connection String Issues
+
+| Issue | Cause | Solution |
+|-------|-------|----------|
+| "No such host is known" | Wrong host in connection string | Use `localhost` for local, `db` for containers |
+| "Connection refused" | Database not running | Start PostgreSQL service or Docker container |
+| "Password authentication failed" | Wrong password | Check password in appsettings matches database |
+| "Database does not exist" | Database not created | Run setup scripts or create database manually |
 
 ## 📁 Project Structure
 
@@ -190,9 +287,31 @@ docker-compose logs db
 3. Test connection: `psql -h localhost -p 5432 -U postgres -d goodfood_db_pub`
 
 ### Migration Issues
+
+**"No such host is known" Error:**
+This happens when the wrong environment configuration is used.
+
+1. **For Docker Setup**: Ensure `ASPNETCORE_ENVIRONMENT=Docker` is set before running migrations
+   ```bash
+   # Windows
+   set ASPNETCORE_ENVIRONMENT=Docker
+   dotnet ef database update --project src/GoodFood.Infrastructure --startup-project src/GoodFood.Web
+   
+   # Linux/macOS
+   export ASPNETCORE_ENVIRONMENT=Docker
+   dotnet ef database update --project src/GoodFood.Infrastructure --startup-project src/GoodFood.Web
+   ```
+
+2. **For Manual Setup**: Ensure `ASPNETCORE_ENVIRONMENT=Development` (default)
+   ```bash
+   dotnet ef database update --project src/GoodFood.Infrastructure --startup-project src/GoodFood.Web
+   ```
+
+**Other Migration Issues:**
 1. Ensure .NET 8.0 SDK is installed: `dotnet --version`
 2. Verify project builds: `dotnet build src/GoodFood.Web/GoodFood.Web.csproj`
-3. Check connection strings in appsettings files
+3. Check connection strings match your setup (see [Connection Strings Configuration](#-connection-strings-configuration))
+4. Verify database is running and accessible
 
 ### Port Conflicts
 **Docker:** Modify ports in `docker-compose.yml`
