@@ -62,6 +62,39 @@ flowchart LR
   Events --> Handlers[Infrastructure Handlers]
 ```
 
+Sequence: request to repository and database
+
+```mermaid
+sequenceDiagram
+  autonumber
+  participant U as Browser
+  participant C as Web Controller
+  participant S as Application Service
+  participant D as Domain
+  participant UoW as Unit of Work
+  participant R as Repository
+  participant EF as EF Core DbContext
+  participant DB as PostgreSQL
+  participant H as SignalR Hub
+  participant M as MediatR
+
+  U->>C: HTTP POST /orders
+  C->>S: PlaceOrder(request DTO)
+  Note over S: Map DTO -> Domain (Mapster)
+  S->>D: Validate and create Order aggregate
+  S->>UoW: Begin
+  S->>R: Save(Order)
+  R->>EF: Add/Update entities
+  EF->>DB: SQL INSERT/UPDATE
+  DB-->>EF: Result
+  EF-->>R: Persisted entities
+  S->>UoW: Commit
+  UoW-->>S: OK
+  S->>M: Publish OrderCreatedNotification
+  M->>H: Broadcast status
+  C-->>U: 200 OK
+```
+
 Folder structure (abridged):
 
 ```text
@@ -284,10 +317,3 @@ Developed by [codehaks.com](https://codehaks.com).
   dotnet test tests/GoodFood.Tests
   ```
 
----
-
-## Need Help?
-
-- Check the README.md for more details.
-- Contact the maintainers or open an issue on GitHub.
-# GoodFood
