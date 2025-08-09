@@ -23,19 +23,18 @@ if %errorlevel% neq 0 (
 echo Database is ready!
 
 echo.
-echo [4/5] Installing EF Core tools and running database migrations...
-dotnet tool install --global dotnet-ef >nul 2>&1
-echo Running migrations against database...
-echo Setting environment to use Docker configuration...
-set ASPNETCORE_ENVIRONMENT=Docker
-dotnet ef database update --project src/GoodFood.Infrastructure --startup-project src/GoodFood.Web
+echo [4/5] Running database migrations inside Docker container...
+echo Building webapp container for migrations...
+docker-compose build webapp
+echo Running migrations...
+docker-compose run --rm -e ASPNETCORE_ENVIRONMENT=Docker webapp dotnet ef database update --project /src/src/GoodFood.Infrastructure --startup-project /src/src/GoodFood.Web
 
 if %errorlevel% neq 0 (
     echo.
     echo ERROR: Failed to run migrations. Please check:
-    echo 1. .NET 8.0 SDK is installed
+    echo 1. Docker containers are running properly
     echo 2. Database connection string is correct
-    echo 3. Project builds successfully
+    echo 3. Project builds successfully inside container
     echo.
     pause
     exit /b 1
@@ -43,8 +42,8 @@ if %errorlevel% neq 0 (
 
 echo.
 echo [5/5] Starting the web application...
-echo Building and starting the application container...
-docker-compose up --build webapp
+echo Starting the application container...
+docker-compose up webapp
 
 echo.
 echo ============================================
