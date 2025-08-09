@@ -44,3 +44,16 @@ services:
     depends_on:
       db:
         condition: service_healthy
+
+  emailworker:
+    container_name: 'goodfood_emailworker'
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Staging"
+    build:
+      context: .
+      dockerfile: Dockerfile.EmailWorker
+    networks:
+      - goodfood-network
+    restart: unless-stopped
+    depends_on:
+      - webapp

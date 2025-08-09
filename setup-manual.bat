@@ -77,22 +77,31 @@ if %errorlevel% neq 0 (
 
 echo.
 echo ============================================
-echo         Setup Complete!
+echo         🎉 Setup Complete! 🎉
 echo ============================================
 echo.
-echo To run the application:
-echo   cd src/GoodFood.Web
-echo   dotnet run
+echo ✅ To run the FULL application you need to start:
 echo.
-echo The application will be available at:
-echo   https://localhost:7001 (HTTPS)
-echo   http://localhost:5000 (HTTP)
+echo 1. 🌐 Web Application:
+echo    cd src/GoodFood.Web
+echo    dotnet run
 echo.
-echo Database connection details:
-echo   Host: localhost
-echo   Port: 5432
-echo   Database: goodfood_db_pub
-echo   Username: postgres
-echo   Password: postgres
+echo 2. 📧 Email Worker (in separate terminal):
+echo    cd src/GoodFood.Worker.EmailSender
+echo    dotnet run
+echo.
+echo 🚀 The web application will be available at:
+echo    👉 https://localhost:7001 (HTTPS)
+echo    👉 http://localhost:5000 (HTTP)
+echo.
+echo 📊 Database connection details:
+echo    Host: localhost
+echo    Port: 5432
+echo    Database: goodfood_db_pub
+echo    Username: postgres
+echo    Password: postgres
+echo.
+echo 💡 TIP: For the best experience, run both services!
+echo    The email worker handles background email processing.
 echo.
 pause

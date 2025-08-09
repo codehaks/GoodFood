@@ -4,7 +4,7 @@ This guide provides setup instructions for running the GoodFood application with
 
 ## 🐳 Setup Option 1: Docker (Recommended)
 
-This provides a complete Docker-based environment with PostgreSQL database in containers.
+This provides a complete Docker-based environment with PostgreSQL database and email worker service in containers.
 
 ### Prerequisites for Docker Setup
 
@@ -30,15 +30,25 @@ chmod +x setup-and-run.sh
 2. **Starts PostgreSQL database** - Runs PostgreSQL 16 in a Docker container
 3. **Waits for database** - Ensures the database is ready before proceeding
 4. **Runs migrations inside Docker** - Builds webapp container and runs EF migrations
-5. **Starts the web application** - Runs the GoodFood web application container
+5. **Starts email worker service** - Runs background email processing service
+6. **Starts the web application** - Runs the GoodFood web application container
+7. **Opens application in browser** - Automatically launches http://localhost:8090
 
 ### Docker Access Points
-- **Web Application**: http://localhost:8090
+- **Web Application**: http://localhost:8090 (opens automatically)
 - **PostgreSQL Database**: localhost:5432
   - Database: `goodfood_db_pub`
   - Username: `postgres`
   - Password: `postgres`
   - Environment: `Staging`
+- **Email Worker**: Running in background container
+
+### Docker Services
+| Service | Container Name | Purpose | Status |
+|---------|---------------|---------|---------|
+| webapp | goodfood_web | Main web application | http://localhost:8090 |
+| db | goodfood_db | PostgreSQL database | localhost:5432 |
+| emailworker | goodfood_emailworker | Background email processing | Running |
 
 ---
 
@@ -98,9 +108,15 @@ chmod +x setup-manual.sh
    dotnet ef database update --project src/GoodFood.Infrastructure --startup-project src/GoodFood.Web
    ```
 
-5. **Run the application:**
+5. **Run the web application (Terminal 1):**
    ```bash
    cd src/GoodFood.Web
+   dotnet run
+   ```
+
+6. **Run the email worker (Terminal 2):**
+   ```bash
+   cd src/GoodFood.Worker.EmailSender
    dotnet run
    ```
 
@@ -113,6 +129,14 @@ chmod +x setup-manual.sh
   - Username: `postgres`
   - Password: `postgres`
   - Environment: `Development`
+- **Email Worker**: Running in separate terminal
+
+### Manual Services
+| Service | Location | Purpose | Access |
+|---------|----------|---------|--------|
+| Web App | src/GoodFood.Web | Main application | https://localhost:7001 |
+| Email Worker | src/GoodFood.Worker.EmailSender | Email processing | Background service |
+| Database | Local PostgreSQL | Data storage | localhost:5432 |
 
 ---
 
@@ -228,15 +252,18 @@ db:
 ```
 GoodFood/
 ├── src/
-│   ├── GoodFood.Web/           # Main web application
-│   ├── GoodFood.Application/   # Application services
-│   ├── GoodFood.Domain/        # Domain entities and logic
-│   └── GoodFood.Infrastructure/ # Data access and external services
-├── tests/                      # Unit and integration tests
-├── docker-compose.yml          # Docker configuration
-├── setup-and-run.bat/.sh      # Docker setup scripts
-├── setup-manual.bat/.sh       # Manual setup scripts
-└── setup-database.sql         # Database creation script
+│   ├── GoodFood.Web/                    # Main web application
+│   ├── GoodFood.Application/            # Application services
+│   ├── GoodFood.Domain/                 # Domain entities and logic
+│   ├── GoodFood.Infrastructure/         # Data access and external services
+│   └── GoodFood.Worker.EmailSender/    # Background email worker
+├── tests/                               # Unit and integration tests
+├── docker-compose.yml                  # Docker configuration
+├── Dockerfile                          # Web app container config
+├── Dockerfile.EmailWorker              # Email worker container config
+├── setup-and-run.bat/.sh              # Docker setup scripts
+├── setup-manual.bat/.sh               # Manual setup scripts
+└── setup-database.sql                 # Database creation script
 ```
 
 ## 🛠️ Development Commands
@@ -258,11 +285,14 @@ dotnet ef migrations remove --project src/GoodFood.Infrastructure --startup-proj
 
 ### Docker Commands
 ```bash
+# Start all services
+docker-compose up --build
+
 # Start only database
 docker-compose up -d db
 
-# Start everything
-docker-compose up --build
+# Start only specific services
+docker-compose up -d db webapp emailworker
 
 # Stop all services
 docker-compose down
@@ -272,10 +302,31 @@ docker-compose down -v
 
 # View logs
 docker-compose logs webapp
+docker-compose logs emailworker
 docker-compose logs db
+
+# View real-time logs
+docker-compose logs -f webapp
 
 # Run migrations in Docker
 docker-compose run --rm -e ASPNETCORE_ENVIRONMENT=Docker webapp dotnet ef database update --project /src/src/GoodFood.Infrastructure --startup-project /src/src/GoodFood.Web
+```
+
+### Manual Development Commands
+```bash
+# Start web application
+cd src/GoodFood.Web
+dotnet run
+
+# Start email worker (separate terminal)
+cd src/GoodFood.Worker.EmailSender
+dotnet run
+
+# Build all projects
+dotnet build
+
+# Run tests
+dotnet test tests/GoodFood.Tests/
 ```
 
 ## 🚨 Troubleshooting
@@ -292,6 +343,16 @@ docker-compose run --rm -e ASPNETCORE_ENVIRONMENT=Docker webapp dotnet ef databa
 2. Verify database exists: `psql -h localhost -p 5432 -U postgres -l`
 3. Test connection: `psql -h localhost -p 5432 -U postgres -d goodfood_db_pub`
 
+### Email Worker Issues
+
+**For Docker Setup:**
+- Check if email worker container is running: `docker ps | grep emailworker`
+- View email worker logs: `docker-compose logs emailworker`
+
+**For Manual Setup:**
+- Ensure email worker is running in separate terminal
+- Check NetMQ port 5556 is available
+
 ### Migration Issues
 
 **For Docker Setup:**
@@ -307,8 +368,32 @@ Migrations now run inside Docker containers, so they automatically use the corre
 **Docker:** Modify ports in `docker-compose.yml`
 **Manual:** The application will use the next available port automatically
 
+### Application Not Opening
+**Docker:** The setup script will automatically open http://localhost:8090 in your browser
+**Manual:** Manually navigate to https://localhost:7001 or http://localhost:5000
+
 ## 📦 Additional Setup Files
 
 - `setup-database.sql` - SQL script to create required databases
 - `docker-compose.override.yml` - Development overrides for Docker
-- `Dockerfile` - Application container configuration
+- `Dockerfile` - Web application container configuration
+- `Dockerfile.EmailWorker` - Email worker container configuration
+
+## 🎉 Success Indicators
+
+### Docker Setup Success
+```
+✅ Services Started:
+   📧 Email Worker: Running in background
+   🗄️  Database: PostgreSQL on localhost:5432
+   🌐 Web App: http://localhost:8090
+```
+
+### Manual Setup Success
+```
+✅ To run the FULL application you need to start:
+1. 🌐 Web Application: https://localhost:7001
+2. 📧 Email Worker: Background service running
+```
+
+Both setups will have a fully functional GoodFood application with email processing capabilities!
