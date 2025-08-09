@@ -91,6 +91,7 @@ namespace GoodFood.Infrastructure.Migrations
                     UserId = table.Column<string>(type: "text", nullable: false),
                     UserName = table.Column<string>(type: "text", nullable: false),
                     TotalAmount = table.Column<decimal>(type: "numeric", nullable: false),
+                    DiscountAmount = table.Column<decimal>(type: "numeric", nullable: false),
                     Status = table.Column<int>(type: "integer", nullable: false),
                     LastUpdate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
@@ -257,7 +258,8 @@ namespace GoodFood.Infrastructure.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     FoodId = table.Column<int>(type: "integer", nullable: false),
                     Count = table.Column<int>(type: "integer", nullable: false),
-                    Price = table.Column<decimal>(type: "numeric", nullable: false)
+                    Price = table.Column<decimal>(type: "numeric", nullable: false),
+                    Details = table.Column<string>(type: "jsonb", nullable: false)
                 },
                 constraints: table =>
                 {
