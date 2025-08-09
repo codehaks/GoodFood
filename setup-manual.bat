@@ -31,7 +31,7 @@ if %errorlevel% neq 0 (
 echo.
 echo [Database Setup]
 echo Please ensure PostgreSQL server is running on localhost:5432
-echo Default credentials: username=postgres, password=2385
+echo Default credentials: username=postgres, password=postgres
 echo.
 
 set /p continue="Continue with database setup? (y/n): "
@@ -93,6 +93,6 @@ echo   Host: localhost
 echo   Port: 5432
 echo   Database: goodfood_db_pub
 echo   Username: postgres
-echo   Password: 2385
+echo   Password: postgres
 echo.
 pause

@@ -273,8 +273,8 @@ Access at: https://localhost:7001 or http://localhost:5000
 
 | Setup Type | Environment | Database Host | Database Password | Access Port |
 |------------|-------------|---------------|-------------------|-------------|
-| Docker | Staging | `db` (container) | `6859` | 8090 |
-| Manual | Development | `localhost` | `2385` | 5000/7001 |
+| Docker | Staging | `db` (container) | `postgres` | 8090 |
+| Manual | Development | `localhost` | `postgres` | 5000/7001 |
 
 ---
 

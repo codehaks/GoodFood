@@ -16,7 +16,7 @@ services:
       - "5432:5432"
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: "6859"
+      POSTGRES_PASSWORD: postgres
       POSTGRES_DB: goodfood_db_pub
     networks:
       - goodfood-network

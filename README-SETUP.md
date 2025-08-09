@@ -37,7 +37,7 @@ chmod +x setup-and-run.sh
 - **PostgreSQL Database**: localhost:5432
   - Database: `goodfood_db_pub`
   - Username: `postgres`
-  - Password: `6859`
+  - Password: `postgres`
   - Environment: `Staging`
 
 ---
@@ -58,7 +58,7 @@ You need to create the following database on your local PostgreSQL server:
 
 | Database Name | Purpose | Username | Password |
 |---------------|---------|----------|----------|
-| `goodfood_db_pub` | Main application database | `postgres` | `2385` |
+| `goodfood_db_pub` | Main application database | `postgres` | `postgres` |
 
 ### Quick Start with Manual Setup
 
@@ -111,7 +111,7 @@ chmod +x setup-manual.sh
 - **PostgreSQL Database**: localhost:5432
   - Database: `goodfood_db_pub`
   - Username: `postgres`
-  - Password: `2385`
+  - Password: `postgres`
   - Environment: `Development`
 
 ---
@@ -122,10 +122,10 @@ The application uses different configurations based on the environment:
 
 | Environment | Used For | Database Host | Database Password | Port |
 |-------------|----------|---------------|-------------------|------|
-| **Development** | Manual/Local setup | `localhost` | `2385` | 5000/7001 |
-| **Docker** | Docker migrations (local → Docker DB) | `localhost` | `6859` | N/A |
-| **Staging** | Docker containers | `db` (container) | `6859` | 8090 |
-| **Production** | Production deployment | `localhost` | `2385` | varies |
+| **Development** | Manual/Local setup | `localhost` | `postgres` | 5000/7001 |
+| **Docker** | Docker migrations (local → Docker DB) | `localhost` | `postgres` | N/A |
+| **Staging** | Docker containers | `db` (container) | `postgres` | 8090 |
+| **Production** | Production deployment | `localhost` | `postgres` | varies |
 
 ## 🔗 Connection Strings Configuration
 
@@ -149,7 +149,7 @@ src/GoodFood.Web/
 ```json
 {
   "ConnectionStrings": {
-    "DefaultConnection": "Host=localhost;Port=5432;Database=goodfood_db_pub;Username=postgres;Password=2385"
+    "DefaultConnection": "Host=localhost;Port=5432;Database=goodfood_db_pub;Username=postgres;Password=postgres"
   }
 }
 ```
@@ -158,7 +158,7 @@ src/GoodFood.Web/
 ```json
 {
   "ConnectionStrings": {
-    "DefaultConnection": "Host=localhost;Port=5432;Database=goodfood_db_pub;Username=postgres;Password=6859"
+    "DefaultConnection": "Host=localhost;Port=5432;Database=goodfood_db_pub;Username=postgres;Password=postgres"
   }
 }
 ```
@@ -167,7 +167,7 @@ src/GoodFood.Web/
 ```json
 {
   "ConnectionStrings": {
-    "DefaultConnection": "Host=db;Port=5432;Database=goodfood_db_pub;Username=postgres;Password=6859"
+    "DefaultConnection": "Host=db;Port=5432;Database=goodfood_db_pub;Username=postgres;Password=postgres"
   }
 }
 ```
