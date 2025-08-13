@@ -1,16 +1,186 @@
 @page
 @model GoodFood.Web.Areas.User.Pages.IndexModel
 @{
+    ViewData["Title"] = "داشبورد کاربری";
 }
 
 @section header{
     <div class="breadcrumb-title">
-        <h2>حساب من</h2>
+        <h2>داشبورد کاربری</h2>
         <ul class="breadcrumb-menu list-style">
-            <li><a href="index.html">خانه </a></li>
+            <li><a asp-page="/shop/index" asp-area="">خانه </a></li>
             <li>حساب من</li>
         </ul>
     </div>
 }
 
+<!-- Dashboard Content -->
+<div class="container-fluid p-0">
+    <!-- Welcome Section -->
+    <div class="card mb-4" style="background: linear-gradient(135deg, #FFA323 0%, #ff7f00 100%); color: white; border: none;">
+        <div class="card-body d-flex justify-content-between align-items-center">
+            <div>
+                <h3 class="mb-2" style="color: white;">خوش آمدید، @User.Identity.Name!</h3>
+                <p class="mb-0" style="color: rgba(255,255,255,0.9);">از پنل کاربری خود برای مدیریت سفارشات و اطلاعات حساب کاربری استفاده کنید.</p>
+            </div>
+            <div class="d-flex gap-2">
+                <a asp-page="/shop/index" asp-area="" class="btn" style="background: white; color: #FFA323; border: none;">مشاهده منو</a>
+                <a asp-page="/orders/index" asp-area="user" class="btn" style="background: transparent; color: white; border: 2px solid rgba(255,255,255,0.3);">سفارش های من</a>
+            </div>
+        </div>
+    </div>
 
+    <!-- Stats Overview -->
+    <div class="row mb-4">
+        <div class="col-lg-3 col-md-6 mb-3">
+            <div class="feature-card style1">
+                <div class="feature-info text-center" style="padding: 30px 20px;">
+                    <i class="flaticon-order" style="font-size: 40px; color: #FFA323; margin-bottom: 15px;"></i>
+                    <h4 style="margin: 0 0 5px 0;">@Model.TotalOrders</h4>
+                    <p style="margin: 0; color: #545454;">کل سفارشات</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-3">
+            <div class="feature-card style1">
+                <div class="feature-info text-center" style="padding: 30px 20px;">
+                    <i class="flaticon-money" style="font-size: 40px; color: #28a745; margin-bottom: 15px;"></i>
+                    <h4 style="margin: 0 0 5px 0;">@Model.TotalSpent.ToString("N0")</h4>
+                    <p style="margin: 0; color: #545454;">مجموع خرید (تومان)</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-3">
+            <div class="feature-card style1">
+                <div class="feature-info text-center" style="padding: 30px 20px;">
+                    <i class="flaticon-shopping-bag" style="font-size: 40px; color: #007bff; margin-bottom: 15px;"></i>
+                    <h4 style="margin: 0 0 5px 0;">@Model.CartItemsCount</h4>
+                    <p style="margin: 0; color: #545454;">آیتم در سبد خرید</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-3">
+            <div class="feature-card style1">
+                <div class="feature-info text-center" style="padding: 30px 20px;">
+                    <i class="flaticon-user" style="font-size: 40px; color: #17a2b8; margin-bottom: 15px;"></i>
+                    <h4 style="margin: 0 0 5px 0;">فعال</h4>
+                    <p style="margin: 0; color: #545454;">وضعیت حساب</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Orders -->
+    <div class="card mb-4">
+        <div class="card-header d-flex justify-content-between align-items-center" style="background: #f8f9fa; border-bottom: 1px solid #dee2e6;">
+            <h5 class="mb-0">آخرین سفارشات</h5>
+            <a asp-page="/orders/index" asp-area="user" style="color: #FFA323; text-decoration: none;">مشاهده همه</a>
+        </div>
+        <div class="card-body">
+            @if (Model.RecentOrders.Any())
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead style="background: #f8f9fa;">
+                            <tr>
+                                <th>شماره سفارش</th>
+                                <th>تاریخ</th>
+                                <th>وضعیت</th>
+                                <th>عملیات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var order in Model.RecentOrders)
+                            {
+                                <tr>
+                                    <td><strong>#@order.Id.ToString()[..8]</strong></td>
+                                    <td>@order.LastUpdate.ToString("yyyy/MM/dd HH:mm")</td>
+                                    <td>
+                                        @{
+                                            var badgeClass = order.Status.ToString().ToLower() switch
+                                            {
+                                                "pending" => "badge-warning",
+                                                "confirmed" => "badge-success",
+                                                "readyforpickup" => "badge-info",
+                                                "delivered" => "badge-success",
+                                                _ => "badge-secondary"
+                                            };
+                                        }
+                                        <span class="badge @badgeClass">@order.Status</span>
+                                    </td>
+                                    <td>
+                                        <a asp-page="/orders/details" asp-area="user" asp-route-orderId="@order.Id" class="btn btn-sm" style="background: #FFA323; color: white; border: none;">
+                                            جزئیات
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <div class="text-center py-5">
+                    <i class="flaticon-order" style="font-size: 64px; color: #dee2e6; margin-bottom: 20px;"></i>
+                    <h5>هنوز سفارشی ثبت نکرده‌اید</h5>
+                    <p class="text-muted">برای شروع خرید به منوی غذاها مراجعه کنید.</p>
+                    <a asp-page="/shop/index" asp-area="" class="btn" style="background: #FFA323; color: white; border: none;">مشاهده منو</a>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="card">
+        <div class="card-header" style="background: #f8f9fa; border-bottom: 1px solid #dee2e6;">
+            <h5 class="mb-0">دسترسی سریع</h5>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <a asp-page="/shop/index" asp-area="" class="text-decoration-none">
+                        <div class="feature-card style1">
+                            <div class="feature-info text-center" style="padding: 25px 20px;">
+                                <i class="flaticon-menu" style="font-size: 32px; color: #FFA323; margin-bottom: 15px;"></i>
+                                <h6 style="margin: 0 0 8px 0; color: #000;">مشاهده منو</h6>
+                                <p style="margin: 0; color: #545454; font-size: 14px;">مشاهده غذاها و سفارش</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <a asp-page="/shop/cart/index" asp-area="" class="text-decoration-none">
+                        <div class="feature-card style1">
+                            <div class="feature-info text-center" style="padding: 25px 20px;">
+                                <i class="flaticon-shopping-bag" style="font-size: 32px; color: #007bff; margin-bottom: 15px;"></i>
+                                <h6 style="margin: 0 0 8px 0; color: #000;">سبد خرید</h6>
+                                <p style="margin: 0; color: #545454; font-size: 14px;">بررسی سبد خرید</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div style="opacity: 0.6;">
+                        <div class="feature-card style1">
+                            <div class="feature-info text-center" style="padding: 25px 20px;">
+                                <i class="flaticon-settings" style="font-size: 32px; color: #6c757d; margin-bottom: 15px;"></i>
+                                <h6 style="margin: 0 0 8px 0; color: #000;">تنظیمات</h6>
+                                <p style="margin: 0; color: #545454; font-size: 14px;">مدیریت حساب کاربری (به زودی)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        // Dashboard interactivity can be added here
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add any dashboard-specific JavaScript here
+        });
+    </script>
+}

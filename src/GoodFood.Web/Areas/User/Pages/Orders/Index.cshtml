@@ -6,64 +6,77 @@
 
 @section header {
     <div class="breadcrumb-title">
-        <h2>حساب من</h2>
+        <h2>سفارشات من</h2>
         <ul class="breadcrumb-menu list-style">
-            <li><a href="index.html">خانه </a></li>
+            <li><a asp-page="/shop/index" asp-area="">خانه </a></li>
+            <li><a asp-page="/index" asp-area="user">حساب من</a></li>
             <li>سفارش ها</li>
         </ul>
     </div>
 }
 
-<div class="row">
-    <div class="col-md-12 grid-margin stretch-card">
-        <div class="card">
-            <div class="card-body">
-                <div class="table-responsive">
-                    @if (Model.Orders is null)
-                    {
-                        <p>هیچ سفارشی یافت نشد</p>
-                    }
-                    else
-                    {
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>مشتری</th>
-                                    <th>وضعیت</th>
-                                    <th>ساعت</th>
-                                    <th>تعداد</th>
-                                    <th>
-
-                                    </th>
-
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model.Orders)
-                                {
-                                    <tr>
-                                        <th>@i</th>
-                                        <th>@item.UserInfo.UserName</th>
-                                        <td>@item.Status</td>
-                                        <td>@item.LastUpdate.ToLocalTime()</td>
-                                        <td></td>
-                                        <td>
-                                            <a asp-page="details" asp-route-orderId="@item.Id">جرئیات سفارش</a>
-                                        </td>
-                                    </tr>
-
-                                    i++;
-                                }
-
-
-                            </tbody>
-                        </table>
-                    }
-
+<div class="container-fluid p-0">
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center" style="background: #f8f9fa; border-bottom: 1px solid #dee2e6;">
+            <h4 class="mb-0">تمام سفارشات</h4>
+            <span class="badge badge-secondary">@Model.Orders?.Count ?? 0 سفارش</span>
+        </div>
+        <div class="card-body">
+            @if (Model.Orders == null || !Model.Orders.Any())
+            {
+                <div class="text-center py-5">
+                    <i class="flaticon-order" style="font-size: 64px; color: #dee2e6; margin-bottom: 20px;"></i>
+                    <h5>هنوز سفارشی ثبت نکرده‌اید</h5>
+                    <p class="text-muted">برای شروع خرید به منوی غذاها مراجعه کنید.</p>
+                    <a asp-page="/shop/index" asp-area="" class="btn" style="background: #FFA323; color: white; border: none;">مشاهده منو</a>
                 </div>
-            </div>
+            }
+            else
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead style="background: #f8f9fa;">
+                            <tr>
+                                <th>شماره سفارش</th>
+                                <th>مشتری</th>
+                                <th>وضعیت</th>
+                                <th>تاریخ و ساعت</th>
+                                <th>عملیات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Orders)
+                            {
+                                <tr>
+                                    <td><strong>#@item.Id.ToString()[..8]</strong></td>
+                                    <td>@item.UserInfo.UserName</td>
+                                    <td>
+                                        @{
+                                            var badgeClass = item.Status.ToString().ToLower() switch
+                                            {
+                                                "pending" => "badge-warning",
+                                                "confirmed" => "badge-success",
+                                                "readyforpickup" => "badge-info",
+                                                "delivered" => "badge-success",
+                                                _ => "badge-secondary"
+                                            };
+                                        }
+                                        <span class="badge @badgeClass">@item.Status</span>
+                                    </td>
+                                    <td>@item.LastUpdate.ToString("yyyy/MM/dd HH:mm")</td>
+                                    <td>
+                                        <a asp-page="details" asp-route-orderId="@item.Id" class="btn btn-sm" style="background: #FFA323; color: white; border: none;">
+                                            <i class="flaticon-eye"></i>
+                                            جزئیات
+                                        </a>
+                                    </td>
+                                </tr>
+                                i++;
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
         </div>
     </div>
-
 </div>
